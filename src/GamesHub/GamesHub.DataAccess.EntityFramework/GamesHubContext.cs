@@ -1,12 +1,12 @@
 ﻿namespace GamesHub.DataAccess.EntityFramework
 {
-    using GamesHub.DataAccess.EntityFramework.Entities;
+    using GamesHub.DataAccess.Contracts.Models;
 
     using Microsoft.EntityFrameworkCore;
 
     public class GamesHubContext : DbContext
     {
-        public DbSet<GameEntity> Games { get; set; }
+        public DbSet<Game> Games { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

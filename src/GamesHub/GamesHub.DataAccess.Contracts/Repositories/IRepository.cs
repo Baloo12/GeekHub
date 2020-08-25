@@ -22,9 +22,6 @@
 
         Task<IEnumerable<TModel>> GetMany(Expression<Func<TEntity, bool>> predicate);
 
-        // IDEA: Raise Save inside CRUD methods or use this separate method?
-        Task Save();
-
         // IDEA: Combine into AddOrUpdate method
         Task Update(TModel model);
     }

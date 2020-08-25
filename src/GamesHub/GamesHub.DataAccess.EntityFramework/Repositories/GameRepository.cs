@@ -6,26 +6,19 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.DataAccess.Contracts.Repositories;
-    using GamesHub.DataAccess.EntityFramework.Entities;
-    using GamesHub.DataAccess.EntityFramework.Mapping;
 
     using Microsoft.EntityFrameworkCore;
 
-    public class GameRepository : IRepository<Game, GameEntity>
+    public class GameRepository : IRepository<Game>
     {
         private readonly GamesHubContext _dbContext;
-
-        private readonly IMapper _mapper;
 
         public GameRepository()
         {
             // TODO: Use dependency injection
             _dbContext = new GamesHubContext();
-            _mapper = MappingBuidler.CreateMapper();
         }
 
         // IDEA: Move all CRUD operations to BaseRepository
@@ -52,22 +45,19 @@
         public async Task<Game> Get(Guid id)
         {
             var entity = await _dbContext.Games.FindAsync(id);
-            var model = _mapper.Map<Game>(entity);
-            return model;
+            return entity;
         }
 
         public async Task<IEnumerable<Game>> GetAll()
         {
             var entities = await _dbContext.Games.ToListAsync();
-            var models = _mapper.Map<IEnumerable<Game>>(entities);
-            return models;
+            return entities;
         }
 
-        public async Task<IEnumerable<Game>> GetMany(Expression<Func<GameEntity, bool>> predicate)
+        public async Task<IEnumerable<Game>> GetMany(Expression<Func<Game, bool>> predicate)
         {
             var entities = await _dbContext.Games.Where(predicate).ToListAsync();
-            var models = _mapper.Map<IEnumerable<Game>>(entities);
-            return models;
+            return entities;
         }
 
         public Task Save()

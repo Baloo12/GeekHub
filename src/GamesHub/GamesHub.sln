@@ -5,9 +5,13 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.Web", "GamesHub.Web\GamesHub.Web.csproj", "{7575C44B-081F-4FF4-8C62-89795C6D92A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.DataAccess.Contracts", "GamesHub.DataAccess.Contracts\GamesHub.DataAccess.Contracts.csproj", "{99D77BA2-52EE-482F-B770-30A9E59DAAF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.DataAccess.Contracts", "GamesHub.DataAccess.Contracts\GamesHub.DataAccess.Contracts.csproj", "{99D77BA2-52EE-482F-B770-30A9E59DAAF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.DataAccess.EntityFramework", "GamesHub.DataAccess.EntityFramework\GamesHub.DataAccess.EntityFramework.csproj", "{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.DataAccess.EntityFramework", "GamesHub.DataAccess.EntityFramework\GamesHub.DataAccess.EntityFramework.csproj", "{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.Business.Contracts", "GamesHub.Business.Contracts\GamesHub.Business.Contracts.csproj", "{4FA92552-7521-4765-82D4-7900436CEF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.Business", "GamesHub.Business\GamesHub.Business.csproj", "{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA92552-7521-4765-82D4-7900436CEF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA92552-7521-4765-82D4-7900436CEF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA92552-7521-4765-82D4-7900436CEF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA92552-7521-4765-82D4-7900436CEF92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

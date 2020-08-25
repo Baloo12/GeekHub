@@ -1,7 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GamesHub.Business.Contracts.Services;
+using GamesHub.Business.Services;
+using GamesHub.DataAccess.Contracts.Models;
+using GamesHub.DataAccess.Contracts.Repositories;
+using GamesHub.DataAccess.EntityFramework.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,10 @@ namespace GamesHub.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            RegisterRepositories(services);
+            RegisterServices(services);
+
+            services.AddAutoMapper()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +40,16 @@ namespace GamesHub.Web
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+        }
+
+        private void RegisterRepositories(IServiceCollection services)
+        {
+            services.AddTransient<IRepository<Game>, GameRepository>();
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddTransient<IGameService, GameService>();
         }
     }
 }
