@@ -5,7 +5,7 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    public interface IRepository<TModel, TEntity>
+    public interface IRepository<TModel>
     {
         // IDEA: Combine into AddOrUpdate method
         Task Add(TModel model);
@@ -20,7 +20,7 @@
 
         Task<IEnumerable<TModel>> GetAll();
 
-        Task<IEnumerable<TModel>> GetMany(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TModel>> GetMany(Expression<Func<TModel, bool>> predicate);
 
         // IDEA: Combine into AddOrUpdate method
         Task Update(TModel model);

@@ -1,3 +1,4 @@
+using AutoMapper;
 using GamesHub.Business.Contracts.Services;
 using GamesHub.Business.Services;
 using GamesHub.DataAccess.Contracts.Models;
@@ -20,7 +21,7 @@ namespace GamesHub.Web
             RegisterRepositories(services);
             RegisterServices(services);
 
-            services.AddAutoMapper()
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
