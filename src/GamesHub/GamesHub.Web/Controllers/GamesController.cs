@@ -1,17 +1,21 @@
-﻿using AutoMapper;
-using GamesHub.Business.Contracts.Services;
-using GamesHub.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
-
-namespace GamesHub.Web.Controllers
+﻿namespace GamesHub.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
+    using AutoMapper;
+
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.Web.Models;
+
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/games")]
     [ApiController]
     public class GamesController : ControllerBase
     {
         private readonly IGameService _gameService;
+
         private readonly IMapper _mapper;
 
         public GamesController(IGameService gameService, IMapper mapper)
