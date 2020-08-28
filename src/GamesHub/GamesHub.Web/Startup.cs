@@ -1,3 +1,5 @@
+using GamesHub.DataAccess.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace GamesHub.Web
@@ -15,8 +17,16 @@ namespace GamesHub.Web
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using Microsoft.Extensions.Configuration;
+
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen(s =>
@@ -28,6 +38,10 @@ namespace GamesHub.Web
             RegisterServices(services);
 
             services.AddAutoMapper(typeof(Startup));
+
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<GamesHubContext>(options =>
+                options.UseSqlServer(connectionString));
 
             services.AddControllers(c => c.EnableEndpointRouting = false);
         }

@@ -1,4 +1,6 @@
-﻿namespace GamesHub.DataAccess.EntityFramework
+﻿using GamesHub.DataAccess.EntityFramework.Configurations;
+
+namespace GamesHub.DataAccess.EntityFramework
 {
     using GamesHub.DataAccess.Contracts.Models;
 
@@ -8,10 +10,11 @@
     {
         public DbSet<Game> Games { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=localhost\\sqlexpress;Database=GamesHub;Trusted_Connection=True;");
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new GamesConfiguration());
         }
     }
 }
