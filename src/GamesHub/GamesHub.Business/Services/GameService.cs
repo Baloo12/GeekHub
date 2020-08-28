@@ -1,10 +1,12 @@
 ﻿namespace GamesHub.Business.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     using GamesHub.Business.Contracts.Services;
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.DataAccess.Contracts.Repositories;
-    using System;
-    using System.Threading.Tasks;
 
     public class GameService : IGameService
     {
@@ -14,9 +16,15 @@
         {
             _gameRepository = gameRepository;
         }
+
         public async Task<Game> Get(Guid id)
         {
             return await _gameRepository.Get(id);
+        }
+
+        public async Task<IEnumerable<Game>> GetAll()
+        {
+            return await _gameRepository.GetAll();
         }
     }
 }

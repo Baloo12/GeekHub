@@ -1,6 +1,7 @@
 ﻿namespace GamesHub.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -30,6 +31,14 @@
             var game = await _gameService.Get(id);
             var gameModel = _mapper.Map<GameModel>(game);
             return gameModel;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<GameModel>> GetAll()
+        {
+            var games = await _gameService.GetAll();
+            var gameModels = _mapper.Map<IEnumerable<GameModel>>(games);
+            return gameModels;
         }
     }
 }

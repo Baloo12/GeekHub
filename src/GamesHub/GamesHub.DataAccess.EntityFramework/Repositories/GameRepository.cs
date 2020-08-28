@@ -15,10 +15,9 @@
     {
         private readonly GamesHubContext _dbContext;
 
-        public GameRepository()
+        public GameRepository(GamesHubContext dbContext)
         {
-            // TODO: Use dependency injection
-            _dbContext = new GamesHubContext();
+            _dbContext = dbContext;
         }
 
         // IDEA: Move all CRUD operations to BaseRepository
