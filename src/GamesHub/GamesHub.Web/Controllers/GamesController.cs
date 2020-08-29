@@ -7,6 +7,7 @@
     using AutoMapper;
 
     using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.Web.Models;
 
     using Microsoft.AspNetCore.Mvc;
@@ -39,6 +40,14 @@
             var games = await _gameService.GetAll();
             var gameModels = _mapper.Map<IEnumerable<GameModel>>(games);
             return gameModels;
+        }
+
+        [HttpPost]
+        public async Task CreateGame()
+        {
+            var newGame = new GameModel("test game");
+            var entity = _mapper.Map<Game>(newGame);
+            await _gameService.Create(entity);
         }
 
         [HttpGet("top")]

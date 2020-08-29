@@ -13,5 +13,7 @@
         Task<IEnumerable<Game>> GetAll();
 
         Task<IEnumerable<Game>> GetTopGames();
+
+        Task Create(Game game);
     }
 }

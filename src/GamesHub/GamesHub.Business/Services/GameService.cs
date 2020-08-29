@@ -33,5 +33,10 @@
             var allGames = await _gameRepository.GetAll();
             return allGames.OrderBy(x => x.Rank.Overall);
         }
+
+        public Task Create(Game game)
+        {
+            game.
+        }
     }
 }

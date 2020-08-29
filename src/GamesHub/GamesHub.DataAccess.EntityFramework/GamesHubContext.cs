@@ -10,8 +10,7 @@
         public GamesHubContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+
         }
 
         public GamesHubContext()
@@ -26,8 +25,8 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new GamesConfiguration());
-            modelBuilder.ApplyConfiguration(new RankConfiguration());
+            // modelBuilder.ApplyConfiguration(new GamesConfiguration());
+            // modelBuilder.ApplyConfiguration(new RankConfiguration());
         }
 
 
