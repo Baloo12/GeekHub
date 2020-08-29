@@ -34,9 +34,10 @@
             return allGames.OrderBy(x => x.Rank.Overall);
         }
 
-        public Task Create(Game game)
+        public async Task Create(Game game)
         {
-            game.
+            game.Rank = new Rank();
+            await _gameRepository.Add(game);
         }
     }
 }

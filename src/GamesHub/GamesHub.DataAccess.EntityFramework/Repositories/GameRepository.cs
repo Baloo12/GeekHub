@@ -21,9 +21,10 @@
         }
 
         // IDEA: Move all CRUD operations to BaseRepository
-        public Task Add(Game model)
+        public async Task Add(Game model)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(model);
+            await _dbContext.SaveChangesAsync();
         }
 
         public Task Delete(Guid id)

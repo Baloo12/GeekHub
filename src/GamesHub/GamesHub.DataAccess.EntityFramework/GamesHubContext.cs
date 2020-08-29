@@ -10,7 +10,6 @@
         public GamesHubContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
-
         }
 
         public GamesHubContext()
