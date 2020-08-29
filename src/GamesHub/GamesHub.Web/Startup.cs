@@ -43,6 +43,17 @@ namespace GamesHub.Web
             services.AddDbContext<GamesHubContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            // Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("cors",
+                    builder =>
+                    {
+                        // Not a permanent solution, but just trying to isolate the problem
+                        builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
+
             services.AddControllers(c => c.EnableEndpointRouting = false);
         }
 
@@ -59,6 +70,9 @@ namespace GamesHub.Web
             });
 
             app.UseRouting();
+
+            // Use the CORS policy
+            app.UseCors("cors");
 
             app.UseMvc(routes =>
             {
