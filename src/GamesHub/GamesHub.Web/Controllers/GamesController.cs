@@ -40,5 +40,13 @@
             var gameModels = _mapper.Map<IEnumerable<GameModel>>(games);
             return gameModels;
         }
+
+        [HttpGet("top")]
+        public async Task<IEnumerable<TopGamesEntry>> GetTopGames()
+        {
+            var games = await _gameService.GetAll();
+            var gameModels = _mapper.Map<IEnumerable<TopGamesEntry>>(games);
+            return gameModels;
+        }
     }
 }

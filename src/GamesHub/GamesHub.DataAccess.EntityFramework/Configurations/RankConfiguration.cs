@@ -5,12 +5,11 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class GamesConfiguration : IEntityTypeConfiguration<Game>
+    public class RankConfiguration : IEntityTypeConfiguration<Rank>
     {
-        public void Configure(EntityTypeBuilder<Game> builder)
+        public void Configure(EntityTypeBuilder<Rank> builder)
         {
-            builder.HasKey(_ => _.Id);
-            builder.HasOne(x => x.Rank).WithOne(x => x.Game);
+            builder.HasKey(x => x.Id);
         }
     }
 }

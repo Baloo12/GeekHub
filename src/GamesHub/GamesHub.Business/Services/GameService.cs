@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using GamesHub.Business.Contracts.Services;
@@ -25,6 +26,12 @@
         public async Task<IEnumerable<Game>> GetAll()
         {
             return await _gameRepository.GetAll();
+        }
+
+        public async Task<IEnumerable<Game>> GetTopGames()
+        {
+            var allGames = await _gameRepository.GetAll();
+            return allGames.OrderBy(x => x.Rank.Overall);
         }
     }
 }
