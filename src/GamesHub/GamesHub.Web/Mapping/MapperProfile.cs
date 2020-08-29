@@ -10,7 +10,9 @@
         public MapperProfile()
         {
             CreateMap<Game, GameModel>().ReverseMap();
-            CreateMap<Game, TopGamesEntry>().ReverseMap();
+            CreateMap<Game, TopGamesEntry>()
+                .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
+                .ReverseMap();
         }
     }
 }
