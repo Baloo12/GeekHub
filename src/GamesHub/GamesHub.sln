@@ -9,9 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.DataAccess.Contrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.DataAccess.EntityFramework", "GamesHub.DataAccess.EntityFramework\GamesHub.DataAccess.EntityFramework.csproj", "{F41F5D11-8B7D-44F1-BF30-F19CB876E8F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.Business.Contracts", "GamesHub.Business.Contracts\GamesHub.Business.Contracts.csproj", "{4FA92552-7521-4765-82D4-7900436CEF92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.Business.Contracts", "GamesHub.Business.Contracts\GamesHub.Business.Contracts.csproj", "{4FA92552-7521-4765-82D4-7900436CEF92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.Business", "GamesHub.Business\GamesHub.Business.csproj", "{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.Business", "GamesHub.Business\GamesHub.Business.csproj", "{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.GamesProvider.Contracts", "GamesHub.GamesProvider.Contracts\GamesHub.GamesProvider.Contracts.csproj", "{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.SteamGamesProvider", "GamesHub.SteamGamesProvider\GamesHub.SteamGamesProvider.csproj", "{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
