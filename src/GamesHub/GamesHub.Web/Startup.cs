@@ -1,23 +1,21 @@
-using GamesHub.DataAccess.EntityFramework;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-
 namespace GamesHub.Web
 {
     using AutoMapper;
-
     using GamesHub.Business.Contracts.Services;
     using GamesHub.Business.Services;
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.DataAccess.Contracts.Repositories;
+    using GamesHub.DataAccess.EntityFramework;
     using GamesHub.DataAccess.EntityFramework.Repositories;
-
+    using GamesHub.GamesProvider.Contracts.Interfaces;
+    using GamesHub.SteamGamesProvider.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
-    using Microsoft.Extensions.Configuration;
+    using Microsoft.OpenApi.Models;
 
     public class Startup
     {
@@ -36,6 +34,7 @@ namespace GamesHub.Web
 
             RegisterRepositories(services);
             RegisterServices(services);
+            RegisterProviders(services);
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -61,6 +60,7 @@ namespace GamesHub.Web
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
+            app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
 
             app.UseSwagger();
@@ -90,7 +90,13 @@ namespace GamesHub.Web
 
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<IGameService, GameService>();
+            services.AddTransient<IGameService, GameService>();            
+            services.AddTransient<ISyncService, SyncService>();            
+        }
+
+        private void RegisterProviders(IServiceCollection services)
+        {
+            services.AddTransient<ISteamGamesProvider, SteamGamesProvider>();
         }
     }
 }
