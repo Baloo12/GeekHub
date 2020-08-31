@@ -54,7 +54,7 @@ namespace GamesHub.SteamGamesProvider.Services
                 return null;
             }
 
-            return new GameDetails()
+            var result = new GameDetails()
             {
                 Description = details.Data.ShortDescription,
                 Name = details.Data.Name,
@@ -64,11 +64,12 @@ namespace GamesHub.SteamGamesProvider.Services
                 IsFree = details.Data.IsFree,
                 RequiredAge = details.Data.RequiredAge,
                 Type = details.Data.Type,
-                Genres = details.Data.Genres.Select(g => g.Description).ToList(),
+                Genres = details.Data.Genres?.Select(g => g.Description).ToList(),
                 Image = details.Data.Image,
-                Platforms = details.Data.Platforms.Where(p => p.Value).Select(p => p.Key).ToList(),
-                ReleaseDate = details.Data.ReleaseDate.Date ?? "Coming Soon"
+                Platforms = details.Data.Platforms?.Where(p => p.Value).Select(p => p.Key).ToList(),
+                ReleaseDate = details.Data.ReleaseDate?.Date ?? "Coming Soon"
             };
+            return result;
         }
 
         private async Task<TResponse> Request<TResponse>(HttpClient client, string url)
