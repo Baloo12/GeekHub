@@ -27,10 +27,10 @@
         }
 
         [HttpGet("{id}")]
-        public async Task<GameModel> Get(Guid id)
+        public async Task<GameOverviewModel> Get(Guid id)
         {
             var game = await _gameService.Get(id);
-            var gameModel = _mapper.Map<GameModel>(game);
+            var gameModel = _mapper.Map<GameOverviewModel>(game);
             return gameModel;
         }
 

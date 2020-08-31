@@ -17,6 +17,9 @@
             CreateMap<Game, TopGamesEntry>()
                 .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
                 .ReverseMap();
+            CreateMap<Game, GameOverviewModel>()
+                .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
+                .ReverseMap();
         }
     }
 }
