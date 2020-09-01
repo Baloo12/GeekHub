@@ -50,7 +50,12 @@
 
         public async Task<IEnumerable<Game>> GetAll()
         {
-            var entities = await _dbContext.Games.ToListAsync();
+            var entities = await _dbContext.Games
+                .Include(g => g.GameDevelopers)
+                .ThenInclude(gd => gd.Game)
+                .Include(g => g.GameDevelopers)
+                .ThenInclude(gd => gd.Developer)
+                .ToListAsync();
             return entities;
         }
 
