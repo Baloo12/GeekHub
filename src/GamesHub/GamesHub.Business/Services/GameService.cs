@@ -11,11 +11,22 @@
 
     public class GameService : IGameService
     {
-        private readonly IRepository<Game> _gameRepository;
+        private readonly IGameRepository _gameRepository;
 
-        public GameService(IRepository<Game> gameRepository)
+        public GameService(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
+        }
+
+        public async Task Create(Game game)
+        {
+            var gameExists = await CheckSteam(game);
+
+            if (gameExists == false)
+            {
+                game.Rank = new Rank();
+                await _gameRepository.Add(game);
+            }
         }
 
         public async Task<Game> Get(Guid id)
@@ -34,10 +45,15 @@
             return allGames.OrderBy(x => x.Rank.Overall);
         }
 
-        public async Task Create(Game game)
+        private async Task<bool> CheckSteam(Game game)
         {
-            game.Rank = new Rank();
-            await _gameRepository.Add(game);
+            var entity = await _gameRepository.GetBySteamAppId(game.SteamAppId);
+            if (entity != null)
+            {
+                // TODO: Merge with existing data. For now just ignore
+            }
+
+            return entity != null;
         }
     }
 }

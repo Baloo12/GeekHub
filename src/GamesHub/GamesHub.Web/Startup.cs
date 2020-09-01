@@ -109,7 +109,7 @@ namespace GamesHub.Web
 
         private void RegisterRepositories(IServiceCollection services)
         {
-            services.AddTransient<IRepository<Game>, GameRepository>();
+            services.AddTransient<IGameRepository, GameRepository>();
         }
 
         private void RegisterServices(IServiceCollection services)

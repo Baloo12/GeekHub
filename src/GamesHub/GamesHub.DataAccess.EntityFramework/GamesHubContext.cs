@@ -10,6 +10,8 @@
         public GamesHubContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
+            // Database.EnsureDeleted();
+            // Database.EnsureCreated();
         }
 
         public GamesHubContext()

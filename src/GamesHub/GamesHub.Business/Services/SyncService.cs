@@ -1,7 +1,10 @@
 ﻿namespace GamesHub.Business.Services
 {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
+    using System.Timers;
 
     using GamesHub.Business.Contracts;
     using GamesHub.Business.Contracts.Services;
@@ -30,6 +33,7 @@
             foreach (var gamesProvider in _gamesProviders)
             {
                 var gameIds = await gamesProvider.GetAllIds();
+
                 foreach (var gameId in gameIds)
                 {
                     var gameDetails = await gamesProvider.GetDetails(gameId);

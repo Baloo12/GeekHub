@@ -11,7 +11,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    public class GameRepository : IRepository<Game>
+    public class GameRepository : IGameRepository
     {
         private readonly GamesHubContext _dbContext;
 
@@ -68,6 +68,12 @@
         public Task Update(Game model)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Game> GetBySteamAppId(string steamAppId)
+        {
+            var entity = await _dbContext.Games.FirstOrDefaultAsync(x => x.SteamAppId.Equals(steamAppId)); // IDEA: maybe ignore culture. depends on is format
+            return entity;
         }
     }
 }
