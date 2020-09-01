@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GamesHub.DataAccess.Contracts\GamesHub.DataAccess.Contracts.csproj" />
+    <ProjectReference Include="..\GamesHub.GamesProvider.Contracts\GamesHub.GamesProvider.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

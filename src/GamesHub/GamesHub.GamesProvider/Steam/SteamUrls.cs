@@ -1,4 +1,4 @@
-﻿namespace GamesHub.SteamGamesProvider.Constants
+﻿namespace GamesHub.GamesProvider.Steam
 {
     public static class SteamUrls
     {

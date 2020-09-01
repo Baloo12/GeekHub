@@ -19,7 +19,7 @@
     <ProjectReference Include="..\GamesHub.DataAccess.Contracts\GamesHub.DataAccess.Contracts.csproj" />
     <ProjectReference Include="..\GamesHub.DataAccess.EntityFramework\GamesHub.DataAccess.EntityFramework.csproj" />
     <ProjectReference Include="..\GamesHub.GamesProvider.Contracts\GamesHub.GamesProvider.Contracts.csproj" />
-    <ProjectReference Include="..\GamesHub.SteamGamesProvider\GamesHub.SteamGamesProvider.csproj" />
+    <ProjectReference Include="..\GamesHub.GamesProvider\GamesHub.GamesProvider.csproj"/>
   </ItemGroup>
 
 </Project>

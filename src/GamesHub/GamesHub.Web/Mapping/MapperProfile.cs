@@ -13,13 +13,16 @@
                 .ForMember(x => x.Id, o => o.Ignore())
                 .ForMember(x => x.Rating, o => o.Ignore())
                 .ForMember(x => x.RankId, o => o.Ignore())
-                .ForMember(x => x.Rank, o => o.Ignore());
+                .ForMember(x => x.Rank, o => o.Ignore())
+                .ForMember(x => x.SteamAppId, o => o.Ignore());
             CreateMap<Game, TopGamesEntry>()
                 .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(x => x.SteamAppId, o => o.Ignore());
             CreateMap<Game, GameOverviewModel>()
                 .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(x => x.SteamAppId, o => o.Ignore());
         }
     }
 }
