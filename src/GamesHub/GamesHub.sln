@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.Business.Contracts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.Business", "GamesHub.Business\GamesHub.Business.csproj", "{F1180954-9AC3-48BC-BF79-B1C7E4B2F8A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.GamesProvider.Contracts", "GamesHub.GamesProvider.Contracts\GamesHub.GamesProvider.Contracts.csproj", "{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.GamesProvider.Contracts", "GamesHub.GamesProvider.Contracts\GamesHub.GamesProvider.Contracts.csproj", "{705559CC-5EAD-4AAA-9FD8-60C0EBD84796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamesHub.SteamGamesProvider", "GamesHub.SteamGamesProvider\GamesHub.SteamGamesProvider.csproj", "{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamesHub.GamesProvider", "GamesHub.GamesProvider\GamesHub.GamesProvider.csproj", "{468A5EE6-958F-4FB9-872A-ABCB116D4DF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

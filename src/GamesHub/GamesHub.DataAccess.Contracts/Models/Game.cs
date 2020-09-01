@@ -17,6 +17,21 @@
 
         public Guid RankId { get; set; }
 
+        // [ForeignKey(nameof(AppReferenceId))]
+        // [InverseProperty(nameof(Game))]
+        // public GameAppReference AppReference { get; set; }
+        // public GameAppReference AppReferenceId { get; set; }
         public double Rating { get; set; }
+
+        public string SteamAppId { get; set; }
     }
+
+    // public class GameAppReference
+    // {
+    // [InverseProperty("AppReference")]
+    // public Game Game { get; set; }
+    // [Key]
+    // public Guid Id { get; set; }
+    // public string SteamAppId { get; set; }
+    // }
 }

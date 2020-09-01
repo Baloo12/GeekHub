@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
-namespace GamesHub.SteamGamesProvider.Models
+﻿namespace GamesHub.GamesProvider.Steam
 {
+    using System.Collections.Generic;
+    using System.Text.Json.Serialization;
+
     public class SteamGameDetails
     {
         [JsonPropertyName("success")]
