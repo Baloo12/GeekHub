@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace GamesHub.Business.Services
+﻿namespace GamesHub.Business.Services
 {
     using GamesHub.Business.Contracts.Services;
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.GamesProvider.Contracts;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -12,7 +11,6 @@ namespace GamesHub.Business.Services
     {
         private readonly IGameService _gameService;
         private readonly IDeveloperService _developerService;
-
         private readonly IEnumerable<IGamesProvider> _gamesProviders;
 
         public SyncService(
@@ -34,7 +32,7 @@ namespace GamesHub.Business.Services
                 foreach (var gameId in gameIds)
                 {
                     var gameDetails = await gamesProvider.GetDetails(gameId);
-                    var developersIds = await GetDevelopers(gameDetails.Developers);
+                    var developersIds = await GetDeveloperEntitiesIds(gameDetails.Developers);
 
                     if (gameDetails != null)
                     {
@@ -49,18 +47,26 @@ namespace GamesHub.Business.Services
             }
         }
 
-        private async Task<List<Guid>> GetDevelopers(List<string> developers)
+        private async Task<List<Guid>> GetDeveloperEntitiesIds(List<string> developers)
         {
             var developersIds = new List<Guid>();
+
             foreach (var developerName in developers)
             {
-                var developer = new Developer()
-                {
-                    Name = developerName
-                };
+                var isDeveloperExist = await _developerService.IsExistWithName(developerName);
 
-                await _developerService.Create(developer);
+                if (isDeveloperExist)
+                {
+                    var developer = new Developer()
+                    {
+                        Name = developerName
+                    };
+
+                    await _developerService.Create(developer);
+                }
+
                 var developerId = await _developerService.GetIdByName(developerName);
+
                 developersIds.Add(developerId);
             }
 

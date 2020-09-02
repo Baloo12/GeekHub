@@ -12,5 +12,7 @@
         Task<Guid> GetIdByName(string name);
 
         Task<IEnumerable<Developer>> GetAll();
+
+        Task<bool> IsExistWithName(string developerName);
     }
 }

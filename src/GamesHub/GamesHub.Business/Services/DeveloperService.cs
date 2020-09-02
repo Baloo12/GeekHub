@@ -18,12 +18,7 @@
 
         public async Task Create(Developer developer)
         {
-            var gameExists = await IsExisted(developer);
-
-            if (gameExists == false)
-            {
-                await _developerRepository.Add(developer);
-            }
+            await _developerRepository.Add(developer);
         }
 
         public async Task<IEnumerable<Developer>> GetAll()
@@ -38,15 +33,10 @@
             return entity.Id;
         }
 
-        private async Task<bool> IsExisted(Developer developer)
+        public async Task<bool> IsExistWithName(string developerName)
         {
-            var entity = await _developerRepository.GetByName(developer.Name);
-            if (entity != null)
-            {
-                // TODO: Merge with existing data. For now just ignore
-            }
-
-            return entity != null;
+            var developer = await _developerRepository.GetByName(developerName);
+            return developer != null;
         }
     }
 }
