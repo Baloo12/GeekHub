@@ -55,7 +55,7 @@
             {
                 var isDeveloperExist = await _developerService.IsExistWithName(developerName);
 
-                if (isDeveloperExist)
+                if (!isDeveloperExist)
                 {
                     var developer = new Developer()
                     {
