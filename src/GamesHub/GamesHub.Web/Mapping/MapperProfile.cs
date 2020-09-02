@@ -1,4 +1,6 @@
-﻿namespace GamesHub.Web.Mapping
+﻿using System.Linq;
+
+namespace GamesHub.Web.Mapping
 {
     using AutoMapper;
 
@@ -9,23 +11,12 @@
     {
         public MapperProfile()
         {
-            CreateMap<Game, GameModel>().ReverseMap()
-                .ForMember(x => x.Id, o => o.Ignore())
-                .ForMember(x => x.Rating, o => o.Ignore())
-                .ForMember(x => x.RankId, o => o.Ignore())
-                .ForMember(x => x.Rank, o => o.Ignore())
-                .ForMember(x => x.SteamAppId, o => o.Ignore())
-                .ForMember(x => x.GameDevelopers, o => o.MapFrom(x => x.Developers))
-                .AfterMap((model, entity) =>
-                {
-                    foreach (var entityGameDeveloper in entity.GameDevelopers)
-                    {
-                        entityGameDeveloper.Game = entity;
-                    }
-                });
-            CreateMap<GameDeveloper, DeveloperModel>().ReverseMap()
-                .ForMember(entity => entity.Developer, opt => opt.MapFrom(model => model));
-            CreateMap<Developer, DeveloperModel>().ReverseMap();
+            CreateMap<Game, GameModel>()
+                .ForMember(x => x.Developers, o => o.MapFrom(x => x.GameDevelopers.Select(gd => gd.Developer)))
+                .ReverseMap();
+            CreateMap<Developer, DeveloperModel>()
+                .ForMember(x => x.Games, o => o.MapFrom(x => x.GameDevelopers.Select(gd => gd.Game)))
+                .ReverseMap();
             CreateMap<Game, TopGamesEntry>()
                 .ForMember(x => x.OverallRank, o => o.MapFrom(x => x.Rank.Overall))
                 .ReverseMap()

@@ -12,10 +12,12 @@
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
+        private readonly IDeveloperRepository _developerRepository;
 
-        public GameService(IGameRepository gameRepository)
+        public GameService(IGameRepository gameRepository, IDeveloperRepository developerRepository)
         {
             _gameRepository = gameRepository;
+            _developerRepository = developerRepository;
         }
 
         public async Task Create(Game game)

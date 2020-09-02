@@ -11,6 +11,6 @@ namespace GamesHub.DataAccess.Contracts.Models
         public string Name { get; set; }
 
         [InverseProperty(nameof(Developer))]
-        public ICollection<GameDeveloper> Games { get; set; }
+        public ICollection<GameDeveloper> GameDevelopers { get; set; }
     }
 }

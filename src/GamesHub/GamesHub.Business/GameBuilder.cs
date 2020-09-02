@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace GamesHub.Business
+﻿namespace GamesHub.Business
 {
     using GamesHub.Business.Contracts;
     using GamesHub.DataAccess.Contracts.Models;
@@ -12,14 +8,6 @@ namespace GamesHub.Business
     {
         public Game Build(GameDetails gameDetails, string sourceEntityId)
         {
-            var gameDevelopers = new List<GameDeveloper>();
-            gameDetails.Developers.ForEach(d => gameDevelopers.Add(new GameDeveloper()
-            {
-                Developer = new Developer()
-                {
-                    Name = d
-                }
-            }));
             var game = new Game()
             {
                 Name = gameDetails.Name,
@@ -29,13 +17,8 @@ namespace GamesHub.Business
                 Type = gameDetails.Type,
                 RequiredAge = gameDetails.RequiredAge,
                 IsFree = gameDetails.IsFree,
-                Website = gameDetails.Website,
-                GameDevelopers = gameDevelopers
+                Website = gameDetails.Website
             };
-            foreach (var gameDeveloper in game.GameDevelopers)
-            {
-                gameDeveloper.Game = game;
-            }
 
             switch (gameDetails.Source)
             {

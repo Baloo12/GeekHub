@@ -86,7 +86,10 @@ namespace GamesHub.Web
                                 });
                     });
 
-            services.AddControllers(c => c.EnableEndpointRouting = false);
+            services
+                .AddControllers(c => c.EnableEndpointRouting = false)
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         private void RegisterProviders(IServiceCollection services)
@@ -110,12 +113,14 @@ namespace GamesHub.Web
         private void RegisterRepositories(IServiceCollection services)
         {
             services.AddTransient<IGameRepository, GameRepository>();
+            services.AddTransient<IDeveloperRepository, DeveloperRepository>();
         }
 
         private void RegisterServices(IServiceCollection services)
         {
             services.AddTransient<IGameService, GameService>();
             services.AddTransient<ISyncService, SyncService>();
+            services.AddTransient<IDeveloperService, DeveloperService>();
 
             services.AddTransient<IGameBuilder, GameBuilder>();
         }
