@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using GamesHub.DataAccess.Contracts.Models;
-using GamesHub.DataAccess.Contracts.Repositories;
-using Microsoft.EntityFrameworkCore;
-
-namespace GamesHub.DataAccess.EntityFramework.Repositories
+﻿namespace GamesHub.DataAccess.EntityFramework.Repositories
 {
+    using GamesHub.DataAccess.Contracts.Models;
+    using GamesHub.DataAccess.Contracts.Repositories;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
+
     public class DeveloperRepository : IDeveloperRepository
     {
         private readonly GamesHubContext _dbContext;

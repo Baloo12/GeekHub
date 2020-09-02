@@ -1,8 +1,7 @@
 ﻿namespace GamesHub.DataAccess.Contracts.Repositories
 {
-    using System.Threading.Tasks;
-
     using GamesHub.DataAccess.Contracts.Models;
+    using System.Threading.Tasks;
 
     public interface IGameRepository : IRepository<Game>
     {

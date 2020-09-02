@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GamesHub.DataAccess.Contracts.Models
+﻿namespace GamesHub.DataAccess.Contracts.Models
 {
+    using System;
+
     public class GameDeveloper
     {
         public Guid Id { get; set; }

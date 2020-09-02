@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using GamesHub.Business.Contracts.Services;
-using GamesHub.DataAccess.Contracts.Models;
-using GamesHub.DataAccess.Contracts.Repositories;
-
-namespace GamesHub.Business.Services
+﻿namespace GamesHub.Business.Services
 {
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
+    using GamesHub.DataAccess.Contracts.Repositories;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public class DeveloperService : IDeveloperService
     {
         private readonly IDeveloperRepository _developerRepository;

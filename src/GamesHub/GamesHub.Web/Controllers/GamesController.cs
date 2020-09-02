@@ -1,16 +1,13 @@
 ﻿namespace GamesHub.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
     using AutoMapper;
-
     using GamesHub.Business.Contracts.Services;
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.Web.Models;
-
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     [Route("api/games")]
     [ApiController]

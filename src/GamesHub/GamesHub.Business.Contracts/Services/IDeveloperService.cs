@@ -1,10 +1,10 @@
-﻿using GamesHub.DataAccess.Contracts.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace GamesHub.Business.Contracts.Services
+﻿namespace GamesHub.Business.Contracts.Services
 {
+    using GamesHub.DataAccess.Contracts.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IDeveloperService
     {
         Task Create(Developer developer);

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GamesHub.Web.Models
+﻿namespace GamesHub.Web.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public class DeveloperModel
     {
         public Guid Id { get; set; }

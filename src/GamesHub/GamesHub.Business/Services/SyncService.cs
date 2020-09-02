@@ -1,17 +1,12 @@
-﻿using GamesHub.DataAccess.Contracts.Models;
-using GamesHub.GamesProvider.Contracts.Models;
-
-namespace GamesHub.Business.Services
+﻿namespace GamesHub.Business.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-    using System.Timers;
-
     using GamesHub.Business.Contracts;
     using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.GamesProvider.Contracts;
+    using GamesHub.GamesProvider.Contracts.Models;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public class SyncService : ISyncService
     {

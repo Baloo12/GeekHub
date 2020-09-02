@@ -1,7 +1,6 @@
 ﻿namespace GamesHub.DataAccess.EntityFramework
 {
     using GamesHub.DataAccess.Contracts.Models;
-    using GamesHub.DataAccess.EntityFramework.Configurations;
 
     using Microsoft.EntityFrameworkCore;
 

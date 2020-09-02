@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using GamesHub.Business.Contracts.Services;
-using GamesHub.Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace GamesHub.Web.Controllers
+﻿namespace GamesHub.Web.Controllers
 {
+    using AutoMapper;
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.Web.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     [Route("api/developers")]
     [ApiController]
     public class DevelopersController : ControllerBase

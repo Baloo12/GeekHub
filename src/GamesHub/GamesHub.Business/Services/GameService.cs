@@ -1,23 +1,20 @@
 ﻿namespace GamesHub.Business.Services
 {
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
+    using GamesHub.DataAccess.Contracts.Repositories;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using GamesHub.Business.Contracts.Services;
-    using GamesHub.DataAccess.Contracts.Models;
-    using GamesHub.DataAccess.Contracts.Repositories;
-
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
-        private readonly IDeveloperRepository _developerRepository;
 
-        public GameService(IGameRepository gameRepository, IDeveloperRepository developerRepository)
+        public GameService(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
-            _developerRepository = developerRepository;
         }
 
         public async Task Create(Game game)

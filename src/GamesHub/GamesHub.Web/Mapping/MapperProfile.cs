@@ -1,11 +1,9 @@
-﻿using System.Linq;
-
-namespace GamesHub.Web.Mapping
+﻿namespace GamesHub.Web.Mapping
 {
     using AutoMapper;
-
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.Web.Models;
+    using System.Linq;
 
     public class MapperProfile : Profile
     {

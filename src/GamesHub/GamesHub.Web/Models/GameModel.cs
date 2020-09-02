@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace GamesHub.Web.Models
+﻿namespace GamesHub.Web.Models
 {
+    using System.Collections.Generic;
+
     public class GameModel
     {
         public GameModel(string name)
