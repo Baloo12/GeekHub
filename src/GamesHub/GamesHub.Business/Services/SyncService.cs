@@ -32,15 +32,21 @@
                 foreach (var gameId in gameIds)
                 {
                     var gameDetails = await gamesProvider.GetDetails(gameId);
-                    var developersIds = await GetDeveloperEntitiesIds(gameDetails.Developers);
 
                     if (gameDetails != null)
                     {
-                        var game = new GameBuilder()
+                        var gameBuilder = new GameBuilder()
                             .WithDetails(gameDetails)
-                            .WithSource(gameDetails.Source, gameId)
-                            .WithDevelopers(developersIds)
-                            .Build();
+                            .WithSource(gameDetails.Source, gameId);
+
+                        if (gameDetails.Developers != null)
+                        {
+                            var developersIds = await GetDeveloperEntitiesIds(gameDetails.Developers);
+
+                            gameBuilder = gameBuilder.WithDevelopers(developersIds);
+                        }
+
+                        var game = gameBuilder.Build();
                         await _gameService.Create(game);
                     }
                 }
