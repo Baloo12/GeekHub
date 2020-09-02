@@ -121,8 +121,6 @@ namespace GamesHub.Web
             services.AddTransient<IGameService, GameService>();
             services.AddTransient<ISyncService, SyncService>();
             services.AddTransient<IDeveloperService, DeveloperService>();
-
-            services.AddTransient<IGameBuilder, GameBuilder>();
         }
     }
 }

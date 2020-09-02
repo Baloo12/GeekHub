@@ -1,17 +1,15 @@
-﻿namespace GamesHub.Business.Services
+﻿using System;
+
+namespace GamesHub.Business.Services
 {
-    using GamesHub.Business.Contracts;
     using GamesHub.Business.Contracts.Services;
     using GamesHub.DataAccess.Contracts.Models;
     using GamesHub.GamesProvider.Contracts;
-    using GamesHub.GamesProvider.Contracts.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class SyncService : ISyncService
     {
-        private readonly IGameBuilder _gameBuilder;
-
         private readonly IGameService _gameService;
         private readonly IDeveloperService _developerService;
 
@@ -20,13 +18,11 @@
         public SyncService(
             IEnumerable<IGamesProvider> steamGamesProviders,
             IGameService gameService,
-            IDeveloperService developerService,
-            IGameBuilder gameBuilder)
+            IDeveloperService developerService)
         {
             _gamesProviders = steamGamesProviders;
             _gameService = gameService;
             _developerService = developerService;
-            _gameBuilder = gameBuilder;
         }
 
         public async Task SyncGames()
@@ -38,20 +34,25 @@
                 foreach (var gameId in gameIds)
                 {
                     var gameDetails = await gamesProvider.GetDetails(gameId);
+                    var developersIds = await GetDevelopers(gameDetails.Developers);
+
                     if (gameDetails != null)
                     {
-                        var game = _gameBuilder.Build(gameDetails, gameId);
-                        await UpdateGameDevelopers(gameDetails, game);
+                        var game = new GameBuilder()
+                            .WithDetails(gameDetails)
+                            .WithSource(gameDetails.Source, gameId)
+                            .WithDevelopers(developersIds)
+                            .Build();
                         await _gameService.Create(game);
                     }
                 }
             }
         }
 
-        private async Task UpdateGameDevelopers(GameDetails gameDetails, Game game)
+        private async Task<List<Guid>> GetDevelopers(List<string> developers)
         {
-            var gameDevelopers = new List<GameDeveloper>();
-            foreach (var developerName in gameDetails.Developers)
+            var developersIds = new List<Guid>();
+            foreach (var developerName in developers)
             {
                 var developer = new Developer()
                 {
@@ -60,14 +61,10 @@
 
                 await _developerService.Create(developer);
                 var developerId = await _developerService.GetIdByName(developerName);
-                gameDevelopers.Add(new GameDeveloper()
-                {
-                    DeveloperId = developerId,
-                    GameId = game.Id
-                });
+                developersIds.Add(developerId);
             }
 
-            game.GameDevelopers = gameDevelopers;
+            return developersIds;
         }
     }
 }
