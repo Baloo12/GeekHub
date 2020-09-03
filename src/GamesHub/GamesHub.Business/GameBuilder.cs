@@ -1,4 +1,5 @@
 ﻿using System;
+using GamesHub.Common.Extensions;
 
 namespace GamesHub.Business
 {
@@ -45,17 +46,20 @@ namespace GamesHub.Business
 
         public GameBuilder WithDevelopers(List<Guid> developersIds)
         {
-            var gameDevelopers = new List<GameDeveloper>();
-            foreach (var developerId in developersIds)
+            if (!developersIds.IsNullOrEmpty())
             {
-                gameDevelopers.Add(new GameDeveloper()
+                var gameDevelopers = new List<GameDeveloper>();
+                foreach (var developerId in developersIds)
                 {
-                    DeveloperId = developerId,
-                    GameId = _game.Id
-                });
-            }
+                    gameDevelopers.Add(new GameDeveloper()
+                    {
+                        DeveloperId = developerId,
+                        GameId = _game.Id
+                    });
+                }
 
-            _game.GameDevelopers = gameDevelopers;
+                _game.GameDevelopers = gameDevelopers;
+            }
 
             return this;
         }
