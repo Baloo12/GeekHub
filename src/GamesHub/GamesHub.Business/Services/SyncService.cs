@@ -1,31 +1,28 @@
-﻿namespace GamesHub.Business.Services
+﻿using GamesHub.Common.Extensions;
+
+namespace GamesHub.Business.Services
 {
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
+    using GamesHub.GamesProvider.Contracts;
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Threading.Tasks;
-    using System.Timers;
-
-    using GamesHub.Business.Contracts;
-    using GamesHub.Business.Contracts.Services;
-    using GamesHub.GamesProvider.Contracts;
 
     public class SyncService : ISyncService
     {
-        private readonly IGameBuilder _gameBuilder;
-
         private readonly IGameService _gameService;
-
+        private readonly IDeveloperService _developerService;
         private readonly IEnumerable<IGamesProvider> _gamesProviders;
 
         public SyncService(
             IEnumerable<IGamesProvider> steamGamesProviders,
             IGameService gameService,
-            IGameBuilder gameBuilder)
+            IDeveloperService developerService)
         {
             _gamesProviders = steamGamesProviders;
             _gameService = gameService;
-            _gameBuilder = gameBuilder;
+            _developerService = developerService;
         }
 
         public async Task SyncGames()
@@ -37,13 +34,50 @@
                 foreach (var gameId in gameIds)
                 {
                     var gameDetails = await gamesProvider.GetDetails(gameId);
+
                     if (gameDetails != null)
                     {
-                        var game = _gameBuilder.Build(gameDetails, gameId);
+                        var developersIds = await GetDeveloperEntitiesIds(gameDetails.Developers);
+
+                        var game = new GameBuilder()
+                            .WithDetails(gameDetails)
+                            .WithSource(gameDetails.Source, gameId)
+                            .WithDevelopers(developersIds)
+                            .Build();
+
                         await _gameService.Create(game);
                     }
                 }
             }
+        }
+
+        private async Task<List<Guid>> GetDeveloperEntitiesIds(List<string> developers)
+        {
+            var developersIds = new List<Guid>();
+
+            if (!developers.IsNullOrEmpty())
+            {
+                foreach (var developerName in developers)
+                {
+                    var isDeveloperExist = await _developerService.IsExistWithName(developerName);
+
+                    if (!isDeveloperExist)
+                    {
+                        var developer = new Developer()
+                        {
+                            Name = developerName
+                        };
+
+                        await _developerService.Create(developer);
+                    }
+
+                    var developerId = await _developerService.GetIdByName(developerName);
+
+                    developersIds.Add(developerId);
+                }
+            }
+
+            return developersIds;
         }
     }
 }

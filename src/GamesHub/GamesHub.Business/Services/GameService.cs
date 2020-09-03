@@ -1,13 +1,12 @@
 ﻿namespace GamesHub.Business.Services
 {
+    using GamesHub.Business.Contracts.Services;
+    using GamesHub.DataAccess.Contracts.Models;
+    using GamesHub.DataAccess.Contracts.Repositories;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using GamesHub.Business.Contracts.Services;
-    using GamesHub.DataAccess.Contracts.Models;
-    using GamesHub.DataAccess.Contracts.Repositories;
 
     public class GameService : IGameService
     {

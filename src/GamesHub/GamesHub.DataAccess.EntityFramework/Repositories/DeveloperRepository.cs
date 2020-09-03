@@ -5,21 +5,19 @@
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    public class GameRepository : IGameRepository
+    public class DeveloperRepository : IDeveloperRepository
     {
         private readonly GamesHubContext _dbContext;
 
-        public GameRepository(GamesHubContext dbContext)
+        public DeveloperRepository(GamesHubContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        // IDEA: Move all CRUD operations to BaseRepository
-        public async Task Add(Game model)
+        public async Task Add(Developer model)
         {
             await _dbContext.AddAsync(model);
             await _dbContext.SaveChangesAsync();
@@ -40,43 +38,36 @@
             throw new NotImplementedException();
         }
 
-        public async Task<Game> Get(Guid id)
+        public Task<Developer> Get(Guid id)
         {
-            var entity = await _dbContext.Games.FindAsync(id);
-            return entity;
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Game>> GetAll()
+        public async Task<IEnumerable<Developer>> GetAll()
         {
-            var entities = await _dbContext.Games
-                .Include(g => g.GameDevelopers)
-                .ThenInclude(gd => gd.Game)
-                .Include(g => g.GameDevelopers)
+            var developers = await _dbContext.Developers
+                .Include(d => d.GameDevelopers)
                 .ThenInclude(gd => gd.Developer)
+                .Include(d => d.GameDevelopers)
+                .ThenInclude(gd => gd.Game)
                 .ToListAsync();
-            return entities;
+            return developers;
         }
 
-        public async Task<IEnumerable<Game>> GetMany(Expression<Func<Game, bool>> predicate)
-        {
-            var entities = await _dbContext.Games.Where(predicate).ToListAsync();
-            return entities;
-        }
-
-        public Task Save()
+        public Task<IEnumerable<Developer>> GetMany(Expression<Func<Developer, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(Game model)
+        public Task Update(Developer model)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Game> GetBySteamAppId(string steamAppId)
+        public async Task<Developer> GetByName(string name)
         {
-            var entity = await _dbContext.Games.FirstOrDefaultAsync(x => x.SteamAppId.Equals(steamAppId)); // IDEA: maybe ignore culture. depends on is format
-            return entity;
+            var developer = await _dbContext.Developers.FirstOrDefaultAsync(d => d.Name == name);
+            return developer;
         }
     }
 }

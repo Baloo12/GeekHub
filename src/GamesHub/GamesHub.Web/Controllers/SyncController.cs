@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using GamesHub.Business.Contracts.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace GamesHub.Web.Controllers
+﻿namespace GamesHub.Web.Controllers
 {
+    using GamesHub.Business.Contracts.Services;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+
     [Route("api/sync")]
     [ApiController]
     public class SyncController : ControllerBase

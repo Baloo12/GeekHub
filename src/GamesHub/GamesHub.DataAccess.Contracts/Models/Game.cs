@@ -1,6 +1,7 @@
 ﻿namespace GamesHub.DataAccess.Contracts.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +25,23 @@
         public double Rating { get; set; }
 
         public string SteamAppId { get; set; }
+
+        public string Description { get; set; }
+
+        public string Image { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public string ReleaseDate { get; set; }
+
+        public int RequiredAge { get; set; }
+
+        public string Type { get; set; }
+
+        public string Website { get; set; }
+
+        [InverseProperty(nameof(Game))]
+        public ICollection<GameDeveloper> GameDevelopers { get; set; }
     }
 
     // public class GameAppReference

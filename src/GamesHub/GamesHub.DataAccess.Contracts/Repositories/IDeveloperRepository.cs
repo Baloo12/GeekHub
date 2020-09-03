@@ -3,8 +3,8 @@
     using GamesHub.DataAccess.Contracts.Models;
     using System.Threading.Tasks;
 
-    public interface IGameRepository : IRepository<Game>
+    public interface IDeveloperRepository : IRepository<Developer>
     {
-        Task<Game> GetBySteamAppId(string steamAppId);
+        Task<Developer> GetByName(string name);
     }
 }
