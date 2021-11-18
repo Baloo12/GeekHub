@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <LangVersion>10.0</LangVersion>
     </PropertyGroup>
     
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
