@@ -44,8 +44,11 @@ namespace GeekHub.VideoGames.Web.Controllers
         public async Task Create()
         {
             var newGame = new VideoGameModel("test game");
+            
             var entity = _mapper.Map<VideoGame>(newGame);
+            
             await _videoGamesRepository.CreateAsync(entity);
+            await _videoGamesRepository.SaveChangesAsync();
         }
     }
 }

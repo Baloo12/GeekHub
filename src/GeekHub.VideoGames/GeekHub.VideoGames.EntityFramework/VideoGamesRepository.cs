@@ -43,7 +43,6 @@ namespace GeekHub.VideoGames.EntityFramework
         public async Task CreateAsync(VideoGame model)
         {
             await _dbContext.AddAsync(model);
-            await _dbContext.SaveChangesAsync();
         }
 
         public Task UpdateAsync(VideoGame model)
@@ -54,6 +53,11 @@ namespace GeekHub.VideoGames.EntityFramework
         public Task DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

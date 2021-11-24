@@ -18,5 +18,7 @@ namespace GeekHub.VideoGames.Domain.Interfaces
         Task UpdateAsync(TModel model);
         
         Task DeleteAsync(Guid id);
+
+        Task SaveChangesAsync();
     }
 }
