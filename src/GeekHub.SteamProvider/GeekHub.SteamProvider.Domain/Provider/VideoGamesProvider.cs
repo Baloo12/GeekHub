@@ -17,19 +17,25 @@ namespace GeekHub.SteamProvider.Domain.Provider
         {
             var persistedVideoGame = await _repository.GetBySteamIdAsync(steamId);
 
+            if (persistedVideoGame == null)
+            {
+                return null;
+            }
+
             var dto = new SteamVideoGameDto()
             {
+                SteamId = persistedVideoGame.SteamId,
                 Description = persistedVideoGame.Description,
                 Name = persistedVideoGame.Name,
                 Website = persistedVideoGame.Website,
-                // Developers = details.Data.Developers,
-                // Publishers = details.Data.Publishers,
+                Developers = persistedVideoGame.Developers,
+                Publishers = persistedVideoGame.Publishers,
                 IsFree = persistedVideoGame.IsFree,
                 RequiredAge = persistedVideoGame.RequiredAge,
                 Type = persistedVideoGame.Type,
-                // Genres = details.Data.Genres?.Select(g => g.Description).ToList(),
+                Genres = persistedVideoGame.Genres,
                 Image = persistedVideoGame.Image,
-                // Platforms = details.Data.Platforms?.Where(p => p.Value).Select(p => p.Key).ToList(),
+                Platforms = persistedVideoGame.Platforms,
                 ReleaseDate = persistedVideoGame.ReleaseDate
             };
 

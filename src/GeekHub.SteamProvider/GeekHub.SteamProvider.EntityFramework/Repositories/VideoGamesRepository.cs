@@ -7,7 +7,7 @@ using GeekHub.SteamProvider.Domain.DataAccess;
 using GeekHub.SteamProvider.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GeekHub.SteamProvider.EntityFramework
+namespace GeekHub.SteamProvider.EntityFramework.Repositories
 {
     public class VideoGamesRepository : IVideoGamesRepository
     {
@@ -43,12 +43,17 @@ namespace GeekHub.SteamProvider.EntityFramework
 
         public async Task CreateAsync(VideoGame model)
         {
-            await _dbContext.AddAsync(model);
+            await _dbContext.VideoGames.AddAsync(model);
         }
 
-        public Task UpdateAsync(VideoGame model)
+        public async Task CreateAsync(IEnumerable<VideoGame> models)
         {
-            throw new NotImplementedException();
+            await _dbContext.VideoGames.AddRangeAsync(models);
+        }
+
+        public void Update(VideoGame model)
+        {
+            _dbContext.VideoGames.Update(model);
         }
 
         public Task DeleteAsync(Guid id)
@@ -63,7 +68,22 @@ namespace GeekHub.SteamProvider.EntityFramework
 
         public async Task<VideoGame> GetBySteamIdAsync(string steamId)
         {
-            var entity = await _dbContext.VideoGames.FirstOrDefaultAsync(g => g.SteamId == steamId);
+            var entity = await _dbContext.VideoGames
+                .Where(g => g.SteamId == steamId)
+                .Include(g => g.Developers)
+                .Include(g => g.Genres)
+                .Include(g => g.Publishers)
+                .Include(g => g.Platforms)
+                .FirstOrDefaultAsync();
+            
+            return entity;
+        }
+
+        public async Task<IEnumerable<string>> GetAllSteamIdsAsync()
+        {
+            var entity = await _dbContext.VideoGames
+                .Select(g => g.SteamId)
+                .ToListAsync();
             
             return entity;
         }

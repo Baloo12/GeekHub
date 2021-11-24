@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using GeekHub.SteamProvider.Domain.Collector;
+using GeekHub.SteamProvider.Domain.Specifications;
+using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekHub.SteamProvider.Web.Controllers
@@ -8,17 +9,29 @@ namespace GeekHub.SteamProvider.Web.Controllers
     [Route("api/collector")]
     public class CollectorController : ControllerBase
     {
-        private readonly IVideoGamesCollector _collector;
+        private readonly ICollectAllVideoGamesFromSteamApiSpecification _collectAllVideoGames;
+        private readonly ICollectIdsFromSteamApiSpecification _collectIdsSpecification;
 
-        public CollectorController(IVideoGamesCollector collector)
+        public CollectorController(
+            ICollectAllVideoGamesFromSteamApiSpecification collectAllVideoGames,
+            ICollectIdsFromSteamApiSpecification collectIdsSpecification)
         {
-            _collector = collector;
+            _collectAllVideoGames = collectAllVideoGames;
+            _collectIdsSpecification = collectIdsSpecification;
+        }
+        
+        [HttpPost("ids")]
+        public async Task<IActionResult> CollectIds()
+        {
+            await _collectIdsSpecification.ExecuteAsync();
+
+            return Ok();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> BeginCollect()
+        [HttpPost("games")]
+        public async Task<IActionResult> CollectGames()
         {
-            await _collector.BeginCollect();
+            await _collectAllVideoGames.ExecuteAsync();
 
             return Ok();
         }

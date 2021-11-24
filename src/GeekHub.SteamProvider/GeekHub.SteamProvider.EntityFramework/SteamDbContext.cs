@@ -8,7 +8,7 @@ namespace GeekHub.SteamProvider.EntityFramework
         public SteamDbContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
-            //Database.EnsureDeleted();
+            // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -17,5 +17,9 @@ namespace GeekHub.SteamProvider.EntityFramework
         }
 
         public DbSet<VideoGame> VideoGames { get; set; }
+        public DbSet<Developer> Developers { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Platform> Platforms { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
     }
 }

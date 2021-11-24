@@ -15,7 +15,9 @@ namespace GeekHub.SteamProvider.Domain.DataAccess
 
         Task CreateAsync(TModel model);
         
-        Task UpdateAsync(TModel model);
+        Task CreateAsync(IEnumerable<TModel> models);
+        
+        void Update(TModel model);
         
         Task DeleteAsync(Guid id);
 

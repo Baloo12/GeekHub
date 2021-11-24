@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GeekHub.SteamProvider.Domain.Entities
@@ -12,9 +13,9 @@ namespace GeekHub.SteamProvider.Domain.Entities
         
         public string Description { get; set; }
 
-        // public List<Developer> Developers { get; set; }
-        //
-        // public List<Genre> Genres { get; set; }
+        public List<Developer> Developers { get; set; }
+        
+        public List<Genre> Genres { get; set; }
 
         public string Image { get; set; }
 
@@ -22,9 +23,9 @@ namespace GeekHub.SteamProvider.Domain.Entities
 
         public string Name { get; set; }
 
-        // public List<Platform> Platforms { get; set; }
-        //
-        // public List<Publisher> Publishers { get; set; }
+        public List<Platform> Platforms { get; set; }
+        
+        public List<Publisher> Publishers { get; set; }
 
         public string ReleaseDate { get; set; }
 
@@ -33,5 +34,7 @@ namespace GeekHub.SteamProvider.Domain.Entities
         public string Type { get; set; }
 
         public string Website { get; set; }
+        
+        public DateTime ModifiedAt { get; set; }
     }
 }

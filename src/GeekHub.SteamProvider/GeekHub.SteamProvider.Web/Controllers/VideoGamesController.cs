@@ -20,6 +20,11 @@ namespace GeekHub.SteamProvider.Web.Controllers
         {
             var game = await _provider.Get(steamId);
 
+            if (game == null)
+            {
+                return NotFound();
+            }
+
             return Ok(game);
         }
     }
