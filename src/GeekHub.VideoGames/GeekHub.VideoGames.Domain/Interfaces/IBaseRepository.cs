@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GeekHub.VideoGames.Domain.Interfaces
 {
-    public interface IGenericRepository<TModel>
+    public interface IBaseRepository<TModel>
     {
         Task<TModel> GetAsync(Guid id);
         
