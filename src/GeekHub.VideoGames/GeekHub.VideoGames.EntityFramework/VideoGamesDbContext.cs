@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekHub.VideoGames.EntityFramework
 {
-    public class VideoGameDbContext: DbContext
+    public class VideoGamesDbContext: DbContext
     {
-        public VideoGameDbContext(DbContextOptions contextOptions)
+        public VideoGamesDbContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
             //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
-        public VideoGameDbContext()
+        public VideoGamesDbContext()
         {
         }
 

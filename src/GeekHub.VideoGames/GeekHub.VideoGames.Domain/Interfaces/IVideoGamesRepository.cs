@@ -2,7 +2,7 @@
 
 namespace GeekHub.VideoGames.Domain.Interfaces
 {
-    public interface IVideoGameRepository : IBaseRepository<VideoGame>
+    public interface IVideoGamesRepository : IBaseRepository<VideoGame>
     {
         
     }

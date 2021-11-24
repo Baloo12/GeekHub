@@ -10,12 +10,12 @@ namespace GeekHub.VideoGames.EntityFramework.Registration
         public static void RegisterDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<VideoGameDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<VideoGamesDbContext>(options => options.UseSqlServer(connectionString));
         }
         
         public static void RegisterRepositories(this IServiceCollection services)
         {
-            services.AddTransient<IVideoGameRepository, VideoGameRepository>();
+            services.AddTransient<IVideoGamesRepository, VideoGamesRepository>();
         }
     }
 }

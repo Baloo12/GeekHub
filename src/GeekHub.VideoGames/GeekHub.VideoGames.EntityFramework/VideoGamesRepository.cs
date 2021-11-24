@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GeekHub.VideoGames.EntityFramework
 {
-    public class VideoGameRepository : IVideoGameRepository
+    public class VideoGamesRepository : IVideoGamesRepository
     {
-        private readonly VideoGameDbContext _dbContext;
+        private readonly VideoGamesDbContext _dbContext;
 
-        public VideoGameRepository(VideoGameDbContext dbContext)
+        public VideoGamesRepository(VideoGamesDbContext dbContext)
         {
             _dbContext = dbContext;
         }

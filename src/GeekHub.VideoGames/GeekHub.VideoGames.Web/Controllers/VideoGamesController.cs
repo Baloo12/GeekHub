@@ -11,21 +11,21 @@ namespace GeekHub.VideoGames.Web.Controllers
 {
     [ApiController]
     [Route("api/video-games")]
-    public class VideoGameController : ControllerBase
+    public class VideoGamesController : ControllerBase
     {
-        private readonly IVideoGameRepository _videoGameRepository;
+        private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public VideoGameController(IVideoGameRepository videoGameRepository, IMapper mapper)
+        public VideoGamesController(IVideoGamesRepository videoGamesRepository, IMapper mapper)
         {
-            _videoGameRepository = videoGameRepository;
+            _videoGamesRepository = videoGamesRepository;
             _mapper = mapper;
         }
 
         [HttpGet("{id}")]
         public async Task<VideoGameModel> Get(Guid id)
         {
-            var game = await _videoGameRepository.GetAsync(id);
+            var game = await _videoGamesRepository.GetAsync(id);
             var gameModel = _mapper.Map<VideoGameModel>(game);
             
             return gameModel;
@@ -34,7 +34,7 @@ namespace GeekHub.VideoGames.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<VideoGameModel>> GetList()
         {
-            var games = await _videoGameRepository.GetListAsync();
+            var games = await _videoGamesRepository.GetListAsync();
             var gameModels = _mapper.Map<IEnumerable<VideoGameModel>>(games);
             
             return gameModels;
@@ -45,7 +45,7 @@ namespace GeekHub.VideoGames.Web.Controllers
         {
             var newGame = new VideoGameModel("test game");
             var entity = _mapper.Map<VideoGame>(newGame);
-            await _videoGameRepository.CreateAsync(entity);
+            await _videoGamesRepository.CreateAsync(entity);
         }
     }
 }
