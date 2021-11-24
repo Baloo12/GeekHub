@@ -32,9 +32,9 @@ namespace GeekHub.VideoGames.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VideoGameModel>> GetList()
+        public async Task<IEnumerable<VideoGameModel>> GetAll()
         {
-            var games = await _videoGamesRepository.GetListAsync();
+            var games = await _videoGamesRepository.GetAllAsync();
             var gameModels = _mapper.Map<IEnumerable<VideoGameModel>>(games);
             
             return gameModels;

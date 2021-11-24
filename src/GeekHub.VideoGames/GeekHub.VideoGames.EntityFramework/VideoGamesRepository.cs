@@ -25,17 +25,18 @@ namespace GeekHub.VideoGames.EntityFramework
             return entity;
         }
 
-        public async Task<IEnumerable<VideoGame>> GetListAsync()
+        public async Task<IEnumerable<VideoGame>> GetAllAsync()
         {
-            var entities = await _dbContext.VideoGames
-                .ToListAsync();
+            var entities = await _dbContext.VideoGames.ToListAsync();
             
             return entities;
         }
 
-        public async Task<IEnumerable<VideoGame>> GetListAsync(Expression<Func<VideoGame, bool>> predicate)
+        public async Task<IEnumerable<VideoGame>> GetManyAsync(Expression<Func<VideoGame, bool>> predicate)
         {
-            var entities = await _dbContext.VideoGames.Where(predicate).ToListAsync();
+            var entities = await _dbContext.VideoGames
+                .Where(predicate)
+                .ToListAsync();
             
             return entities;
         }

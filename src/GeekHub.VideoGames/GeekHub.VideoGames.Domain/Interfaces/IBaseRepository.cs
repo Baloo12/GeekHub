@@ -9,9 +9,9 @@ namespace GeekHub.VideoGames.Domain.Interfaces
     {
         Task<TModel> GetAsync(Guid id);
         
-        Task<IEnumerable<TModel>> GetListAsync();
+        Task<IEnumerable<TModel>> GetAllAsync();
         
-        Task<IEnumerable<TModel>> GetListAsync(Expression<Func<TModel, bool>> predicate);
+        Task<IEnumerable<TModel>> GetManyAsync(Expression<Func<TModel, bool>> predicate);
 
         Task CreateAsync(TModel model);
         
