@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\*.nupkg&quot; &quot;..\..\..\nugets\&quot; /Y /I" />
+        <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\*.nupkg&quot; &quot;$(ProjectDir)..\..\..\nugets\&quot; /Y /I" />
     </Target>
 
     <Target Name="Generate" DependsOnTargets="Restore">
