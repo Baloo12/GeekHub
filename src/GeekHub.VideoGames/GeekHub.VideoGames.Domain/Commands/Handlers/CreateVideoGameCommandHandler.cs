@@ -13,13 +13,17 @@ namespace GeekHub.VideoGames.Domain.Commands.Handlers
         private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public CreateVideoGameCommandHandler(IVideoGamesRepository videoGamesRepository, IMapper mapper)
+        public CreateVideoGameCommandHandler(
+            IVideoGamesRepository videoGamesRepository,
+            IMapper mapper)
         {
             _videoGamesRepository = videoGamesRepository;
             _mapper = mapper;
         }
         
-        public async Task<VideoGameResponseDto> Handle(CreateVideoGameCommand request, CancellationToken cancellationToken)
+        public async Task<VideoGameResponseDto> Handle(
+            CreateVideoGameCommand request,
+            CancellationToken cancellationToken = default)
         {
             var game = _mapper.Map<VideoGame>(request.RequestDto);
             

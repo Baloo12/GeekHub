@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.VideoGames.Web", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.VideoGames.EntityFramework", "GeekHub.VideoGames.EntityFramework\GeekHub.VideoGames.EntityFramework.csproj", "{E7FF0E12-3FEF-49D1-8030-BD9F4C562595}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0633F592-C1B7-47B8-8EF1-069C4883F314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.VideoGames.Domain.Tests", "GeekHub.VideoGames.Domain.Tests\GeekHub.VideoGames.Domain.Tests.csproj", "{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,12 @@ Global
 		{E7FF0E12-3FEF-49D1-8030-BD9F4C562595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7FF0E12-3FEF-49D1-8030-BD9F4C562595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7FF0E12-3FEF-49D1-8030-BD9F4C562595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6BFCBF14-5FAC-45F1-9491-339F4B9DDF2A} = {0633F592-C1B7-47B8-8EF1-069C4883F314}
 	EndGlobalSection
 EndGlobal

@@ -13,13 +13,17 @@ namespace GeekHub.VideoGames.Domain.Queries.Handlers
         private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public GetAllVideoGamesQueryHandler(IVideoGamesRepository videoGamesRepository, IMapper mapper)
+        public GetAllVideoGamesQueryHandler(
+            IVideoGamesRepository videoGamesRepository,
+            IMapper mapper)
         {
             _videoGamesRepository = videoGamesRepository;
             _mapper = mapper;
         }
         
-        public async Task<IEnumerable<VideoGameResponseDto>> Handle(GetAllVideoGamesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<VideoGameResponseDto>> Handle(
+            GetAllVideoGamesQuery request,
+            CancellationToken cancellationToken = default)
         {
             var games = await _videoGamesRepository.GetAllAsync();
             var response = _mapper.Map<IEnumerable<VideoGameResponseDto>>(games);
