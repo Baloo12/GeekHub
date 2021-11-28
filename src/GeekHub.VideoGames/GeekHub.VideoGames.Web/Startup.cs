@@ -1,3 +1,4 @@
+using GeekHub.VideoGames.Domain.Registration;
 using GeekHub.VideoGames.EntityFramework.Registration;
 using GeekHub.VideoGames.Web.Registration.Swagger;
 using Microsoft.AspNetCore.Builder;
@@ -24,7 +25,9 @@ namespace GeekHub.VideoGames.Web
             services.RegisterDbContext(_configuration);
             services.RegisterRepositories();
             
-            services.AddAutoMapper(typeof(Startup));
+            services.RegisterMapping();
+            
+            services.RegisterMediatR();
             
             services.AddControllers();
         }

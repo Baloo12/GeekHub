@@ -41,9 +41,12 @@ namespace GeekHub.VideoGames.EntityFramework
             return entities;
         }
 
-        public async Task CreateAsync(VideoGame model)
+        public async Task<VideoGame> CreateAsync(VideoGame model)
         {
-            await _dbContext.AddAsync(model);
+            var createdEntityEntry = await _dbContext.AddAsync(model);
+            var createdEntity = createdEntityEntry.Entity;
+
+            return createdEntity;
         }
 
         public Task UpdateAsync(VideoGame model)
