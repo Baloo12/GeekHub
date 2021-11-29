@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
-using GeekHub.VideoGames.Domain.Entities;
-using GeekHub.VideoGames.Domain.Interfaces;
-using GeekHub.VideoGames.Web.Models;
+using GeekHub.VideoGames.Domain.Commands;
+using GeekHub.VideoGames.Domain.Dtos;
+using GeekHub.VideoGames.Domain.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekHub.VideoGames.Web.Controllers
@@ -13,42 +12,43 @@ namespace GeekHub.VideoGames.Web.Controllers
     [Route("api/video-games")]
     public class VideoGamesController : ControllerBase
     {
-        private readonly IVideoGamesRepository _videoGamesRepository;
-        private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
 
-        public VideoGamesController(IVideoGamesRepository videoGamesRepository, IMapper mapper)
+        public VideoGamesController(IMediator mediator)
         {
-            _videoGamesRepository = videoGamesRepository;
-            _mapper = mapper;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public async Task<VideoGameModel> Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var game = await _videoGamesRepository.GetAsync(id);
-            var gameModel = _mapper.Map<VideoGameModel>(game);
+            var query = new GetVideoGameByIdQuery(id);
+            var response = await _mediator.Send(query);
+
+            if (response == null)
+            {
+                return NotFound();
+            }
             
-            return gameModel;
+            return Ok(response);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VideoGameModel>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var games = await _videoGamesRepository.GetAllAsync();
-            var gameModels = _mapper.Map<IEnumerable<VideoGameModel>>(games);
+            var query = new GetAllVideoGamesQuery();
+            var response = await _mediator.Send(query);
             
-            return gameModels;
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task Create()
+        public async Task<IActionResult> Create([FromBody]CreateVideoGameRequestDto requestDto)
         {
-            var newGame = new VideoGameModel("test game");
+            var command = new CreateVideoGameCommand(requestDto);
+            var response = await _mediator.Send(command);
             
-            var entity = _mapper.Map<VideoGame>(newGame);
-            
-            await _videoGamesRepository.CreateAsync(entity);
-            await _videoGamesRepository.SaveChangesAsync();
+            return CreatedAtAction("Get", new { id = response.Id }, response);
         }
     }
 }

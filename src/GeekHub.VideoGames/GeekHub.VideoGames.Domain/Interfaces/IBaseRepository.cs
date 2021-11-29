@@ -13,7 +13,7 @@ namespace GeekHub.VideoGames.Domain.Interfaces
         
         Task<IEnumerable<TModel>> GetManyAsync(Expression<Func<TModel, bool>> predicate);
 
-        Task CreateAsync(TModel model);
+        Task<TModel> CreateAsync(TModel model);
         
         Task UpdateAsync(TModel model);
         
