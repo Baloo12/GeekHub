@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.2</PackageVersion>
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-        <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\*.1.0.1.nupkg&quot; &quot;$(ProjectDir)..\..\..\nugets\&quot; /Y /I" />
+        <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\*.1.0.2.nupkg&quot; &quot;$(ProjectDir)..\..\..\nugets\&quot; /Y /I" />
     </Target>
 </Project>
