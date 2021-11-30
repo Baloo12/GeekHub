@@ -41,9 +41,12 @@ namespace GeekHub.SteamProvider.EntityFramework.Repositories
             return entities;
         }
 
-        public async Task CreateAsync(VideoGame model)
+        public async Task<VideoGame> CreateAsync(VideoGame model)
         {
-            await _dbContext.VideoGames.AddAsync(model);
+            var createdEntityEntry = await _dbContext.VideoGames.AddAsync(model);
+            var createdEntity = createdEntityEntry.Entity;
+
+            return createdEntity;
         }
 
         public async Task CreateAsync(IEnumerable<VideoGame> models)
@@ -51,12 +54,15 @@ namespace GeekHub.SteamProvider.EntityFramework.Repositories
             await _dbContext.VideoGames.AddRangeAsync(models);
         }
 
-        public void Update(VideoGame model)
+        public VideoGame Update(VideoGame model)
         {
-            _dbContext.VideoGames.Update(model);
+            var updatedEntityEntry = _dbContext.VideoGames.Update(model);
+            var updatedEntity = updatedEntityEntry.Entity;
+
+            return updatedEntity;
         }
 
-        public Task DeleteAsync(Guid id)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }

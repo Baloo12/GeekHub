@@ -41,22 +41,20 @@ namespace GeekHub.SteamProvider.EntityFramework.Repositories
             return entities;
         }
 
-        public async Task CreateAsync(Publisher model)
+        public async Task<Publisher> CreateAsync(Publisher model)
         {
-            await _dbContext.Publishers.AddAsync(model);
+            var createdEntityEntry = await _dbContext.Publishers.AddAsync(model);
+            var createdEntity = createdEntityEntry.Entity;
+
+            return createdEntity;
         }
 
-        public async Task CreateAsync(IEnumerable<Publisher> models)
-        {
-            await _dbContext.Publishers.AddRangeAsync(models);
-        }
-
-        public void Update(Publisher model)
+        public Publisher Update(Publisher model)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Guid id)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }

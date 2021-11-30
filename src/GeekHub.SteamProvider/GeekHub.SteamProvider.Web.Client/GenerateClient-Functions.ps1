@@ -81,11 +81,13 @@ function Generate-Client {
  
     # Import VS Development tools
     Write-Output "Locating MSBuild"
-    $installationPath = & $vswherePath -prerelease -latest -property installationPath
+    $vs = & $vswherePath -version "[16.0,18.0)" -products * -requires Microsoft.Component.MSBuild -prerelease -latest -utf8 -format json | ConvertFrom-Json
+    $installationPath = $vs[0].installationPath
     if (!$installationPath -or !(test-path $installationPath)) {
         throw "`nCould not find MSbuild... `nExiting script"
     }
-    $msBuildPath = "$installationPath\MSBuild\Current\Bin\msbuild.exe"
+    $msBuildPath = "$installationPath\MSBuild\Current\Bin\MSBuild.exe"
+    Write-Host $msBuildPath
  
     Write-Output "Generating..."
     & $msBuildPath $ClientPath /t:Generate /p:ServiceUrl=$Endpoint
@@ -108,7 +110,7 @@ function Start-WebApp {
         Verbose = $VerbosePreference -ne 'SilentlyContinue'
     }
  
-    $launchProfile = 'Local'
+    $launchProfile = 'Development'
  
     # Run application
     Write-Host "Running application... $ApplicationPath"
