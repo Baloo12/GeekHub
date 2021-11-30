@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using GeekHub.SteamProvider.Domain.DataAccess;
-using GeekHub.SteamProvider.Domain.Models.External;
+using GeekHub.VideoGames.Contracts.Dtos.Steam;
 
 namespace GeekHub.SteamProvider.Domain.Provider
 {
@@ -13,7 +15,7 @@ namespace GeekHub.SteamProvider.Domain.Provider
             _repository = repository;
         }
         
-        public async Task<SteamVideoGameDto> Get(string steamId)
+        public async Task<VideoGameDto> Get(string steamId)
         {
             var persistedVideoGame = await _repository.GetBySteamIdAsync(steamId);
 
@@ -22,21 +24,36 @@ namespace GeekHub.SteamProvider.Domain.Provider
                 return null;
             }
 
-            var dto = new SteamVideoGameDto()
+            var dto = new VideoGameDto()
             {
-                SteamId = persistedVideoGame.SteamId,
+                ExternalId = persistedVideoGame.SteamId,
                 Description = persistedVideoGame.Description,
                 Name = persistedVideoGame.Name,
                 Website = persistedVideoGame.Website,
-                Developers = persistedVideoGame.Developers,
-                Publishers = persistedVideoGame.Publishers,
+                Developers = persistedVideoGame.Developers.Select(d => new DeveloperDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                }).ToList(),
+                Publishers = persistedVideoGame.Publishers.Select(d => new PublisherDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                }).ToList(),
                 IsFree = persistedVideoGame.IsFree,
                 RequiredAge = persistedVideoGame.RequiredAge,
-                Type = persistedVideoGame.Type,
-                Genres = persistedVideoGame.Genres,
+                Genres = persistedVideoGame.Genres.Select(d => new GenreDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                }).ToList(),
                 Image = persistedVideoGame.Image,
-                Platforms = persistedVideoGame.Platforms,
-                ReleaseDate = persistedVideoGame.ReleaseDate
+                Platforms = persistedVideoGame.Platforms.Select(d => new PlatformDto()
+                {
+                    Id = d.Id,
+                    Name = d.Name
+                }).ToList(),
+                ReleaseDate = new DateTime() //persistedVideoGame.ReleaseDate
             };
 
             return dto;

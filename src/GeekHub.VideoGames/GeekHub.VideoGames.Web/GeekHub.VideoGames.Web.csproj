@@ -13,6 +13,7 @@
     <ItemGroup>
       <ProjectReference Include="..\GeekHub.VideoGames.Domain\GeekHub.VideoGames.Domain.csproj" />
       <ProjectReference Include="..\GeekHub.VideoGames.EntityFramework\GeekHub.VideoGames.EntityFramework.csproj" />
+      <ProjectReference Include="..\GeekHub.VideoGames.SteamAdapter\GeekHub.VideoGames.SteamAdapter.csproj" />
     </ItemGroup>
 
 </Project>
