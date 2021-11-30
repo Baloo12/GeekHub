@@ -2,8 +2,10 @@
 {
     using System.Threading.Tasks;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
+
     public interface IBggApiClient
     {
-        Task<string> GetGameContentAsync(int bggId);
+        Task<string> GetGameContentAsync(RequestGameParameters requestParameters);
     }
 }

@@ -6,6 +6,7 @@
 
     using GeekHub.BoardGames.BggProvider.Domain;
     using GeekHub.BoardGames.BggProvider.Domain.Api;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
     using GeekHub.BoardGames.BggProvider.Web.Models;
 
     using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,14 @@
         [HttpGet("{id}")]
         public async Task<ActionResult<BoardGameModel>> Get(int id)
         {
-            var gameContent = await _bggApiClient.GetGameContentAsync(id);
+            var parameters = new RequestGameParameters();
+            parameters.BggIds.Set(
+                new[]
+                    {
+                        id
+                    });
+            
+            var gameContent = await _bggApiClient.GetGameContentAsync(parameters);
             var game = _contentParser.ParseGame(gameContent);
             var model = _mapper.Map<BoardGameModel>(game);
             return Ok(model);

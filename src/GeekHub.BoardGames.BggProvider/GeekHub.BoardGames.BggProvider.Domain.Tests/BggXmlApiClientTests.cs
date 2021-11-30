@@ -5,6 +5,7 @@
 
     using GeekHub.BoardGames.BggProvider.Domain.Api;
     using GeekHub.BoardGames.BggProvider.Domain.Api.Http;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
 
     using Moq;
 
@@ -26,7 +27,7 @@
 
             var client = new BggXmlApiClient(httpClientMock.Object);
 
-            var actualContent = await client.GetGameContentAsync(1);
+            var actualContent = await client.GetGameContentAsync(new RequestGameParameters());
 
             Assert.Equal(ExpectedContent, actualContent);
         }
@@ -37,7 +38,7 @@
             var httpClientMock = new Mock<IHttpClientHandler>();
             var client = new BggXmlApiClient(httpClientMock.Object);
 
-            Assert.ThrowsAsync<InvalidDataException>(async () => await client.GetGameContentAsync(1));
+            Assert.ThrowsAsync<InvalidDataException>(async () => await client.GetGameContentAsync(It.IsAny<RequestGameParameters>()));
         }
     }
 }
