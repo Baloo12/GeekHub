@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GeekHub.Common.HttpClient.Exceptions;
 
 namespace GeekHub.SteamProvider.Web.Client
 {
@@ -10,15 +11,13 @@ namespace GeekHub.SteamProvider.Web.Client
             int statusCode,
             string response,
             IReadOnlyDictionary<string, IEnumerable<string>> headers,
-            Exception innerException,
-            string type = null)
+            Exception innerException)
             : base(
                 message,
                 statusCode,
                 response,
                 (Dictionary<string, IEnumerable<string>>)headers,
-                innerException,
-                type)
+                innerException)
         {
         }
     }

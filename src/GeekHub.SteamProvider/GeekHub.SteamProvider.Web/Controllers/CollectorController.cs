@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GeekHub.SteamProvider.Domain.Specifications;
 using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GeekHub.SteamProvider.Web.Controllers
 {
@@ -20,16 +20,20 @@ namespace GeekHub.SteamProvider.Web.Controllers
             _collectIdsSpecification = collectIdsSpecification;
         }
         
-        [HttpPost("ids")]
-        public async Task<IActionResult> CollectIds()
+        [HttpPost("base-info")]
+        [SwaggerOperation(OperationId = "CollectAllVideoGamesBaseInfo")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> CollectAllVideoGamesBaseInfo()
         {
             await _collectIdsSpecification.ExecuteAsync();
 
             return Ok();
         }
 
-        [HttpPost("games")]
-        public async Task<IActionResult> CollectGames()
+        [HttpPost("details")]
+        [SwaggerOperation(OperationId = "CollectAllVideoGamesDetails")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> CollectAllVideoGamesDetails()
         {
             await _collectAllVideoGames.ExecuteAsync();
 

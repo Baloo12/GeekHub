@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using GeekHub.Common.DataAccess;
 using GeekHub.SteamProvider.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace GeekHub.SteamProvider.Domain.DataAccess
 {
