@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.BoardGames.BggProvi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.BoardGames.BggProvider.Domain", "GeekHub.BoardGames.BggProvider.Domain\GeekHub.BoardGames.BggProvider.Domain.csproj", "{A478625E-D834-470D-BD94-1831F1385F90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.BoardGames.BggProvider.Domain.Tests", "GeekHub.BoardGames.BggProvider.Domain.Tests\GeekHub.BoardGames.BggProvider.Domain.Tests.csproj", "{39CE98CD-934B-49DB-9C44-E08ECFAC416E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A478625E-D834-470D-BD94-1831F1385F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A478625E-D834-470D-BD94-1831F1385F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A478625E-D834-470D-BD94-1831F1385F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39CE98CD-934B-49DB-9C44-E08ECFAC416E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39CE98CD-934B-49DB-9C44-E08ECFAC416E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39CE98CD-934B-49DB-9C44-E08ECFAC416E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39CE98CD-934B-49DB-9C44-E08ECFAC416E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,8 @@
 namespace GeekHub.BoardGames.BggProvider.Web
 {
     using GeekHub.BoardGames.BggProvider.Domain;
+    using GeekHub.BoardGames.BggProvider.Domain.Api;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.Http;
     using GeekHub.BoardGames.BggProvider.Web.Registration.Swagger;
 
     using Microsoft.AspNetCore.Builder;
@@ -39,7 +41,7 @@ namespace GeekHub.BoardGames.BggProvider.Web
 
         private static void RegisterHttpClients(IServiceCollection services)
         {
-            services.AddHttpClient<IBggApiClient, BggXmlApiClient>();
+            services.AddHttpClient<IHttpClientHandler, HttpClientHandler>();
         }
     }
 }

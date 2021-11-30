@@ -1,4 +1,4 @@
-namespace GeekHub.BoardGames.BggProvider.Domain
+namespace GeekHub.BoardGames.BggProvider.Domain.Api
 {
     using System.Xml;
 
