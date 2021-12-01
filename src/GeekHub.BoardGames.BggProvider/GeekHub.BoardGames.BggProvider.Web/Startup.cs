@@ -1,6 +1,8 @@
 namespace GeekHub.BoardGames.BggProvider.Web
 {
+    using GeekHub.BoardGames.BggProvider.Domain.Api;
     using GeekHub.BoardGames.BggProvider.Domain.Api.Http;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters.Base;
     using GeekHub.BoardGames.BggProvider.Web.Registration.Swagger;
 
     using Microsoft.AspNetCore.Builder;
@@ -32,9 +34,18 @@ namespace GeekHub.BoardGames.BggProvider.Web
             services.AddAutoMapper(typeof(Startup));
 
             RegisterHttpClients(services);
-
+            RegisterServices(services);
             services.RegisterSwagger();
             services.AddControllers();
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            //TODO: temp solution. extract to separate classes
+            services.AddTransient<IRequestParameterConstructor, RequestParameterConstructor>();
+            services.AddTransient<IRequestBuilderFactory, RequestBuilderFactory>();
+            services.AddTransient<IBggApiClient,BggXmlApiClient>();
+            services.AddTransient<IContentParser,XmlContentParser>();
         }
 
         private static void RegisterHttpClients(IServiceCollection services)
