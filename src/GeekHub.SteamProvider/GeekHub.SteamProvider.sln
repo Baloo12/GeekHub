@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.SteamProvider.Web",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.SteamProvider.Web.Client", "GeekHub.SteamProvider.Web.Client\GeekHub.SteamProvider.Web.Client.csproj", "{99A53DF6-0EE4-4C0F-AA16-6CDCD6BF2EAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekHub.SteamProvider.VideoGamesAdapter", "GeekHub.SteamProvider.VideoGamesAdapter\GeekHub.SteamProvider.VideoGamesAdapter.csproj", "{EAF6DAC4-B9A9-4CC0-B5B5-F5231AC4F0F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{99A53DF6-0EE4-4C0F-AA16-6CDCD6BF2EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99A53DF6-0EE4-4C0F-AA16-6CDCD6BF2EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99A53DF6-0EE4-4C0F-AA16-6CDCD6BF2EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF6DAC4-B9A9-4CC0-B5B5-F5231AC4F0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF6DAC4-B9A9-4CC0-B5B5-F5231AC4F0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF6DAC4-B9A9-4CC0-B5B5-F5231AC4F0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF6DAC4-B9A9-4CC0-B5B5-F5231AC4F0F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

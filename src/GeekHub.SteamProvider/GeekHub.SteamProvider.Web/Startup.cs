@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GeekHub.SteamProvider.Domain.Registration;
 using GeekHub.SteamProvider.EntityFramework.Registration;
+using GeekHub.SteamProvider.VideoGamesAdapter.Registration;
 using GeekHub.SteamProvider.Web.Registration.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,14 @@ namespace GeekHub.SteamProvider.Web
             
             services.RegisterDbContext(_configuration);
             services.RegisterRepositories();
+
+            services.RegisterSteamProviderDomainMapping();
+            
+            services.RegisterVideoGamesAdapterMapping();
+            services.RegisterVideoGamesConsumerClient();
+            services.RegisterVideoGamesConsumer();
+
+            services.RegisterMediatR();
             
             services.RegisterSteamApiClient();
             services.RegisterSteamStoreClient();

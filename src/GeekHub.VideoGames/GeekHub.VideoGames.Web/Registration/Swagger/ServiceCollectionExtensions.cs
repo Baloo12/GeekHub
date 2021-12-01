@@ -9,6 +9,7 @@ namespace GeekHub.VideoGames.Web.Registration.Swagger
         {
             services.AddSwaggerGen(s =>
             { 
+                s.EnableAnnotations();
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Video Games Service API", 

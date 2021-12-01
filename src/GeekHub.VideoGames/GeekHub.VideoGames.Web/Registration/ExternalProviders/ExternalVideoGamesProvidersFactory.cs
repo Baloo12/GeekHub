@@ -19,7 +19,7 @@ namespace GeekHub.VideoGames.Web.Registration.ExternalProviders
         {
             switch (source.ToLower())
             {
-                case "Steam":
+                case "steam":
                     return _videoGamesProviders.FirstOrDefault(p =>
                         p.GetType() == typeof(SteamVideoGamesProvider));
                 default:
