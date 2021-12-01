@@ -18,6 +18,12 @@
 
         private readonly Mock<IRequestBuilderFactory> _requestBuilderFactoryMock = new();
 
+        public BggXmlApiClientTests()
+        {
+            var builderMock = new Mock<IRequestBuilder>();
+            _requestBuilderFactoryMock.Setup(x => x.GetUrlBuilder(It.IsAny<string>(), It.IsAny<IRequestParameters>())).Returns(builderMock.Object);
+        }
+
         [Fact]
         public async void GetGameById_IdIsCorrect_ReturnExpectedContent()
         {
