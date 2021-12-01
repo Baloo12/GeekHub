@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using GeekHub.SteamProvider.Domain.Models.External;
+﻿using System;
+using System.Threading.Tasks;
+using GeekHub.VideoGames.Contracts.Dtos.Steam;
 
 namespace GeekHub.SteamProvider.Domain.Provider
 {
     public interface IVideoGamesProvider
     {
-        public Task<SteamVideoGameDto> Get(string steamId);
+        public Task<VideoGameDto> Get(Guid geekHubId);
     }
 }

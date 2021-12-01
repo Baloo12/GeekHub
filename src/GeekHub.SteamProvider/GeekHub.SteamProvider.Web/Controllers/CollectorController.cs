@@ -21,8 +21,8 @@ namespace GeekHub.SteamProvider.Web.Controllers
         }
         
         [HttpPost("base-info")]
-        [SwaggerOperation(OperationId = "CollectAllVideoGamesBaseInfo")]
-        [ProducesResponseType(200)]
+        [SwaggerOperation(OperationId = "Collector_CollectAllVideoGamesBaseInfo")]
+        [SwaggerResponse(200)]
         public async Task<IActionResult> CollectAllVideoGamesBaseInfo()
         {
             await _collectIdsSpecification.ExecuteAsync();
@@ -31,8 +31,8 @@ namespace GeekHub.SteamProvider.Web.Controllers
         }
 
         [HttpPost("details")]
-        [SwaggerOperation(OperationId = "CollectAllVideoGamesDetails")]
-        [ProducesResponseType(200)]
+        [SwaggerOperation(OperationId = "Collector_CollectAllVideoGamesDetails")]
+        [SwaggerResponse(200)]
         public async Task<IActionResult> CollectAllVideoGamesDetails()
         {
             await _collectAllVideoGames.ExecuteAsync();

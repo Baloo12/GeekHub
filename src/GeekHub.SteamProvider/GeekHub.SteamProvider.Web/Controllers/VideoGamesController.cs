@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GeekHub.SteamProvider.Domain.Provider;
+using GeekHub.VideoGames.Contracts.Dtos.Steam;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -16,13 +18,13 @@ namespace GeekHub.SteamProvider.Web.Controllers
             _provider = provider;
         }
 
-        [HttpGet("{steamId}")]
-        [SwaggerOperation(OperationId = "GetDetails")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        public async Task<IActionResult> Get(string steamId)
+        [HttpGet("{geekHubId}")]
+        [SwaggerOperation(OperationId = "VideoGames_GetDetails")]
+        [SwaggerResponse(200, Type = typeof(VideoGameDto))]
+        [SwaggerResponse(404)]
+        public async Task<IActionResult> Get(Guid geekHubId)
         {
-            var game = await _provider.Get(steamId);
+            var game = await _provider.Get(geekHubId);
 
             if (game == null)
             {

@@ -1,5 +1,7 @@
 using GeekHub.VideoGames.Domain.Registration;
 using GeekHub.VideoGames.EntityFramework.Registration;
+using GeekHub.VideoGames.SteamAdapter.Registration;
+using GeekHub.VideoGames.Web.Registration.ExternalProviders;
 using GeekHub.VideoGames.Web.Registration.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +29,12 @@ namespace GeekHub.VideoGames.Web
             
             services.RegisterMapping();
             
+            services.RegisterSteamAdapterMapping();
+            services.RegisterSteamProviderClient();
+            
             services.RegisterMediatR();
+
+            services.RegisterExternalProviders();
             
             services.AddControllers();
         }

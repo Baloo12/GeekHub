@@ -85,6 +85,19 @@ namespace GeekHub.SteamProvider.EntityFramework.Repositories
             return entity;
         }
 
+        public async Task<VideoGame> GetByGeekHubIdAsync(Guid geekHubId)
+        {
+            var entity = await _dbContext.VideoGames
+                .Where(g => g.GeekHubId == geekHubId)
+                .Include(g => g.Developers)
+                .Include(g => g.Genres)
+                .Include(g => g.Publishers)
+                .Include(g => g.Platforms)
+                .FirstOrDefaultAsync();
+            
+            return entity;
+        }
+
         public async Task<IEnumerable<string>> GetAllSteamIdsAsync()
         {
             var entity = await _dbContext.VideoGames
