@@ -12,7 +12,7 @@
                 {
                     null
                 };
-            
+
             yield return new object[]
                 {
                     string.Empty

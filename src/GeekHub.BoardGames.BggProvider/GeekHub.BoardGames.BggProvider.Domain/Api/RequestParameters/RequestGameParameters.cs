@@ -1,53 +1,49 @@
 ﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters.Base;
     using GeekHub.BoardGames.BggProvider.Domain.Constants;
     using GeekHub.BoardGames.BggProvider.Domain.ValueObjects;
 
-    public class RequestGameParameters : BaseRequestParameters
+    public class RequestGameParameters : IRequestParameters
     {
-        public RequestParameter<IEnumerable<int>> BggIds => new(BggThingParameters.Id);
-
-        public RequestParameter<bool> IncludeComments => new(BggThingParameters.Comments);
-
-        public RequestParameter<bool> IncludeMarketplace => new(BggThingParameters.Marketplace);
-
-        public RequestParameter<bool> IncludeRatingComments => new(BggThingParameters.RatingComments);
-
-        public RequestParameter<bool> IncludeStats => new(BggThingParameters.Stats);
-
-        public RequestParameter<bool> IncludeVersions => new(BggThingParameters.Versions);
-
-        public RequestParameter<bool> IncludeVideos => new(BggThingParameters.Versions);
-
-        public override string ItemType => BggItemTypes.Thing;
-
-        public RequestParameter<int> PageNumber => new(BggThingParameters.Page, 1);
-
-        public RequestParameter<PageSize> PageSize => new(BggThingParameters.PageSize, ValueObjects.PageSize.From(10));
-
-        public RequestParameter<IEnumerable<string>> Types => new(BggThingParameters.Type);
-
-        protected override IEnumerable<string> GetStringParameters()
+        public RequestGameParameters()
         {
-            var parameters = new List<string>
-                {
-                    BggIds.ToString(),
-                    IncludeComments.ToString(),
-                    IncludeMarketplace.ToString(),
-                    IncludeRatingComments.ToString(),
-                    IncludeStats.ToString(),
-                    IncludeVersions.ToString(),
-                    IncludeVideos.ToString(),
-                    PageNumber.ToString(),
-                    PageSize.ToString(),
-                    Types.ToString()
-                };
-
-            return parameters;
+            PageNumber = 1;
+            PageSize = PageSize.From(10);
         }
+
+        [RequestParameter(BggThingParameters.Id)]
+        public IEnumerable<int> BggIds { get; set; }
+
+        [RequestParameter(BggThingParameters.Comments)]
+        public bool IncludeComments { get; set; }
+
+        [RequestParameter(BggThingParameters.Marketplace)]
+        public bool IncludeMarketplace { get; set; }
+
+        [RequestParameter(BggThingParameters.RatingComments)]
+        public bool IncludeRatingComments { get; set; }
+
+        [RequestParameter(BggThingParameters.Stats)]
+        public bool IncludeStats { get; set; }
+
+        [RequestParameter(BggThingParameters.Versions)]
+        public bool IncludeVersions { get; set; }
+
+        [RequestParameter(BggThingParameters.Videos)]
+        public bool IncludeVideos { get; set; }
+
+        public string ItemType => BggItemTypes.Thing;
+
+        [RequestParameter(BggThingParameters.Page)]
+        public int PageNumber { get; set; }
+
+        [RequestParameter(BggThingParameters.PageSize)]
+        public PageSize PageSize { get; set; }
+
+        [RequestParameter(BggThingParameters.Type)]
+        public IEnumerable<string> Types { get; set; }
     }
 }

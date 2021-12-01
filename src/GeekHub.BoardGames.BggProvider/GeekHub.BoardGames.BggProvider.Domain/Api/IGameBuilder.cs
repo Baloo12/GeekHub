@@ -6,8 +6,8 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Api
     {
         BoardGame Build();
 
-        IGameBuilder WithName();
-
         IGameBuilder WithBggId();
+
+        IGameBuilder WithName();
     }
 }

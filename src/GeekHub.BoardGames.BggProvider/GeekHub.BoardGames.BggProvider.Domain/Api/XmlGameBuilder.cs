@@ -6,9 +6,9 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Api
 
     public class XmlGameBuilder : IGameBuilder
     {
-        private readonly XmlElement _xmlGame;
-
         private readonly BoardGame _game = new();
+
+        private readonly XmlElement _xmlGame;
 
         public XmlGameBuilder(XmlElement xmlElement)
         {
@@ -20,15 +20,15 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Api
             return _game;
         }
 
-        public IGameBuilder WithName()
-        {
-            _game.Name = ExtractName();
-            return this;
-        }
-
         public IGameBuilder WithBggId()
         {
             _game.BggId = ExtractBggId();
+            return this;
+        }
+
+        public IGameBuilder WithName()
+        {
+            _game.Name = ExtractName();
             return this;
         }
 

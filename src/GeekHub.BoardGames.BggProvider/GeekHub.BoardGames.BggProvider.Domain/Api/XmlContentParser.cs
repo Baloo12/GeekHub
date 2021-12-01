@@ -16,6 +16,7 @@
             {
                 throw new InvalidDataException();
             }
+
             var gameBuilder = new XmlGameBuilder(itemElements[0] as XmlElement);
 
             var game = gameBuilder.WithBggId().WithName().Build();
