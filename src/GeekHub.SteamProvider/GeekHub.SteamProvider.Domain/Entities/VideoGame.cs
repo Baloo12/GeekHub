@@ -11,6 +11,8 @@ namespace GeekHub.SteamProvider.Domain.Entities
         
         public string SteamId { get; set; }
         
+        public Guid GeekHubId { get; set; }
+        
         public string Description { get; set; }
 
         public List<Developer> Developers { get; set; }

@@ -26,7 +26,7 @@ namespace GeekHub.VideoGames.Domain.Queries.Handlers
             CancellationToken cancellationToken = default)
         {
             var provider = _externalVideoGamesProvidersFactory.ResolveProvider(request.ExternalSource);
-            var game = await provider.GetDetails(request.ExternalId);
+            var game = await provider.GetDetails(request.Id);
             
             var response = _mapper.Map<VideoGameResponseDto>(game);
 

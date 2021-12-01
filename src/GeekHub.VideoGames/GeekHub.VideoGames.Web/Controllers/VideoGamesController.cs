@@ -33,10 +33,10 @@ namespace GeekHub.VideoGames.Web.Controllers
             return Ok(response);
         }
         
-        [HttpGet("{externalId}/{externalSource}")]
-        public async Task<IActionResult> GetExternalDetails(string externalId, string externalSource)
+        [HttpGet("{id}/{externalSource}")]
+        public async Task<IActionResult> GetExternalDetails(Guid id, string externalSource)
         {
-            var query = new GetVideoGameExternalDetailsQuery(externalId, externalSource);
+            var query = new GetVideoGameExternalDetailsQuery(id, externalSource);
             var response = await _mediator.Send(query);
 
             if (response == null)

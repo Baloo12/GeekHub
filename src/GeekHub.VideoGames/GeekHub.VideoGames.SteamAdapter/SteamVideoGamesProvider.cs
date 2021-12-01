@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeekHub.SteamProvider.Client;
@@ -17,9 +17,9 @@ namespace GeekHub.VideoGames.SteamAdapter
             _client = new VideoGamesClient(steamProviderClient.HttpClient);
         }
         
-        public async Task<VideoGameDto> GetDetails(string steamId) // Idea: use common Guid Id, get rid of external ids at all
+        public async Task<VideoGameDto> GetDetails(Guid id)
         {
-            var detailsClientDto = await _client.GetDetailsAsync(steamId);
+            var detailsClientDto = await _client.GetDetailsAsync(id);
 
             var details = _mapper.Map<VideoGameDto>(detailsClientDto);
 

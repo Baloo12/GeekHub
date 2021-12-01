@@ -293,7 +293,7 @@ namespace GeekHub.SteamProvider.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="SteamProviderClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<VideoGameDto> GetDetailsAsync(string steamId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<VideoGameDto> GetDetailsAsync(System.Guid geekHubId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     
     }
     
@@ -327,14 +327,14 @@ namespace GeekHub.SteamProvider.Client
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="SteamProviderClientException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<VideoGameDto> GetDetailsAsync(string steamId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VideoGameDto> GetDetailsAsync(System.Guid geekHubId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            if (steamId == null)
-                throw new System.ArgumentNullException("steamId");
+            if (geekHubId == null)
+                throw new System.ArgumentNullException("geekHubId");
     
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/video-games/{steamId}");
-            urlBuilder_.Replace("{steamId}", System.Uri.EscapeDataString(ConvertToString(steamId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Append("api/video-games/{geekHubId}");
+            urlBuilder_.Replace("{geekHubId}", System.Uri.EscapeDataString(ConvertToString(geekHubId, System.Globalization.CultureInfo.InvariantCulture)));
     
             var client_ = _httpClient;
             var disposeClient_ = false;
