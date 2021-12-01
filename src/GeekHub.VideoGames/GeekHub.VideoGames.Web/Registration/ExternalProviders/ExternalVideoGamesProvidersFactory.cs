@@ -17,11 +17,11 @@ namespace GeekHub.VideoGames.Web.Registration.ExternalProviders
         }
         public IExternalVideoGamesProvider ResolveProvider(string source)
         {
-            switch (source)
+            switch (source.ToLower())
             {
                 case "Steam":
                     return _videoGamesProviders.FirstOrDefault(p =>
-                        p.GetType().Name == nameof(SteamVideoGamesProvider));
+                        p.GetType() == typeof(SteamVideoGamesProvider));
                 default:
                     throw new NotImplementedException("External provider not exists");
             }
