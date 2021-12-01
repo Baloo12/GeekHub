@@ -31,7 +31,7 @@
 
         public RequestParameter<IEnumerable<string>> Types => new(BggThingParameters.Type);
 
-        protected override string InternalBuildParameters()
+        protected override IEnumerable<string> GetStringParameters()
         {
             var parameters = new List<string>
                 {
@@ -47,9 +47,7 @@
                     Types.ToString()
                 };
 
-            return parameters.Any()
-                ? string.Join('&', parameters)
-                : string.Empty;
+            return parameters;
         }
     }
 }

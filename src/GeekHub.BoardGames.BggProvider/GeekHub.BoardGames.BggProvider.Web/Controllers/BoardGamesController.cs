@@ -4,7 +4,6 @@
 
     using AutoMapper;
 
-    using GeekHub.BoardGames.BggProvider.Domain;
     using GeekHub.BoardGames.BggProvider.Domain.Api;
     using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
     using GeekHub.BoardGames.BggProvider.Web.Models;
@@ -19,11 +18,12 @@
 
         private readonly IMapper _mapper;
 
-        private IContentParser _contentParser;
+        private readonly IContentParser _contentParser;
 
         public BoardGamesController(IBggApiClient bggApiClient, IContentParser contentParser, IMapper mapper)
         {
             _bggApiClient = bggApiClient;
+            _contentParser = contentParser;
             _mapper = mapper;
         }
 
@@ -36,7 +36,7 @@
                     {
                         id
                     });
-            
+
             var gameContent = await _bggApiClient.GetGameContentAsync(parameters);
             var game = _contentParser.ParseGame(gameContent);
             var model = _mapper.Map<BoardGameModel>(game);
