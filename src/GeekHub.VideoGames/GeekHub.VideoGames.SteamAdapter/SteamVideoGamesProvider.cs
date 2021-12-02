@@ -14,17 +14,17 @@ namespace GeekHub.VideoGames.SteamAdapter
     public class SteamVideoGamesProvider : IExternalVideoGamesProvider
     {
         private readonly IMapper _mapper;
-        private readonly VideoGamesClient _client;
+        private readonly VideoGamesClient _videoGamesClient;
         
-        public SteamVideoGamesProvider(SteamProviderClient steamProviderClient, IMapper mapper)
+        public SteamVideoGamesProvider(VideoGamesClient videoGamesVideoGamesClient, IMapper mapper)
         {
             _mapper = mapper;
-            _client = new VideoGamesClient(steamProviderClient.HttpClient);
+            _videoGamesClient = videoGamesVideoGamesClient;
         }
         
-        public async Task<VideoGameDto> GetDetails(Guid id)
+        public async Task<VideoGameDto> GetDetailsAsync(Guid id)
         {
-            var detailsClientDto = await _client.GetDetailsAsync(id);
+            var detailsClientDto = await _videoGamesClient.GetDetailsAsync(id);
 
             var details = _mapper.Map<VideoGameDto>(detailsClientDto);
 
@@ -33,7 +33,7 @@ namespace GeekHub.VideoGames.SteamAdapter
         
         public async Task<IEnumerable<UnsynchronizedVideoGameDto>> GetUnsynchronizedAsync(int count)
         {
-            var clientUnsynchronizedVideoGames = await _client.GetUnsynchronizedAsync(count);
+            var clientUnsynchronizedVideoGames = await _videoGamesClient.GetUnsynchronizedAsync(count);
 
             var unsynchronizedVideoGames = _mapper.Map<IEnumerable<UnsynchronizedVideoGameDto>>(clientUnsynchronizedVideoGames);
 
@@ -44,7 +44,7 @@ namespace GeekHub.VideoGames.SteamAdapter
         {
             var clientVideoGamesToSynchronize = _mapper.Map<IEnumerable<ClientSynchronizedVideoGameDto>>(videoGamesToSynchronize);
             
-            await _client.SynchronizeAsync(clientVideoGamesToSynchronize);
+            await _videoGamesClient.SynchronizeAsync(clientVideoGamesToSynchronize);
         }
     }
 }

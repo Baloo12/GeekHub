@@ -31,7 +31,7 @@ namespace GeekHub.SteamProvider.Web.Controllers
         [SwaggerResponse(404)]
         public async Task<IActionResult> Get(Guid geekHubId)
         {
-            var game = await _provider.Get(geekHubId);
+            var game = await _provider.GetAsync(geekHubId);
 
             if (game == null)
             {

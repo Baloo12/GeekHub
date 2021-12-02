@@ -9,6 +9,8 @@ namespace GeekHub.VideoGames.Web.Registration.ExternalProviders
 {
     public class ExternalVideoGamesProvidersFactory : IExternalVideoGamesProvidersFactory
     {
+        private const string SteamProvider = "steam";
+        
         private readonly IEnumerable<IExternalVideoGamesProvider> _videoGamesProviders;
 
         public ExternalVideoGamesProvidersFactory(IEnumerable<IExternalVideoGamesProvider> videoGamesProviders)
@@ -19,7 +21,7 @@ namespace GeekHub.VideoGames.Web.Registration.ExternalProviders
         {
             switch (source.ToLower())
             {
-                case "steam":
+                case SteamProvider:
                     return _videoGamesProviders.FirstOrDefault(p =>
                         p.GetType() == typeof(SteamVideoGamesProvider));
                 default:

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
+using GeekHub.SteamProvider.Client;
+using GeekHub.VideoGames.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekHub.VideoGames.SteamAdapter.Registration
@@ -12,14 +14,16 @@ namespace GeekHub.VideoGames.SteamAdapter.Registration
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
         
-        public static void RegisterSteamProviderClient(this IServiceCollection services)
+        public static void RegisterGeneratedClientClient(
+            this IServiceCollection services,
+            Action<HttpClient> clientConfigurations)
         {
-            services.AddHttpClient<SteamProviderClient>();
+            services.AddHttpClient<VideoGamesClient>(clientConfigurations);
         }
         
-        public static void RegisterSteamProviderClient(this IServiceCollection services, Action<HttpClient> clientConfigurations)
+        public static void RegisterSteamProvider(this IServiceCollection services)
         {
-            services.AddHttpClient<SteamProviderClient>(clientConfigurations);
+            services.AddTransient<IExternalVideoGamesProvider, SteamVideoGamesProvider>();
         }
     }
 }

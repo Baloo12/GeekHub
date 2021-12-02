@@ -8,7 +8,7 @@ namespace GeekHub.VideoGames.Domain.Interfaces
 {
     public interface IExternalVideoGamesProvider
     {
-        Task<VideoGameDto> GetDetails(Guid id);
+        Task<VideoGameDto> GetDetailsAsync(Guid id);
 
         Task<IEnumerable<UnsynchronizedVideoGameDto>> GetUnsynchronizedAsync(int count);
         
