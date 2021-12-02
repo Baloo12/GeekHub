@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekHub.VideoGames.Contracts.Dtos.Synchronization;
 using GeekHub.VideoGames.Domain.Commands;
@@ -49,18 +48,10 @@ namespace GeekHub.VideoGames.Web.Controllers
             var query = new VideoGameToSynchronizeQuery(unsynchronizedVideoGame);
             var game = await _mediator.Send(query);
 
+            // TODO: Commands pipeline
             if (game == null)
             {
-                //Create
-                var createVideoGameDto = new CreateVideoGameRequestDto(unsynchronizedVideoGame.Name);
-                var command = new CreateVideoGameCommand(createVideoGameDto);
-                var createdResponse = await _mediator.Send(command);
-
-                var synchronizedGame = new SynchronizedVideoGameDto()
-                {
-                    Id = unsynchronizedVideoGame.Id,
-                    GeekHubId = createdResponse.Id
-                };
+                var synchronizedGame = await CreateVideoGame(unsynchronizedVideoGame);
 
                 return synchronizedGame;
             }
@@ -74,6 +65,22 @@ namespace GeekHub.VideoGames.Web.Controllers
 
                 return synchronizedGame;
             }
+        }
+
+        private async Task<SynchronizedVideoGameDto> CreateVideoGame(UnsynchronizedVideoGameDto unsynchronizedVideoGame)
+        {
+            var createVideoGameDto = new CreateVideoGameRequestDto(unsynchronizedVideoGame.Name);
+            
+            var command = new CreateVideoGameCommand(createVideoGameDto);
+            var createdResponse = await _mediator.Send(command);
+
+            var synchronizedGame = new SynchronizedVideoGameDto()
+            {
+                Id = unsynchronizedVideoGame.Id,
+                GeekHubId = createdResponse.Id
+            };
+            
+            return synchronizedGame;
         }
     }
 }
