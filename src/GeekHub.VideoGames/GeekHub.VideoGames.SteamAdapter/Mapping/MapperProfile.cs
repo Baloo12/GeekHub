@@ -10,6 +10,12 @@ using PublisherDto = GeekHub.VideoGames.Contracts.Dtos.Steam.PublisherDto;
 using ClientPlatformDto = GeekHub.SteamProvider.Client.PlatformDto;
 using PlatformDto = GeekHub.VideoGames.Contracts.Dtos.Steam.PlatformDto;
 
+using UnsynchronizedVideoGameDto = GeekHub.VideoGames.Contracts.Dtos.Synchronization.UnsynchronizedVideoGameDto;
+using ClientUnsynchronizedVideoGameDto = GeekHub.SteamProvider.Client.UnsynchronizedVideoGameDto;
+
+using ClientSynchronizedVideoGameDto = GeekHub.SteamProvider.Client.SynchronizedVideoGameDto;
+using SynchronizedVideoGameDto = GeekHub.VideoGames.Contracts.Dtos.Synchronization.SynchronizedVideoGameDto;
+
 namespace GeekHub.VideoGames.SteamAdapter.Mapping
 {
     public class MapperProfile : Profile
@@ -21,6 +27,9 @@ namespace GeekHub.VideoGames.SteamAdapter.Mapping
             CreateMap<ClientDeveloperDto, DeveloperDto>();
             CreateMap<ClientPublisherDto, PublisherDto>();
             CreateMap<ClientPlatformDto, PlatformDto>();
+            
+            CreateMap<ClientUnsynchronizedVideoGameDto, UnsynchronizedVideoGameDto>();
+            CreateMap<SynchronizedVideoGameDto, ClientSynchronizedVideoGameDto>();
         }
     }
 }

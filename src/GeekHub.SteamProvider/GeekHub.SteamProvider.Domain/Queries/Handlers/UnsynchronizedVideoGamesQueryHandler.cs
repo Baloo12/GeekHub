@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,12 +9,12 @@ using MediatR;
 
 namespace GeekHub.SteamProvider.Domain.Queries.Handlers
 {
-    public class GetAllVideoGamesQueryHandler : IRequestHandler<GetAllVideoGamesQuery, IEnumerable<VideoGameToSynchronizeRequestDto>>
+    public class UnsynchronizedVideoGamesQueryHandler : IRequestHandler<UnsynchronizedVideoGamesQuery, IEnumerable<UnsynchronizedVideoGameDto>>
     {
         private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public GetAllVideoGamesQueryHandler(
+        public UnsynchronizedVideoGamesQueryHandler(
             IVideoGamesRepository videoGamesRepository,
             IMapper mapper)
         {
@@ -21,12 +22,12 @@ namespace GeekHub.SteamProvider.Domain.Queries.Handlers
             _mapper = mapper;
         }
         
-        public async Task<IEnumerable<VideoGameToSynchronizeRequestDto>> Handle(
-            GetAllVideoGamesQuery request,
+        public async Task<IEnumerable<UnsynchronizedVideoGameDto>> Handle(
+            UnsynchronizedVideoGamesQuery request,
             CancellationToken cancellationToken = default)
         {
-            var games = await _videoGamesRepository.GetAllAsync();
-            var response = _mapper.Map<IEnumerable<VideoGameToSynchronizeRequestDto>>(games);
+            var games = await _videoGamesRepository.GetManyAsync(g => g.GeekHubId == Guid.Empty, request.Count);
+            var response = _mapper.Map<IEnumerable<UnsynchronizedVideoGameDto>>(games);
 
             return response;
         }

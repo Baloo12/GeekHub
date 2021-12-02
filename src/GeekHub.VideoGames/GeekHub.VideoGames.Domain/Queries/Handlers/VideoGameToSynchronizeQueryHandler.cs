@@ -6,21 +6,21 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries.Handlers
 {
-    public class GetVideoGameToSynchronizeQueryHandler : IRequestHandler<GetVideoGameToSynchronizeQuery, VideoGame>
+    public class VideoGameToSynchronizeQueryHandler : IRequestHandler<VideoGameToSynchronizeQuery, VideoGame>
     {
         private readonly IVideoGamesRepository _videoGamesRepository;
 
-        public GetVideoGameToSynchronizeQueryHandler(
+        public VideoGameToSynchronizeQueryHandler(
             IVideoGamesRepository videoGamesRepository)
         {
             _videoGamesRepository = videoGamesRepository;
         }
         
         public async Task<VideoGame> Handle(
-            GetVideoGameToSynchronizeQuery request,
+            VideoGameToSynchronizeQuery request,
             CancellationToken cancellationToken = default)
         {
-            var game = await _videoGamesRepository.GetByNameAsync(request.RequestDto.Name);
+            var game = await _videoGamesRepository.GetByNameAsync(request.VideoGameToSynchronize.Name);
 
             return game;
         }

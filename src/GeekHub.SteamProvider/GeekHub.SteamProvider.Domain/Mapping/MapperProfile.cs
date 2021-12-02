@@ -8,7 +8,7 @@ namespace GeekHub.SteamProvider.Domain.Mapping
     {
         public MapperProfile()
         {
-            CreateMap<VideoGame, VideoGameToSynchronizeRequestDto>(MemberList.Destination);
+            CreateMap<VideoGame, UnsynchronizedVideoGameDto>(MemberList.Destination);
         }
     }
 }

@@ -2,6 +2,7 @@
 using GeekHub.Common.DataAccess;
 using GeekHub.SteamProvider.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace GeekHub.SteamProvider.Domain.DataAccess
@@ -15,5 +16,7 @@ namespace GeekHub.SteamProvider.Domain.DataAccess
         Task<VideoGame> GetByGeekHubIdAsync(Guid geekHubId);
         
         Task<IEnumerable<string>> GetAllSteamIdsAsync();
+        
+        Task<IEnumerable<VideoGame>> GetManyAsync(Expression<Func<VideoGame, bool>> predicate, int count);
     }
 }
