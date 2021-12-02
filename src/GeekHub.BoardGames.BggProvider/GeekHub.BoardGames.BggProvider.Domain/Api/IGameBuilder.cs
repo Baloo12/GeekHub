@@ -1,4 +1,4 @@
-namespace GeekHub.BoardGames.BggProvider.Domain
+namespace GeekHub.BoardGames.BggProvider.Domain.Api
 {
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
@@ -6,8 +6,8 @@ namespace GeekHub.BoardGames.BggProvider.Domain
     {
         BoardGame Build();
 
-        IGameBuilder WithName();
-
         IGameBuilder WithBggId();
+
+        IGameBuilder WithName();
     }
 }

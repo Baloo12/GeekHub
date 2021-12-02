@@ -2,10 +2,10 @@
 {
     public class BoardGameModel
     {
-        public string Name { get; set; }
-        
         public int BggId { get; set; }
-        
+
+        public string Name { get; set; }
+
         public int PlayersMax { get; set; }
 
         public int PlayersMin { get; set; }
