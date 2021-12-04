@@ -8,12 +8,12 @@ namespace GeekHub.VideoGames.Domain.Commands
     public class SynchronizeExternalVideoGamesCommand : IRequest<Unit>
     {
         public string Provider { get; }
-        public IEnumerable<SynchronizedVideoGameDto> VideoGameToSynchronize { get; }
+        public IEnumerable<SynchronizedVideoGameDto> VideoGamesToSynchronize { get; }
 
-        public SynchronizeExternalVideoGamesCommand(string provider, IEnumerable<SynchronizedVideoGameDto> videoGameToSynchronize)
+        public SynchronizeExternalVideoGamesCommand(string provider, IEnumerable<SynchronizedVideoGameDto> videoGamesToSynchronize)
         {
             Provider = provider;
-            VideoGameToSynchronize = videoGameToSynchronize;
+            VideoGamesToSynchronize = videoGamesToSynchronize;
         }
     }
 }

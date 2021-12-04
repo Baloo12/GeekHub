@@ -21,7 +21,7 @@ namespace GeekHub.VideoGames.Domain.Commands.Handlers
         {
             
             var provider = _externalVideoGamesProvidersFactory.ResolveProvider(request.Provider);
-            await provider.SynchronizeAsync(request.VideoGameToSynchronize);
+            await provider.SynchronizeAsync(request.VideoGamesToSynchronize);
 
             return Unit.Value;
         }

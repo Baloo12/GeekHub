@@ -8,12 +8,12 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries.Handlers
 {
-    public class GetVideoGameExternalDetailsQueryHandler : IRequestHandler<GetVideoGameExternalDetailsQuery, VideoGameResponseDto>
+    public class QueryVideoGameExternalDetailsHandler : IRequestHandler<QueryVideoGameExternalDetails, VideoGameResponseDto>
     {
         private readonly IExternalVideoGamesProvidersFactory _externalVideoGamesProvidersFactory;
         private readonly IMapper _mapper;
 
-        public GetVideoGameExternalDetailsQueryHandler(
+        public QueryVideoGameExternalDetailsHandler(
             IExternalVideoGamesProvidersFactory externalVideoGamesProvidersFactory,
             IMapper mapper)
         {
@@ -22,7 +22,7 @@ namespace GeekHub.VideoGames.Domain.Queries.Handlers
         }
         
         public async Task<VideoGameResponseDto> Handle(
-            GetVideoGameExternalDetailsQuery request,
+            QueryVideoGameExternalDetails request,
             CancellationToken cancellationToken = default)
         {
             var provider = _externalVideoGamesProvidersFactory.ResolveProvider(request.ExternalSource);

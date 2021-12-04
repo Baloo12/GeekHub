@@ -4,7 +4,7 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries
 {
-    public class GetAllVideoGamesQuery : IRequest<IEnumerable<VideoGameResponseDto>>
+    public class QueryAllVideoGames : IRequest<IEnumerable<VideoGameResponseDto>>
     {
     }
 }

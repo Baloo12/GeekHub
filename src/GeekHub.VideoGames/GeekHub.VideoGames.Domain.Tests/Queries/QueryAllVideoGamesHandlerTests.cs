@@ -13,11 +13,11 @@ using Xunit;
 
 namespace GeekHub.VideoGames.Domain.Tests.Queries
 {
-    public class GetAllVideoGamesQueryHandlerTests
+    public class QueryAllVideoGamesHandlerTests
     {
         public class Handle
         {
-            private readonly GetAllVideoGamesQueryHandler _handler;
+            private readonly QueryAllVideoGamesHandler _handler;
             private readonly Mock<IVideoGamesRepository> _repository;
 
             public Handle()
@@ -29,14 +29,14 @@ namespace GeekHub.VideoGames.Domain.Tests.Queries
 
                 var mapper = TestInitializer.ConfigureMapper();
 
-                _handler = new GetAllVideoGamesQueryHandler(_repository.Object, mapper);
+                _handler = new QueryAllVideoGamesHandler(_repository.Object, mapper);
             }
 
             [Fact]
             public async Task ShouldReturnAllVideoGames()
             {
                 //Arrange
-                var request = new GetAllVideoGamesQuery();
+                var request = new QueryAllVideoGames();
                 var expectedResult = CreateExpectedResponse();
                 
                 //Act

@@ -26,61 +26,67 @@ namespace GeekHub.VideoGames.Web.Controllers
         [SwaggerResponse(200, Type = typeof(IEnumerable<SynchronizedVideoGameDto>))]
         public async Task<IActionResult> SynchronizeVideoGames(string provider, int count)
         {
-            var query = new ExternalVideoGamesToSynchronizeQuery(provider, count);
+            var query = new QueryExternalVideoGamesToSynchronize(provider, count);
             var unsynchronizedGames = await _mediator.Send(query);
 
-            var synchronizedGames = new List<SynchronizedVideoGameDto>();
-            
-            foreach (var unsynchronizedGame in unsynchronizedGames)
-            {
-                var synchronizedGame = await SynchronizeVideoGame(unsynchronizedGame);
-                synchronizedGames.Add(synchronizedGame);
-            }
-            
+            var synchronizedGames = await SynchronizeVideoGames(unsynchronizedGames);
+
             var synchronizeExternalVideoGames = new SynchronizeExternalVideoGamesCommand(provider, synchronizedGames);
             await _mediator.Send(synchronizeExternalVideoGames);
             
             return Ok();
         }
 
+        private async Task<List<SynchronizedVideoGameDto>> SynchronizeVideoGames(
+            IEnumerable<UnsynchronizedVideoGameDto> unsynchronizedGames)
+        {
+            var synchronizedGames = new List<SynchronizedVideoGameDto>();
+
+            foreach (var unsynchronizedGame in unsynchronizedGames)
+            {
+                var synchronizedGame = await SynchronizeVideoGame(unsynchronizedGame);
+                synchronizedGames.Add(synchronizedGame);
+            }
+
+            return synchronizedGames;
+        }
+
         private async Task<SynchronizedVideoGameDto> SynchronizeVideoGame(UnsynchronizedVideoGameDto unsynchronizedVideoGame)
         {
-            var query = new VideoGameToSynchronizeQuery(unsynchronizedVideoGame);
+            var query = new QueryVideoGameToSynchronize(unsynchronizedVideoGame);
             var game = await _mediator.Send(query);
 
             // TODO: Commands pipeline
             if (game == null)
             {
-                var synchronizedGame = await CreateVideoGame(unsynchronizedVideoGame);
+                var createdGame = await CreateVideoGame(unsynchronizedVideoGame);
 
-                return synchronizedGame;
-            }
-            else
-            {
-                var synchronizedGame = new SynchronizedVideoGameDto()
+                var createdSynchronizedGame = new SynchronizedVideoGameDto()
                 {
                     Id = unsynchronizedVideoGame.Id,
-                    GeekHubId = game.Id
+                    GeekHubId = createdGame.Id
                 };
 
-                return synchronizedGame;
+                return createdSynchronizedGame;
             }
+            
+            var synchronizedGame = new SynchronizedVideoGameDto()
+            {
+                Id = unsynchronizedVideoGame.Id,
+                GeekHubId = game.Id
+            };
+
+            return synchronizedGame;
         }
 
-        private async Task<SynchronizedVideoGameDto> CreateVideoGame(UnsynchronizedVideoGameDto unsynchronizedVideoGame)
+        private async Task<VideoGameResponseDto> CreateVideoGame(UnsynchronizedVideoGameDto unsynchronizedVideoGame)
         {
             var createVideoGameDto = new CreateVideoGameRequestDto(unsynchronizedVideoGame.Name);
             
             var command = new CreateVideoGameCommand(createVideoGameDto);
-            var createdResponse = await _mediator.Send(command);
+            var createdVideoGame = await _mediator.Send(command);
 
-            var synchronizedGame = new SynchronizedVideoGameDto()
-            {
-                Id = unsynchronizedVideoGame.Id,
-                GeekHubId = createdResponse.Id
-            };
-            
-            return synchronizedGame;
+            return createdVideoGame;
         }
     }
 }
