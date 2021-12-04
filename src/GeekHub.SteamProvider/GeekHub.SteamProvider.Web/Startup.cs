@@ -33,7 +33,6 @@ namespace GeekHub.SteamProvider.Web
             services.RegisterSteamStoreClient();
             
             services.RegisterSpecifications();
-            services.RegisterProviders();
             
             services.AddControllers();
 

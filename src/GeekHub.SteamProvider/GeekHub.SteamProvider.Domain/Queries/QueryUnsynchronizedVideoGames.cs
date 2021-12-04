@@ -4,11 +4,11 @@ using MediatR;
 
 namespace GeekHub.SteamProvider.Domain.Queries
 {
-    public class UnsynchronizedVideoGamesQuery : IRequest<IEnumerable<UnsynchronizedVideoGameDto>>
+    public class QueryUnsynchronizedVideoGames : IRequest<IEnumerable<UnsynchronizedVideoGameDto>>
     {
         public int Count { get; }
 
-        public UnsynchronizedVideoGamesQuery(int count)
+        public QueryUnsynchronizedVideoGames(int count)
         {
             Count = count;
         }

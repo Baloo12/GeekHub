@@ -1,6 +1,4 @@
 ﻿using GeekHub.SteamProvider.Domain.DataAccess;
-using GeekHub.SteamProvider.Domain.Entities;
-using GeekHub.SteamProvider.Domain.Provider;
 using GeekHub.SteamProvider.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
