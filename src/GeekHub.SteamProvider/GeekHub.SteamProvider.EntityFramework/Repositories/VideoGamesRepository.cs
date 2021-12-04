@@ -40,6 +40,16 @@ namespace GeekHub.SteamProvider.EntityFramework.Repositories
             
             return entities;
         }
+        
+        public async Task<IEnumerable<VideoGame>> GetManyAsync(Expression<Func<VideoGame, bool>> predicate, int count)
+        {
+            var entities = await _dbContext.VideoGames
+                .Where(predicate)
+                .Take(count)
+                .ToListAsync();
+            
+            return entities;
+        }
 
         public async Task<VideoGame> CreateAsync(VideoGame model)
         {

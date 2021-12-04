@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekHub.VideoGames.Domain.Commands;
 using GeekHub.VideoGames.Domain.Dtos;
 using GeekHub.VideoGames.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GeekHub.VideoGames.Web.Controllers
 {
@@ -20,6 +22,9 @@ namespace GeekHub.VideoGames.Web.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(OperationId = "VideoGames_Get")]
+        [SwaggerResponse(200, Type = typeof(VideoGameResponseDto))]
+        [SwaggerResponse(404)]
         public async Task<IActionResult> Get(Guid id)
         {
             var query = new GetVideoGameByIdQuery(id);
@@ -34,6 +39,9 @@ namespace GeekHub.VideoGames.Web.Controllers
         }
         
         [HttpGet("{id}/{externalSource}")]
+        [SwaggerOperation(OperationId = "VideoGames_GetExternalDetails")]
+        [SwaggerResponse(200, Type = typeof(VideoGameResponseDto))]
+        [SwaggerResponse(404)]
         public async Task<IActionResult> GetExternalDetails(Guid id, string externalSource)
         {
             var query = new GetVideoGameExternalDetailsQuery(id, externalSource);
@@ -48,6 +56,8 @@ namespace GeekHub.VideoGames.Web.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation(OperationId = "VideoGames_GetAll")]
+        [SwaggerResponse(200, Type = typeof(IEnumerable<VideoGameResponseDto>))]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllVideoGamesQuery();
@@ -57,6 +67,8 @@ namespace GeekHub.VideoGames.Web.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(OperationId = "VideoGames_Create")]
+        [SwaggerResponse(201, Type = typeof(VideoGameResponseDto))]
         public async Task<IActionResult> Create([FromBody]CreateVideoGameRequestDto requestDto)
         {
             var command = new CreateVideoGameCommand(requestDto);

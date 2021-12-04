@@ -6,6 +6,6 @@ namespace GeekHub.SteamProvider.Domain.Provider
 {
     public interface IVideoGamesProvider
     {
-        public Task<VideoGameDto> Get(Guid geekHubId);
+        public Task<VideoGameDto> GetAsync(Guid geekHubId);
     }
 }

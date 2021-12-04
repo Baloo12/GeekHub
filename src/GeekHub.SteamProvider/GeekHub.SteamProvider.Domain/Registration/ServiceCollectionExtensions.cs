@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using GeekHub.SteamProvider.Domain.Constants;
 using GeekHub.SteamProvider.Domain.HttpClients;
 using GeekHub.SteamProvider.Domain.Provider;
 using GeekHub.SteamProvider.Domain.Specifications;
 using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekHub.SteamProvider.Domain.Registration
@@ -46,6 +48,16 @@ namespace GeekHub.SteamProvider.Domain.Registration
         public static void RegisterProviders(this IServiceCollection services)
         {
             services.AddTransient<IVideoGamesProvider, VideoGamesProvider>();
+        }
+        
+        public static void RegisterSteamProviderDomainMapping(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
+        
+        public static void RegisterMediatR(this IServiceCollection services)
+        {
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using GeekHub.VideoGames.Domain.Registration;
 using GeekHub.VideoGames.EntityFramework.Registration;
 using GeekHub.VideoGames.SteamAdapter.Registration;
@@ -24,18 +25,21 @@ namespace GeekHub.VideoGames.Web
         {
             services.RegisterSwagger();
             
+            services.RegisterMapping();
             services.RegisterDbContext(_configuration);
             services.RegisterRepositories();
-            
-            services.RegisterMapping();
-            
+
             services.RegisterSteamAdapterMapping();
-            services.RegisterSteamProviderClient();
+            services.RegisterGeneratedClientClient(c =>
+            {
+                var url = _configuration["SteamProviderUrl"];
+                c.BaseAddress = new Uri(url);
+            });
+            services.RegisterSteamProvider();
+
+            services.RegisterExternalProvidersFactory();
             
             services.RegisterMediatR();
-
-            services.RegisterExternalProviders();
-            
             services.AddControllers();
         }
 

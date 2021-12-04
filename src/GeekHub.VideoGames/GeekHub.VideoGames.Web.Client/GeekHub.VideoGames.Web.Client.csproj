@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.1</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="GeekHub.Common" Version="1.0.2" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="NSwag.MSBuild" Version="13.14.7">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="xcopy &quot;$(ProjectDir)bin\Debug\*.1.0.1.nupkg&quot; &quot;$(ProjectDir)..\..\..\nugets\&quot; /Y /I" />
+    </Target>
+
+    <Target Name="Generate" DependsOnTargets="Restore">
+        <Exec Command="$(NSwagExe_Net50) swagger2csclient /input:$(ServiceUrl) /output:GeneratedClients.cs /ClientBaseClass:BaseApiClient /GenerateBaseUrlProperty:false /namespace:GeekHub.VideoGames.Web.Client /InjectHttpClient:true /GenerateClientInterfaces:true /GenerateOptionalParameters:true /GenerateExceptionClasses:false /ExceptionClass:VideoGamesClientException /ClassStyle:Poco /ArrayType:System.Collections.Generic.List /ResponseArrayType:System.Collections.Generic.IEnumerable /DictionaryType:System.Collections.Generic.Dictionary /UseBaseUrl:false /DateTimeType:System.DateTime" />
+    </Target>
+</Project>

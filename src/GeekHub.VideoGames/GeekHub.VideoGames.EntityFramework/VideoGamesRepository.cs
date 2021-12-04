@@ -63,5 +63,12 @@ namespace GeekHub.VideoGames.EntityFramework
         {
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<VideoGame> GetByNameAsync(string name)
+        {
+            var entity = await _dbContext.VideoGames.FirstOrDefaultAsync(g => g.Name == name);
+            
+            return entity;
+        }
     }
 }

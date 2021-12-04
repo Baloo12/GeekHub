@@ -15,7 +15,7 @@ namespace GeekHub.SteamProvider.Domain.Provider
             _repository = repository;
         }
         
-        public async Task<VideoGameDto> Get(Guid geekHubId)
+        public async Task<VideoGameDto> GetAsync(Guid geekHubId)
         {
             var persistedVideoGame = await _repository.GetByGeekHubIdAsync(geekHubId);
 
