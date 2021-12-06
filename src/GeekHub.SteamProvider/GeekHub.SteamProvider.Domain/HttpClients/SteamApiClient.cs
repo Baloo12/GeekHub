@@ -6,7 +6,7 @@ using GeekHub.SteamProvider.Domain.Models.Internal;
 
 namespace GeekHub.SteamProvider.Domain.HttpClients
 {
-    public class SteamApiClient
+    public class SteamApiClient : ISteamApiClient
     {
         private readonly HttpClient _httpClient;
 

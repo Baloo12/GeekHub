@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
+using GeekHub.SteamProvider.Domain.Commands.VideoGames;
+using GeekHub.SteamProvider.Domain.Queries.SteamApi;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -9,35 +11,37 @@ namespace GeekHub.SteamProvider.Web.Controllers
     [Route("api/collector")]
     public class CollectorController : ControllerBase
     {
-        private readonly ICollectAllVideoGamesFromSteamApiSpecification _collectAllVideoGames;
-        private readonly ICollectIdsFromSteamApiSpecification _collectIdsSpecification;
+        private readonly IMediator _mediator;
 
         public CollectorController(
-            ICollectAllVideoGamesFromSteamApiSpecification collectAllVideoGames,
-            ICollectIdsFromSteamApiSpecification collectIdsSpecification)
+            IMediator mediator)
         {
-            _collectAllVideoGames = collectAllVideoGames;
-            _collectIdsSpecification = collectIdsSpecification;
+            _mediator = mediator;
         }
         
-        [HttpPost("base-info")]
+        [HttpPost("all-base-info")]
         [SwaggerOperation(OperationId = "Collector_CollectAllVideoGamesBaseInfo")]
         [SwaggerResponse(200)]
         public async Task<IActionResult> CollectAllVideoGamesBaseInfo()
         {
-            await _collectIdsSpecification.ExecuteAsync();
+            var query = new QueryAllVideoGamesBaseInfoFromSteamApi();
+            var games = await _mediator.Send(query);
+
+            var createCommand = new CreateVideoGamesCommand(games);
+            await _mediator.Send(createCommand);
 
             return Ok();
         }
 
-        [HttpPost("details")]
-        [SwaggerOperation(OperationId = "Collector_CollectAllVideoGamesDetails")]
+        [HttpPost("details/{steamId}")]
+        [SwaggerOperation(OperationId = "Collector_CollectVideoGameDetails")]
         [SwaggerResponse(200)]
-        public async Task<IActionResult> CollectAllVideoGamesDetails()
+        public async Task<IActionResult> CollectVideoGameDetails(string steamId)
         {
-            await _collectAllVideoGames.ExecuteAsync();
+            var command = new EnrichVideoGameWithDetailsCommand(steamId);
+            var updated = await _mediator.Send(command);
 
-            return Ok();
+            return Ok(updated);
         }
     }
 }

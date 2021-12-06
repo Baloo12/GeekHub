@@ -32,8 +32,6 @@ namespace GeekHub.SteamProvider.Web
             services.RegisterSteamApiClient();
             services.RegisterSteamStoreClient();
             
-            services.RegisterSpecifications();
-            
             services.AddControllers();
 
             services.AddLogging();
