@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Reflection;
 using GeekHub.SteamProvider.Domain.HttpClients;
-using GeekHub.SteamProvider.Domain.Specifications;
-using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,34 +11,22 @@ namespace GeekHub.SteamProvider.Domain.Registration
     {
         public static void RegisterSteamApiClient(this IServiceCollection services)
         {
-            services.AddHttpClient<SteamApiClient>();
+            services.AddHttpClient<ISteamApiClient, SteamApiClient>();
         }
         
         public static void RegisterSteamApiClient(this IServiceCollection services, Action<HttpClient> clientConfigurations)
         {
-            services.AddHttpClient<SteamApiClient>(clientConfigurations);
+            services.AddHttpClient<ISteamApiClient, SteamApiClient>(clientConfigurations);
         }
         
         public static void RegisterSteamStoreClient(this IServiceCollection services)
         {
-            services.AddHttpClient<SteamStoreClient>();
+            services.AddHttpClient<ISteamStoreClient, SteamStoreClient>();
         }
         
         public static void RegisterSteamStoreClient(this IServiceCollection services, Action<HttpClient> clientConfigurations)
         {
-            services.AddHttpClient<SteamStoreClient>(clientConfigurations);
-        }
-        
-        public static void RegisterSpecifications(this IServiceCollection services)
-        {
-            services.AddTransient<ICollectVideoGameFromSteamApiSpecification, CollectVideoGameFromSteamApiSpecification>();
-            services.AddTransient<ICollectIdsFromSteamApiSpecification, CollectIdsFromSteamApiSpecification>();
-            services.AddTransient<ICollectAllVideoGamesFromSteamApiSpecification, CollectAllVideoGamesFromSteamApiSpecification>();
-            
-            services.AddTransient<ICollectDevelopersSpecification, CollectDevelopersSpecification>();
-            services.AddTransient<ICollectPublishersSpecification, CollectPublishersSpecification>();
-            services.AddTransient<ICollectGenresSpecification, CollectGenresSpecification>();
-            services.AddTransient<ICollectPlatformsSpecification, CollectPlatformsSpecification>();
+            services.AddHttpClient<ISteamStoreClient, SteamStoreClient>(clientConfigurations);
         }
         
         public static void RegisterSteamProviderDomainMapping(this IServiceCollection services)

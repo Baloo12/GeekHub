@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekHub.SteamProvider.Domain.Commands;
+using GeekHub.SteamProvider.Domain.Commands.VideoGames;
 using GeekHub.SteamProvider.Domain.Queries;
+using GeekHub.SteamProvider.Domain.Queries.VideoGames;
 using GeekHub.VideoGames.Contracts.Dtos.Steam;
 using GeekHub.VideoGames.Contracts.Dtos.Synchronization;
 using MediatR;
