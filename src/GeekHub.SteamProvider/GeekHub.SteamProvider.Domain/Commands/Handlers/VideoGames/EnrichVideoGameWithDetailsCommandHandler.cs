@@ -30,6 +30,7 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.VideoGames
             _videoGameEntityBuilderFactory = videoGameEntityBuilderFactory;
         }
         
+        // TODO: To many responsibilities?
         public async Task<VideoGame> Handle(
             EnrichVideoGameWithDetailsCommand request,
             CancellationToken cancellationToken = default)
@@ -37,7 +38,7 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.VideoGames
             var game = await GetVideoGameBySteamIdFromRepository(request, cancellationToken);
             var details = await GetVideoGameDetailsFromSteam(request, cancellationToken);
 
-            var updatedGame = await EnirichVideoGameWithDetails(game, details, cancellationToken);
+            var updatedGame = await EnrichVideoGameWithDetails(game, details, cancellationToken);
 
             var updated = await UpdateVideoGame(updatedGame, cancellationToken);
 
@@ -72,7 +73,7 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.VideoGames
             return gameDetails;
         }
         
-        private async Task<VideoGame> EnirichVideoGameWithDetails(
+        private async Task<VideoGame> EnrichVideoGameWithDetails(
             VideoGame game,
             SteamGameDetails details,
             CancellationToken cancellationToken = default)
