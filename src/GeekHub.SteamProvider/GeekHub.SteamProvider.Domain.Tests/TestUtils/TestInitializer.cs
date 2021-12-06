@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
-using GeekHub.VideoGames.Domain.Entities;
-using GeekHub.VideoGames.Domain.Interfaces;
-using GeekHub.VideoGames.Domain.Mapping;
-using Moq;
+﻿using AutoMapper;
+using GeekHub.SteamProvider.Domain.Mapping;
 
-namespace GeekHub.VideoGames.Domain.Tests.TestUtils
+namespace GeekHub.SteamProvider.Domain.Tests.TestUtils
 {
     public static class TestInitializer
     {

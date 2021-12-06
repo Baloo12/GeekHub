@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
-using GeekHub.SteamProvider.Domain.Constants;
 using GeekHub.SteamProvider.Domain.HttpClients;
-using GeekHub.SteamProvider.Domain.Provider;
 using GeekHub.SteamProvider.Domain.Specifications;
 using GeekHub.SteamProvider.Domain.Specifications.Interfaces;
 using MediatR;
@@ -43,11 +41,6 @@ namespace GeekHub.SteamProvider.Domain.Registration
             services.AddTransient<ICollectPublishersSpecification, CollectPublishersSpecification>();
             services.AddTransient<ICollectGenresSpecification, CollectGenresSpecification>();
             services.AddTransient<ICollectPlatformsSpecification, CollectPlatformsSpecification>();
-        }
-        
-        public static void RegisterProviders(this IServiceCollection services)
-        {
-            services.AddTransient<IVideoGamesProvider, VideoGamesProvider>();
         }
         
         public static void RegisterSteamProviderDomainMapping(this IServiceCollection services)

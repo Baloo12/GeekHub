@@ -9,12 +9,12 @@ using MediatR;
 
 namespace GeekHub.SteamProvider.Domain.Queries.Handlers
 {
-    public class UnsynchronizedVideoGamesQueryHandler : IRequestHandler<UnsynchronizedVideoGamesQuery, IEnumerable<UnsynchronizedVideoGameDto>>
+    public class QueryUnsynchronizedVideoGamesHandler : IRequestHandler<QueryUnsynchronizedVideoGames, IEnumerable<UnsynchronizedVideoGameDto>>
     {
         private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public UnsynchronizedVideoGamesQueryHandler(
+        public QueryUnsynchronizedVideoGamesHandler(
             IVideoGamesRepository videoGamesRepository,
             IMapper mapper)
         {
@@ -23,7 +23,7 @@ namespace GeekHub.SteamProvider.Domain.Queries.Handlers
         }
         
         public async Task<IEnumerable<UnsynchronizedVideoGameDto>> Handle(
-            UnsynchronizedVideoGamesQuery request,
+            QueryUnsynchronizedVideoGames request,
             CancellationToken cancellationToken = default)
         {
             var games = await _videoGamesRepository.GetManyAsync(g => g.GeekHubId == Guid.Empty, request.Count);

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GeekHub.SteamProvider.Domain.Commands;
-using GeekHub.SteamProvider.Domain.Provider;
 using GeekHub.SteamProvider.Domain.Queries;
 using GeekHub.VideoGames.Contracts.Dtos.Steam;
 using GeekHub.VideoGames.Contracts.Dtos.Synchronization;
@@ -16,12 +15,10 @@ namespace GeekHub.SteamProvider.Web.Controllers
     [Route("api/video-games")]
     public class VideoGamesController : ControllerBase
     {
-        private readonly IVideoGamesProvider _provider;
         private readonly IMediator _mediator;
 
-        public VideoGamesController(IVideoGamesProvider provider, IMediator mediator)
+        public VideoGamesController(IMediator mediator)
         {
-            _provider = provider;
             _mediator = mediator;
         }
 
@@ -31,8 +28,9 @@ namespace GeekHub.SteamProvider.Web.Controllers
         [SwaggerResponse(404)]
         public async Task<IActionResult> Get(Guid geekHubId)
         {
-            var game = await _provider.GetAsync(geekHubId);
-
+            var query = new QueryVideoGameByGeekHubId(geekHubId);
+            var game = await _mediator.Send(query);
+            
             if (game == null)
             {
                 return NotFound();
@@ -47,7 +45,7 @@ namespace GeekHub.SteamProvider.Web.Controllers
         [SwaggerResponse(404)]
         public async Task<IActionResult> GetUnsynchronized(int count)
         {
-            var query = new UnsynchronizedVideoGamesQuery(count);
+            var query = new QueryUnsynchronizedVideoGames(count);
             var videoGamesToSynchronize = await _mediator.Send(query);
 
             return Ok(videoGamesToSynchronize);
