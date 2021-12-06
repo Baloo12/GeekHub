@@ -11,8 +11,7 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.Developers
     {
         private readonly IDevelopersRepository _repository;
 
-        public CreateDeveloperCommandHandler(
-            IDevelopersRepository repository)
+        public CreateDeveloperCommandHandler(IDevelopersRepository repository)
         {
             _repository = repository;
         }

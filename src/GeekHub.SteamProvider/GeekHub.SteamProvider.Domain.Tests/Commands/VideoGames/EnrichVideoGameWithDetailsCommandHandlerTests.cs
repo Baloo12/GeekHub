@@ -9,6 +9,8 @@ using GeekHub.SteamProvider.Domain.Models.Internal;
 using GeekHub.SteamProvider.Domain.Queries.Developers;
 using GeekHub.SteamProvider.Domain.Queries.SteamApi;
 using GeekHub.SteamProvider.Domain.Queries.VideoGames;
+using GeekHub.SteamProvider.Domain.Tests.TestUtils;
+using GeekHub.SteamProvider.Domain.Utils;
 using MediatR;
 using Moq;
 using Xunit;
@@ -21,12 +23,17 @@ namespace GeekHub.SteamProvider.Domain.Tests.Commands.VideoGames
         {
             private readonly EnrichVideoGameWithDetailsCommandHandler _handler;
             private readonly Mock<IMediator> _mediator;
+            private readonly Mock<IVideoGameEntityBuilderFactory> _factory;
 
             public Handle()
             {
                 _mediator = new Mock<IMediator>();
+                _factory = new Mock<IVideoGameEntityBuilderFactory>();
+                _factory
+                    .Setup(f => f.GetVideoGameEntityBuilder(It.IsAny<VideoGame>()))
+                    .Returns(new TestInitializer.TestVideoGameEntityBuilder());
 
-                _handler = new EnrichVideoGameWithDetailsCommandHandler(_mediator.Object);
+                _handler = new EnrichVideoGameWithDetailsCommandHandler(_mediator.Object, _factory.Object);
             }
             
             [Fact]

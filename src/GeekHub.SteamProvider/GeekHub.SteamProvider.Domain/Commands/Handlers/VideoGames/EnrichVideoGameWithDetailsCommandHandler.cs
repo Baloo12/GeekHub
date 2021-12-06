@@ -5,6 +5,8 @@ using GeekHub.SteamProvider.Domain.Commands.VideoGames;
 using GeekHub.SteamProvider.Domain.Entities;
 using GeekHub.SteamProvider.Domain.Exceptions;
 using GeekHub.SteamProvider.Domain.Queries.Developers;
+using GeekHub.SteamProvider.Domain.Queries.Genres;
+using GeekHub.SteamProvider.Domain.Queries.Platforms;
 using GeekHub.SteamProvider.Domain.Queries.SteamApi;
 using GeekHub.SteamProvider.Domain.Queries.VideoGames;
 using GeekHub.SteamProvider.Domain.Utils;
@@ -15,10 +17,14 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.VideoGames
     public class EnrichVideoGameWithDetailsCommandHandler : IRequestHandler<EnrichVideoGameWithDetailsCommand, VideoGame>
     {
         private readonly IMediator _mediator;
+        private readonly IVideoGameEntityBuilderFactory _videoGameEntityBuilderFactory;
 
-        public EnrichVideoGameWithDetailsCommandHandler(IMediator mediator)
+        public EnrichVideoGameWithDetailsCommandHandler(
+            IMediator mediator,
+            IVideoGameEntityBuilderFactory videoGameEntityBuilderFactory)
         {
             _mediator = mediator;
+            _videoGameEntityBuilderFactory = videoGameEntityBuilderFactory;
         }
         
         public async Task<VideoGame> Handle(
@@ -44,18 +50,19 @@ namespace GeekHub.SteamProvider.Domain.Commands.Handlers.VideoGames
             var queryDevelopers = new QueryOrCreateDevelopersByNames(gameDetails.Data?.Developers);
             var developers = await _mediator.Send(queryDevelopers, cancellationToken);
             
-            // var publishers = await _collectPublishersSpecification.ExecuteAsync(details.Data.Publishers);
-            // var genres = await _collectGenresSpecification.ExecuteAsync(details.Data.Genres?.Select(g => g.Description).ToList());
-            // var platforms = await _collectPlatformsSpecification.ExecuteAsync(details.Data.Platforms?.Where(p => p.Value).Select(p => p.Key).ToList());
+            var queryGenres = new QueryOrCreateGenresByNames(gameDetails.Data?.Genres?.Select(g => g.Description).ToList());
+            var genres = await _mediator.Send(queryGenres, cancellationToken);
             
-            // TODO: Interface?
-            var updatedGame = new VideoGameEntityBuilder(game)
-                // .WithDetails(gameDetails.Data)
+            var queryPlatforms = new QueryOrCreatePlatformsByNames(gameDetails.Data?.Platforms?.Where(p => p.Value).Select(p => p.Key).ToList());
+            var platforms = await _mediator.Send(queryPlatforms, cancellationToken);
+
+            var builder = _videoGameEntityBuilderFactory.GetVideoGameEntityBuilder(game);
+            var updatedGame = builder
+                .WithDetails(gameDetails.Data)
                 .WithSourceId(request.SteamId)
                 .WithDevelopers(developers.ToList())
-                // .WithPublishers(publishers.ToList())
-                // .WithGenres(genres.ToList())
-                // .WithPlatforms(platforms.ToList())
+                .WithGenres(genres.ToList())
+                .WithPlatforms(platforms.ToList())
                 .Build();
 
             var updateCommand = new UpdateVideoGameCommand(updatedGame);
