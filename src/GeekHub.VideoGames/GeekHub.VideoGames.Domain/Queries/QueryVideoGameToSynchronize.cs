@@ -4,11 +4,11 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries
 {
-    public class VideoGameToSynchronizeQuery : IRequest<VideoGame>
+    public class QueryVideoGameToSynchronize : IRequest<VideoGame>
     {
         public UnsynchronizedVideoGameDto VideoGameToSynchronize { get; }
 
-        public VideoGameToSynchronizeQuery(UnsynchronizedVideoGameDto videoGameToSynchronize)
+        public QueryVideoGameToSynchronize(UnsynchronizedVideoGameDto videoGameToSynchronize)
         {
             VideoGameToSynchronize = videoGameToSynchronize;
         }

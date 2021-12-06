@@ -7,18 +7,18 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries.Handlers
 {
-    public class ExternalVideoGamesToSynchronizeQueryHandler : IRequestHandler<ExternalVideoGamesToSynchronizeQuery, IEnumerable<UnsynchronizedVideoGameDto>>
+    public class QueryExternalVideoGamesToSynchronizeHandler : IRequestHandler<QueryExternalVideoGamesToSynchronize, IEnumerable<UnsynchronizedVideoGameDto>>
     {
         private readonly IExternalVideoGamesProvidersFactory _externalVideoGamesProvidersFactory;
 
-        public ExternalVideoGamesToSynchronizeQueryHandler(
+        public QueryExternalVideoGamesToSynchronizeHandler(
             IExternalVideoGamesProvidersFactory externalVideoGamesProvidersFactory)
         {
             _externalVideoGamesProvidersFactory = externalVideoGamesProvidersFactory;
         }
         
         public async Task<IEnumerable<UnsynchronizedVideoGameDto>> Handle(
-            ExternalVideoGamesToSynchronizeQuery request,
+            QueryExternalVideoGamesToSynchronize request,
             CancellationToken cancellationToken = default)
         {
             var provider = _externalVideoGamesProvidersFactory.ResolveProvider(request.Provider);

@@ -5,11 +5,11 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries
 {
-    public class GetVideoGameByIdQuery : IRequest<VideoGameResponseDto>
+    public class QueryVideoGameById : IRequest<VideoGameResponseDto>
     {
         public Guid Id { get; }
 
-        public GetVideoGameByIdQuery(Guid id)
+        public QueryVideoGameById(Guid id)
         {
             Id = id;
         }

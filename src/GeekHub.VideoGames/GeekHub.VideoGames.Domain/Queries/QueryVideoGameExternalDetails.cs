@@ -4,12 +4,12 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries
 {
-    public class GetVideoGameExternalDetailsQuery : IRequest<VideoGameResponseDto>
+    public class QueryVideoGameExternalDetails : IRequest<VideoGameResponseDto>
     {
         public Guid Id { get; }
         public string ExternalSource { get; }
 
-        public GetVideoGameExternalDetailsQuery(Guid id, string externalSource)
+        public QueryVideoGameExternalDetails(Guid id, string externalSource)
         {
             Id = id;
             ExternalSource = externalSource;

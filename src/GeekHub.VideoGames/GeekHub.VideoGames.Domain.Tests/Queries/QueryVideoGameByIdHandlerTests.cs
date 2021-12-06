@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using GeekHub.VideoGames.Domain.Dtos;
@@ -13,13 +12,13 @@ using Xunit;
 
 namespace GeekHub.VideoGames.Domain.Tests.Queries
 {
-    public class GetVideoGameByIdQueryHandlerTests
+    public class QueryVideoGameByIdHandlerTests
     {
         public class Handle
         {
             private readonly Guid _videoGameId = Guid.Parse("E06D8307-4F1E-40EC-BD2B-6EDBA45EC69C");
             
-            private readonly GetVideoGameByIdQueryHandler _handler;
+            private readonly QueryVideoGameByIdHandler _handler;
             private readonly Mock<IVideoGamesRepository> _repository;
 
             public Handle()
@@ -31,14 +30,14 @@ namespace GeekHub.VideoGames.Domain.Tests.Queries
 
                 var mapper = TestInitializer.ConfigureMapper();
 
-                _handler = new GetVideoGameByIdQueryHandler(_repository.Object, mapper);
+                _handler = new QueryVideoGameByIdHandler(_repository.Object, mapper);
             }
 
             [Fact]
             public async Task ShouldReturnVideoGameById()
             {
                 //Arrange
-                var request = new GetVideoGameByIdQuery(_videoGameId);
+                var request = new QueryVideoGameById(_videoGameId);
                 var expectedResult = CreateExpectedResponse();
                 
                 //Act

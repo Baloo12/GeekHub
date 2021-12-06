@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using GeekHub.VideoGames.Domain.Dtos;
@@ -7,12 +8,12 @@ using MediatR;
 
 namespace GeekHub.VideoGames.Domain.Queries.Handlers
 {
-    public class GetVideoGameByIdQueryHandler : IRequestHandler<GetVideoGameByIdQuery, VideoGameResponseDto>
+    public class QueryAllVideoGamesHandler : IRequestHandler<QueryAllVideoGames, IEnumerable<VideoGameResponseDto>>
     {
         private readonly IVideoGamesRepository _videoGamesRepository;
         private readonly IMapper _mapper;
 
-        public GetVideoGameByIdQueryHandler(
+        public QueryAllVideoGamesHandler(
             IVideoGamesRepository videoGamesRepository,
             IMapper mapper)
         {
@@ -20,12 +21,12 @@ namespace GeekHub.VideoGames.Domain.Queries.Handlers
             _mapper = mapper;
         }
         
-        public async Task<VideoGameResponseDto> Handle(
-            GetVideoGameByIdQuery request,
+        public async Task<IEnumerable<VideoGameResponseDto>> Handle(
+            QueryAllVideoGames request,
             CancellationToken cancellationToken = default)
         {
-            var game = await _videoGamesRepository.GetAsync(request.Id);
-            var response = _mapper.Map<VideoGameResponseDto>(game);
+            var games = await _videoGamesRepository.GetAllAsync();
+            var response = _mapper.Map<IEnumerable<VideoGameResponseDto>>(games);
 
             return response;
         }

@@ -27,7 +27,7 @@ namespace GeekHub.VideoGames.Web.Controllers
         [SwaggerResponse(404)]
         public async Task<IActionResult> Get(Guid id)
         {
-            var query = new GetVideoGameByIdQuery(id);
+            var query = new QueryVideoGameById(id);
             var response = await _mediator.Send(query);
 
             if (response == null)
@@ -44,7 +44,7 @@ namespace GeekHub.VideoGames.Web.Controllers
         [SwaggerResponse(404)]
         public async Task<IActionResult> GetExternalDetails(Guid id, string externalSource)
         {
-            var query = new GetVideoGameExternalDetailsQuery(id, externalSource);
+            var query = new QueryVideoGameExternalDetails(id, externalSource);
             var response = await _mediator.Send(query);
 
             if (response == null)
@@ -60,7 +60,7 @@ namespace GeekHub.VideoGames.Web.Controllers
         [SwaggerResponse(200, Type = typeof(IEnumerable<VideoGameResponseDto>))]
         public async Task<IActionResult> GetAll()
         {
-            var query = new GetAllVideoGamesQuery();
+            var query = new QueryAllVideoGames();
             var response = await _mediator.Send(query);
             
             return Ok(response);
