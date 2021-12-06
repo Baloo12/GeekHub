@@ -11,109 +11,112 @@
 
     public class RequestParameterConstructorTests
     {
-        private const string KeyExample = "Key";
-
-        [Fact]
-        public void CreateAnyType_ValueIsNull_ToString_ExpectEmpty()
+        public class Construct
         {
-            var constructor = new RequestParameterConstructor();
-            var parameter = constructor.Construct<It.IsAnyType>(KeyExample, null);
+            private const string KeyExample = "Key";
 
-            var actual = parameter;
-            Assert.Empty(actual);
-        }
+            [Fact]
+            public void CreateAnyType_ValueIsNull_ToString_ExpectEmpty()
+            {
+                var constructor = new RequestParameterConstructor();
+                var parameter = constructor.Construct<It.IsAnyType>(KeyExample, null);
 
-        [Fact]
-        public void CreateBoolean_False_ToString_ExpectEmpty()
-        {
-            var constructor = new RequestParameterConstructor();
-            var actualResult = constructor.Construct(KeyExample, false);
+                var actual = parameter;
+                Assert.Empty(actual);
+            }
 
-            Assert.Empty(actualResult);
-        }
+            [Fact]
+            public void CreateBoolean_False_ToString_ExpectEmpty()
+            {
+                var constructor = new RequestParameterConstructor();
+                var actualResult = constructor.Construct(KeyExample, false);
 
-        [Fact]
-        public void CreateBoolean_True_ToString_Expect1()
-        {
-            var constructor = new RequestParameterConstructor();
-            var actualResult = constructor.Construct(KeyExample, true);
-            var expectedResult = GenerateKeyValue(KeyExample, 1.ToString());
+                Assert.Empty(actualResult);
+            }
 
-            Assert.Equal(expectedResult, actualResult);
-        }
+            [Fact]
+            public void CreateBoolean_True_ToString_Expect1()
+            {
+                var constructor = new RequestParameterConstructor();
+                var actualResult = constructor.Construct(KeyExample, true);
+                var expectedResult = GenerateKeyValue(KeyExample, 1.ToString());
 
-        [Fact]
-        public void CreateIEnumerable_Empty_ToString_ExpectEmpty()
-        {
-            var constructor = new RequestParameterConstructor();
-            var actualResult = constructor.Construct(KeyExample, It.IsAny<It.IsAnyType>());
+                Assert.Equal(expectedResult, actualResult);
+            }
 
-            Assert.Empty(actualResult);
-        }
+            [Fact]
+            public void CreateIEnumerable_Empty_ToString_ExpectEmpty()
+            {
+                var constructor = new RequestParameterConstructor();
+                var actualResult = constructor.Construct(KeyExample, It.IsAny<It.IsAnyType>());
 
-        [Fact]
-        public void CreateIEnumerable_MultipleElements_ToString_ExpectComaSeparatedValues()
-        {
-            var values = new List<int>()
-                {
-                    1,
-                    2
-                };
+                Assert.Empty(actualResult);
+            }
 
-            var constructor = new RequestParameterConstructor();
-            var actual = constructor.Construct(KeyExample, values);
-
-            var expected = GenerateKeyValue(KeyExample, "1,2");
-            Assert.Equal(expected, actual);
-        }
-
-        [Fact]
-        public void CreateIEnumerable_SingleElement_ToString_ExpectSingleValue()
-        {
-            var singleValue = "a";
-
-            var constructor = new RequestParameterConstructor();
-            var actual = constructor.Construct(
-                KeyExample,
-                new List<string>()
+            [Fact]
+            public void CreateIEnumerable_MultipleElements_ToString_ExpectComaSeparatedValues()
+            {
+                var values = new List<int>()
                     {
-                        singleValue
-                    });
+                        1,
+                        2
+                    };
 
-            var expected = GenerateKeyValue(KeyExample, singleValue);
-            Assert.Equal(expected, actual);
-        }
+                var constructor = new RequestParameterConstructor();
+                var actual = constructor.Construct(KeyExample, values);
 
-        [Fact]
-        public void CreateInt_ToString_ExpectInternalToString()
-        {
-            var fakeObjectMock = new Mock<FakeType>();
-            fakeObjectMock.Setup(x => x.ToString());
+                var expected = GenerateKeyValue(KeyExample, "1,2");
+                Assert.Equal(expected, actual);
+            }
 
-            var constructor = CreateConstructor();
-            var result = constructor.Construct(KeyExample, fakeObjectMock.Object);
+            [Fact]
+            public void CreateIEnumerable_SingleElement_ToString_ExpectSingleValue()
+            {
+                var singleValue = "a";
 
-            _ = result;
+                var constructor = new RequestParameterConstructor();
+                var actual = constructor.Construct(
+                    KeyExample,
+                    new List<string>()
+                        {
+                            singleValue
+                        });
 
-            fakeObjectMock.Verify(x => x.ToString(), Times.Once);
-        }
+                var expected = GenerateKeyValue(KeyExample, singleValue);
+                Assert.Equal(expected, actual);
+            }
 
-        [Theory]
-        [ClassData(typeof(EmptyStringsData))]
-        public void CreateWithEmptyKey_ThrowRequestParameterKeyIsEmptyException(string emptyKey)
-        {
-            var constructor = CreateConstructor();
-            Assert.Throws<RequestParameterKeyIsEmptyException>(() => constructor.Construct(emptyKey, It.IsAny<It.IsAnyType>()));
-        }
+            [Fact]
+            public void CreateInt_ToString_ExpectInternalToString()
+            {
+                var fakeObjectMock = new Mock<FakeType>();
+                fakeObjectMock.Setup(x => x.ToString());
 
-        private static RequestParameterConstructor CreateConstructor()
-        {
-            return new RequestParameterConstructor();
-        }
+                var constructor = CreateConstructor();
+                var result = constructor.Construct(KeyExample, fakeObjectMock.Object);
 
-        private string GenerateKeyValue(string key, string value)
-        {
-            return $"{key}={value}";
+                _ = result;
+
+                fakeObjectMock.Verify(x => x.ToString(), Times.Once);
+            }
+
+            [Theory]
+            [ClassData(typeof(EmptyStringsData))]
+            public void CreateWithEmptyKey_ThrowRequestParameterKeyIsEmptyException(string emptyKey)
+            {
+                var constructor = CreateConstructor();
+                Assert.Throws<RequestParameterKeyIsEmptyException>(() => constructor.Construct(emptyKey, It.IsAny<It.IsAnyType>()));
+            }
+
+            private static RequestParameterConstructor CreateConstructor()
+            {
+                return new RequestParameterConstructor();
+            }
+
+            private string GenerateKeyValue(string key, string value)
+            {
+                return $"{key}={value}";
+            }
         }
     }
 

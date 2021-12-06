@@ -14,52 +14,55 @@
 
     public class BggXmlApiClientTests
     {
-        private readonly Mock<IHttpClientHandler> _httpClientMock = new();
-
-        private readonly Mock<IRequestBuilderFactory> _requestBuilderFactoryMock = new();
-
-        public BggXmlApiClientTests()
+        public class GetGameById
         {
-            var builderMock = new Mock<IRequestBuilder>();
-            _requestBuilderFactoryMock.Setup(x => x.GetUrlBuilder(It.IsAny<string>(), It.IsAny<IRequestParameters>())).Returns(builderMock.Object);
-        }
+            private readonly Mock<IHttpClientHandler> _httpClientMock = new();
 
-        [Fact]
-        public async void GetGameById_IdIsCorrect_ReturnExpectedContent()
-        {
-            const string ExpectedContent = "gameContent";
-            var expectedResponse = new HttpResponseMessage()
-                {
-                    Content = new StringContent(ExpectedContent)
-                };
+            private readonly Mock<IRequestBuilderFactory> _requestBuilderFactoryMock = new();
 
-            _httpClientMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(expectedResponse);
+            public GetGameById()
+            {
+                var builderMock = new Mock<IRequestBuilder>();
+                _requestBuilderFactoryMock.Setup(x => x.GetUrlBuilder(It.IsAny<string>(), It.IsAny<IRequestParameters>())).Returns(builderMock.Object);
+            }
 
-            var client = CreateClient();
-
-            var actualContent = await client.GetGameContentAsync(
-                new RequestGameParameters()
+            [Fact]
+            public async void IdIsCorrect_ReturnExpectedContent()
+            {
+                const string ExpectedContent = "gameContent";
+                var expectedResponse = new HttpResponseMessage()
                     {
-                        BggIds = new[]
-                            {
-                                1
-                            }
-                    });
+                        Content = new StringContent(ExpectedContent)
+                    };
 
-            Assert.Equal(ExpectedContent, actualContent);
-        }
+                _httpClientMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(expectedResponse);
 
-        [Fact]
-        public void GetGameById_IdIsIncorrect_ThrowException()
-        {
-            var client = CreateClient();
+                var client = CreateClient();
 
-            Assert.ThrowsAsync<InvalidDataException>(async () => await client.GetGameContentAsync(It.IsAny<RequestGameParameters>()));
-        }
+                var actualContent = await client.GetGameContentAsync(
+                    new RequestGameParameters()
+                        {
+                            BggIds = new[]
+                                {
+                                    1
+                                }
+                        });
 
-        private BggXmlApiClient CreateClient()
-        {
-            return new BggXmlApiClient(_httpClientMock.Object, _requestBuilderFactoryMock.Object);
+                Assert.Equal(ExpectedContent, actualContent);
+            }
+
+            [Fact]
+            public void IdIsIncorrect_ThrowException()
+            {
+                var client = CreateClient();
+
+                Assert.ThrowsAsync<InvalidDataException>(async () => await client.GetGameContentAsync(It.IsAny<RequestGameParameters>()));
+            }
+
+            private BggXmlApiClient CreateClient()
+            {
+                return new BggXmlApiClient(_httpClientMock.Object, _requestBuilderFactoryMock.Object);
+            }
         }
     }
 }
