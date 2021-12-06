@@ -1,8 +1,6 @@
 namespace GeekHub.BoardGames.BggProvider.Web
 {
-    using GeekHub.BoardGames.BggProvider.Domain.Api;
-    using GeekHub.BoardGames.BggProvider.Domain.Api.Http;
-    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters.Base;
+    using GeekHub.BoardGames.BggProvider.Web.Registration;
     using GeekHub.BoardGames.BggProvider.Web.Registration.Swagger;
 
     using Microsoft.AspNetCore.Builder;
@@ -12,7 +10,6 @@ namespace GeekHub.BoardGames.BggProvider.Web
 
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -27,30 +24,14 @@ namespace GeekHub.BoardGames.BggProvider.Web
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
 
-            RegisterHttpClients(services);
-            RegisterServices(services);
+            services.RegisterHttpClients();
+            services.RegisterBggApiCommunications();
             services.RegisterSwagger();
             services.AddControllers();
-        }
-
-        private void RegisterServices(IServiceCollection services)
-        {
-            //TODO: temp solution. extract to separate classes
-            services.AddTransient<IRequestParameterConstructor, RequestParameterConstructor>();
-            services.AddTransient<IRequestBuilderFactory, RequestBuilderFactory>();
-            services.AddTransient<IBggApiClient,BggXmlApiClient>();
-            services.AddTransient<IContentParser,XmlContentParser>();
-        }
-
-        private static void RegisterHttpClients(IServiceCollection services)
-        {
-            services.AddHttpClient<IHttpClientHandler, HttpClientHandler>();
         }
     }
 }
