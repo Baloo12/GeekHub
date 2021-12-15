@@ -3,6 +3,7 @@
     using System.IO;
     using System.Xml;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public class XmlContentParser : IContentParser

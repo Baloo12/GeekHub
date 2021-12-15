@@ -1,4 +1,4 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game
 {
     using System.Xml;
 
