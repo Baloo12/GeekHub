@@ -2,10 +2,9 @@ namespace GeekHub.BoardGames.BggProvider.Web.Controllers
 {
     using System.Threading.Tasks;
 
-    using AutoMapper;
+    using GeekHub.BoardGames.BggProvider.Domain.Queries;
 
-    using GeekHub.BoardGames.BggProvider.Domain.Api;
-    using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
+    using MediatR;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -13,31 +12,19 @@ namespace GeekHub.BoardGames.BggProvider.Web.Controllers
     [Route("api/plays")]
     public class PlaysController : ControllerBase
     {
-        private readonly IBggApiClient _bggApiClient;
+        private readonly IMediator _mediator;
 
-        private readonly IContentParser _contentParser;
-
-        private readonly IMapper _mapper;
-
-        public PlaysController(IBggApiClient bggApiClient, IContentParser contentParser, IMapper mapper)
+        public PlaysController(IMediator mediator)
         {
-            _bggApiClient = bggApiClient;
-            _contentParser = contentParser;
-            _mapper = mapper;
+            _mediator = mediator;
         }
 
-        // [HttpGet("{userName}")]
-        // public async Task<IActionResult> GetAllByUserName(string userName)
-        // {
-        //     var parameters = new RequestPlaysParameters
-        //         {
-        //             UserName = "Baloo12"
-        //         };
-        //
-        //     var gameContent = await _bggApiClient.GetPlaysContentAsync(parameters);
-        //     var game = _contentParser.ParseGame(gameContent);
-        //     var model = _mapper.Map<BoardGameModel>(game);
-        //     return Ok(model);
-        // }
+        [HttpGet("{userName}")]
+        public async Task<IActionResult> GetAllByUserName(string userName)
+        {
+            var request = new QueryPlaysByUserNameRequest(userName);
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
     }
 }

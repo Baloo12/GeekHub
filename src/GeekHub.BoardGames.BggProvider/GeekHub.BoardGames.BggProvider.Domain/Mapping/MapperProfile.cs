@@ -10,6 +10,7 @@
         public MapperProfile()
         {
             CreateMap<BoardGame, BoardGameModel>().ReverseMap();
+            CreateMap<PlayRecord, PlayRecordModel>().ReverseMap();
         }
     }
 }

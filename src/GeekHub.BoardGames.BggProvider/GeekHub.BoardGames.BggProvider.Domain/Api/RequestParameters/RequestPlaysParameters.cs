@@ -7,8 +7,8 @@
 
     public class RequestPlaysParameters : IRequestParameters
     {
-        [RequestParameter(BggPlaysParameters.From)]
-        public DateTime From { get; set; }
+       // [RequestParameter(BggPlaysParameters.From)]
+        //public DateTime From { get; set; }
 
         [RequestParameter(BggPlaysParameters.Id)]
         public int Id { get; set; }
@@ -21,8 +21,8 @@
         [RequestParameter(BggPlaysParameters.Subtype)]
         public string Subtype { get; set; }
 
-        [RequestParameter(BggPlaysParameters.To)]
-        public DateTime To { get; set; }
+       // [RequestParameter(BggPlaysParameters.To)]
+       // public DateTime To { get; set; }
 
         [RequestParameter(BggPlaysParameters.Type)]
         public string Type { get; set; }
