@@ -1,4 +1,4 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces
 {
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 

@@ -1,4 +1,4 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces
 {
     public abstract class BaseXmlEntityBuilder<T> : IEntityBuilder<T>
         where T : new()

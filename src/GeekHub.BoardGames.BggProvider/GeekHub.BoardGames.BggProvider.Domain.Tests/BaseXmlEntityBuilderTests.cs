@@ -1,6 +1,6 @@
 ﻿namespace GeekHub.BoardGames.BggProvider.Domain.Tests
 {
-    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces;
 
     using Xunit;
 

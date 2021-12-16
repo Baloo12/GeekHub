@@ -1,7 +1,8 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders
 {
     using System.Xml;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public class XmlGameBuilder : BaseXmlEntityBuilder<BoardGame>, IGameBuilder

@@ -1,8 +1,5 @@
-﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.PlayRecord
+﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces
 {
-    using System;
-
-    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public interface IPlayRecordBuilder : IEntityBuilder<PlayRecord>

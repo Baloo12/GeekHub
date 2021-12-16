@@ -1,8 +1,8 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.PlayRecord
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders
 {
     using System.Xml;
 
-    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Game;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public class XmlPlayRecordBuilder : BaseXmlEntityBuilder<PlayRecord>, IPlayRecordBuilder
