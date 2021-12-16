@@ -1,5 +1,6 @@
 namespace GeekHub.BoardGames.BggProvider.Web
 {
+    using GeekHub.BoardGames.BggProvider.Domain.Registration;
     using GeekHub.BoardGames.BggProvider.Web.Registration;
     using GeekHub.BoardGames.BggProvider.Web.Registration.Swagger;
 
@@ -26,12 +27,12 @@ namespace GeekHub.BoardGames.BggProvider.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
-
             services.RegisterHttpClients();
             services.RegisterBggApiCommunications();
             services.RegisterSwagger();
             services.AddControllers();
+            services.RegisterMapping();
+            services.RegisterMediatR();
         }
     }
 }

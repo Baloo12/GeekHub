@@ -1,10 +1,9 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces
 {
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
-    public interface IGameBuilder
+    public interface IGameBuilder : IEntityBuilder<BoardGame> 
     {
-        BoardGame Build();
 
         IGameBuilder WithBggId();
 

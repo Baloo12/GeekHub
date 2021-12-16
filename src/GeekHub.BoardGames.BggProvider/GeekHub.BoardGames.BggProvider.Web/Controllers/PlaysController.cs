@@ -1,4 +1,4 @@
-﻿namespace GeekHub.BoardGames.BggProvider.Web.Controllers
+namespace GeekHub.BoardGames.BggProvider.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -9,20 +9,20 @@
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
-    [Route("api/games")]
-    public class BoardGamesController : ControllerBase
+    [Route("api/plays")]
+    public class PlaysController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public BoardGamesController(IMediator mediator)
+        public PlaysController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{userName}")]
+        public async Task<IActionResult> GetAllByUserName(string userName)
         {
-            var request = new QueryGameByIdRequest(id);
+            var request = new QueryPlaysByUserNameRequest(userName);
             var response = await _mediator.Send(request);
             return Ok(response);
         }

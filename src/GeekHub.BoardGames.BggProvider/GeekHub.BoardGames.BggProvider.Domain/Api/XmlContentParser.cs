@@ -1,8 +1,11 @@
 ﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Xml;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders;
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public class XmlContentParser : IContentParser
@@ -22,6 +25,22 @@
             var game = gameBuilder.WithBggId().WithName().Build();
 
             return game;
+        }
+
+        public IEnumerable<PlayRecord> ParsePlayRecords(string content)
+        {
+            var xDoc = new XmlDocument();
+            xDoc.LoadXml(content);
+            var itemElements = xDoc.GetElementsByTagName("play");
+            var playRecords = new List<PlayRecord>();
+            foreach (var itemElement in itemElements)
+            {
+                IPlayRecordBuilder builder = new XmlPlayRecordBuilder(itemElement as XmlElement);
+                var playRecord = builder.WithBggId().WithLocation().Build();
+                playRecords.Add(playRecord);
+            }
+
+            return playRecords;
         }
     }
 }

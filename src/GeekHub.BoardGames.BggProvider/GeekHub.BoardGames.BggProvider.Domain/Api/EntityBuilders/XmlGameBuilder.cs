@@ -1,13 +1,12 @@
-namespace GeekHub.BoardGames.BggProvider.Domain.Api
+namespace GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders
 {
     using System.Xml;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Api.EntityBuilders.Interfaces;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
-    public class XmlGameBuilder : IGameBuilder
+    public class XmlGameBuilder : BaseXmlEntityBuilder<BoardGame>, IGameBuilder
     {
-        private readonly BoardGame _game = new();
-
         private readonly XmlElement _xmlGame;
 
         public XmlGameBuilder(XmlElement xmlElement)
@@ -15,20 +14,15 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Api
             _xmlGame = xmlElement;
         }
 
-        public BoardGame Build()
-        {
-            return _game;
-        }
-
         public IGameBuilder WithBggId()
         {
-            _game.BggId = ExtractBggId();
+            Entity.BggId = ExtractBggId();
             return this;
         }
 
         public IGameBuilder WithName()
         {
-            _game.Name = ExtractName();
+            Entity.Name = ExtractName();
             return this;
         }
 
@@ -62,5 +56,6 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Api
 
             return result;
         }
+
     }
 }
