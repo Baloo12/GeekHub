@@ -25,8 +25,8 @@ namespace GeekHub.SteamProvider.Domain.Queries.Handlers.Genres
             foreach (var genreName in request.Names)
             {
                 var queryOrCreateGenre = new QueryOrCreateGenreByName(genreName);
-                var developer = await _mediator.Send(queryOrCreateGenre, cancellationToken);
-                genres.Add(developer);
+                var genre = await _mediator.Send(queryOrCreateGenre, cancellationToken);
+                genres.Add(genre);
             }
             
             return genres;
