@@ -36,7 +36,7 @@
             foreach (var itemElement in itemElements)
             {
                 IPlayRecordBuilder builder = new XmlPlayRecordBuilder(itemElement as XmlElement);
-                var playRecord = builder.WithBggId().WithLocation().Build();
+                var playRecord = builder.WithBggId().WithLocation().WithComment().WithDate().WithGame().Build();
                 playRecords.Add(playRecord);
             }
 

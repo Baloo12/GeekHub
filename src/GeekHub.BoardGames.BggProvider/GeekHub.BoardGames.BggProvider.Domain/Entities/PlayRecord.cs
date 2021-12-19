@@ -12,7 +12,7 @@
 
         public string Comments { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [ForeignKey(nameof(GameId))]
         public virtual BoardGame Game { get; set; }

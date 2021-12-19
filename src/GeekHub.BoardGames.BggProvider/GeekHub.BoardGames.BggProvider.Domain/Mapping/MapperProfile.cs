@@ -11,6 +11,7 @@
         {
             CreateMap<BoardGame, BoardGameModel>().ReverseMap();
             CreateMap<PlayRecord, PlayRecordModel>().ReverseMap();
+            CreateMap<BoardGame, PlayRecordGameModel>().ReverseMap();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Queries.Handlers
         {
             var parameters = new RequestPlaysParameters()
                 {
-                    UserName = "Baloo12"
+                    UserName = request.Username
                 };
 
             var records = await _bggApiClient.GetPlayRecordsAsync(parameters);
