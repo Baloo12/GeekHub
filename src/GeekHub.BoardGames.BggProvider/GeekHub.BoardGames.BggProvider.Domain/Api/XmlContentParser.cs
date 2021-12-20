@@ -1,5 +1,6 @@
 ﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Xml;
@@ -41,6 +42,39 @@
             }
 
             return playRecords;
+        }
+
+        // TODO: Refactor
+        public PlayRecordsMetadata ParsePlayRecordsMetadata(string content)
+        {
+            var metadata = new PlayRecordsMetadata();
+            var xDoc = new XmlDocument();
+            xDoc.LoadXml(content);
+
+            var playsNodeName = "plays";
+            var playsElements = xDoc.GetElementsByTagName(playsNodeName);
+            if (playsElements[0] is XmlElement playElement)
+            {
+                var totalAttributeName = "total";
+                var pageAttributeName = "page";
+                
+                metadata.TotalPlays = int.TryParse(playElement.GetAttribute(totalAttributeName), out var total)
+                    ? total
+                    : throw new AttributeNotFoundException(totalAttributeName, playsNodeName);
+                metadata.PageNumber = int.TryParse(playElement.GetAttribute(pageAttributeName), out var pageNumber)
+                    ? pageNumber
+                    : throw new AttributeNotFoundException(pageAttributeName, playsNodeName);
+            }
+
+            return metadata;
+        }
+    }
+
+    public class AttributeNotFoundException : Exception
+    {
+        public AttributeNotFoundException(string attributeName, string nodeName)
+            : base($"Attribute '{attributeName}' was not found in node '{nodeName}' during parsing XML.")
+        {
         }
     }
 }

@@ -1,22 +1,20 @@
 ﻿namespace GeekHub.BoardGames.BggProvider.Domain.Api
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using GeekHub.BoardGames.BggProvider.Domain.Api.Http;
     using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters;
     using GeekHub.BoardGames.BggProvider.Domain.Api.RequestParameters.Base;
     using GeekHub.BoardGames.BggProvider.Domain.Constants;
-    using GeekHub.BoardGames.BggProvider.Domain.Dtos;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
 
     public class BggXmlApiClient : IBggApiClient
     {
+        private readonly IContentParser _contentParser;
+
         private readonly IHttpClientHandler _httpClient;
 
         private readonly IRequestBuilderFactory _requestBuilderFactory;
-
-        private readonly IContentParser _contentParser;
 
         public BggXmlApiClient(IHttpClientHandler httpClient, IRequestBuilderFactory requestBuilderFactory, IContentParser contentParser)
         {
@@ -33,12 +31,19 @@
             return entity;
         }
 
-        public async Task<IEnumerable<PlayRecord>> GetPlayRecordsAsync(RequestPlaysParameters parameters)
+        public async Task<PlayRecordsResponse> GetPlayRecordsAsync(RequestPlaysParameters parameters)
         {
             var content = await SendGetRequestAsync(parameters);
 
             var entity = _contentParser.ParsePlayRecords(content);
-            return entity;
+            var metadata = _contentParser.ParsePlayRecordsMetadata(content);
+            var response = new PlayRecordsResponse()
+                {
+                    Plays = entity,
+                    TotalPlays = metadata.TotalPlays,
+                    PageNumber = metadata.PageNumber
+                };
+            return response;
         }
 
         private async Task<string> SendGetRequestAsync(IRequestParameters requestParameters)

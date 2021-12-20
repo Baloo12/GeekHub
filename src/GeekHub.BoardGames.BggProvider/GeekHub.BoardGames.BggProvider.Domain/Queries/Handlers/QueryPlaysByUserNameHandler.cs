@@ -31,8 +31,8 @@ namespace GeekHub.BoardGames.BggProvider.Domain.Queries.Handlers
                     UserName = request.Username
                 };
 
-            var records = await _bggApiClient.GetPlayRecordsAsync(parameters);
-            var models = _mapper.Map<IEnumerable<PlayRecordModel>>(records);
+            var response = await _bggApiClient.GetPlayRecordsAsync(parameters);
+            var models = _mapper.Map<IEnumerable<PlayRecordModel>>(response.Plays);
 
             return models;
         }
