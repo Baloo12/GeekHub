@@ -6,6 +6,12 @@
     {
         IPlayRecordBuilder WithBggId();
 
+        IPlayRecordBuilder WithComment();
+
+        IPlayRecordBuilder WithDate();
+
+        IPlayRecordBuilder WithGame();
+
         IPlayRecordBuilder WithLocation();
     }
 }

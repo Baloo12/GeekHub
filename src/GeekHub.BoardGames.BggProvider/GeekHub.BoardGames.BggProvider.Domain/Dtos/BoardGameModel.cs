@@ -12,11 +12,4 @@
 
         public int YearPublished { get; set; }
     }
-    
-    public class PlayRecordModel
-    {
-        public int BggId { get; set; }
-        
-        public string Location { get; set; }
-    }
 }

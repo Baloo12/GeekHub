@@ -7,7 +7,11 @@
 
     public class RequestPlaysParameters : IRequestParameters
     {
-       // [RequestParameter(BggPlaysParameters.From)]
+        public RequestPlaysParameters()
+        {
+            Page = 1;
+        }
+        // [RequestParameter(BggPlaysParameters.From)]
         //public DateTime From { get; set; }
 
         [RequestParameter(BggPlaysParameters.Id)]

@@ -10,5 +10,14 @@
         BoardGame ParseGame(string gameContent);
 
         IEnumerable<PlayRecord> ParsePlayRecords(string content);
+
+        PlayRecordsMetadata ParsePlayRecordsMetadata(string content);
+    }
+
+    public class PlayRecordsMetadata
+    {
+        public int TotalPlays { get; set; }
+
+        public int PageNumber { get; set; }
     }
 }

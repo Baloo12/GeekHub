@@ -10,6 +10,15 @@
     {
         Task<BoardGame> GetGameAsync(RequestGameParameters parameters);
 
-        Task<IEnumerable<PlayRecord>> GetPlayRecordsAsync(RequestPlaysParameters parameters);
+        Task<PlayRecordsResponse> GetPlayRecordsAsync(RequestPlaysParameters parameters);
+    }
+
+    public class PlayRecordsResponse
+    {
+        public int PageNumber { get; set; }
+
+        public IEnumerable<PlayRecord> Plays { get; set; }
+
+        public int TotalPlays { get; set; }
     }
 }
