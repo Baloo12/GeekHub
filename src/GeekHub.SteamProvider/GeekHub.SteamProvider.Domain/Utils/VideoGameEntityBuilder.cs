@@ -7,7 +7,7 @@ using Genre = GeekHub.SteamProvider.Domain.Entities.Genre;
 
 namespace GeekHub.SteamProvider.Domain.Utils
 {
-    public class VideoGameEntityBuilder
+    public class VideoGameEntityBuilder : IVideoGameEntityBuilder
     {
         private readonly VideoGame _game;
         
@@ -21,7 +21,7 @@ namespace GeekHub.SteamProvider.Domain.Utils
             _game = new VideoGame();
         }
 
-        public VideoGameEntityBuilder WithDetails(GameDetailsData details)
+        public IVideoGameEntityBuilder WithDetails(GameDetailsData details)
         {
             _game.Name = details.Name;
             _game.Description = details.ShortDescription;
@@ -35,14 +35,14 @@ namespace GeekHub.SteamProvider.Domain.Utils
             return this;
         }
 
-        public VideoGameEntityBuilder WithSourceId(string steamId)
+        public IVideoGameEntityBuilder WithSourceId(string steamId)
         {
             _game.SteamId = steamId;
 
             return this;
         }
 
-        public VideoGameEntityBuilder WithDevelopers(List<Developer> developers)
+        public IVideoGameEntityBuilder WithDevelopers(List<Developer> developers)
         {
             if (!developers.IsNullOrEmpty())
             {
@@ -52,7 +52,7 @@ namespace GeekHub.SteamProvider.Domain.Utils
             return this;
         }
         
-        public VideoGameEntityBuilder WithPublishers(List<Publisher> publishers)
+        public IVideoGameEntityBuilder WithPublishers(List<Publisher> publishers)
         {
             if (!publishers.IsNullOrEmpty())
             {
@@ -62,7 +62,7 @@ namespace GeekHub.SteamProvider.Domain.Utils
             return this;
         }
         
-        public VideoGameEntityBuilder WithGenres(List<Genre> genres)
+        public IVideoGameEntityBuilder WithGenres(List<Genre> genres)
         {
             if (!genres.IsNullOrEmpty())
             {
@@ -72,7 +72,7 @@ namespace GeekHub.SteamProvider.Domain.Utils
             return this;
         }
         
-        public VideoGameEntityBuilder WithPlatforms(List<Platform> platforms)
+        public IVideoGameEntityBuilder WithPlatforms(List<Platform> platforms)
         {
             if (!platforms.IsNullOrEmpty())
             {

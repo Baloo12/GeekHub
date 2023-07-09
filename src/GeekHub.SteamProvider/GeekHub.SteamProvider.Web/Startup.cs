@@ -26,11 +26,10 @@ namespace GeekHub.SteamProvider.Web
             services.RegisterRepositories();
 
             services.RegisterSteamProviderDomainMapping();
-
             services.RegisterMediatR();
-            
             services.RegisterSteamApiClient();
             services.RegisterSteamStoreClient();
+            services.RegisterFactories();
             
             services.AddControllers();
 

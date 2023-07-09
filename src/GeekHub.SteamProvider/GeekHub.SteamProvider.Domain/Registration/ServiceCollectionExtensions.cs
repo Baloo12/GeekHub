@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Reflection;
 using GeekHub.SteamProvider.Domain.HttpClients;
+using GeekHub.SteamProvider.Domain.Utils;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,6 +38,11 @@ namespace GeekHub.SteamProvider.Domain.Registration
         public static void RegisterMediatR(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+        }
+
+        public static void RegisterFactories(this IServiceCollection services)
+        {
+            services.AddTransient<IVideoGameEntityBuilderFactory, VideoGameEntityBuilderFactory>();
         }
     }
 }
