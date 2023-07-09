@@ -5,7 +5,7 @@
     <th scope="col">Rating</th>
   </thead>
   <tbody>
-    <tr *ngFor="let game of games" routerLink="/game-overview/{{ game.id }}">
+    <tr *ngFor="let game of games" routerLink="/video-games/{{ game.id }}">
       <td>{{ game.overallRank }}</td>
       <td>{{ game.name }}</td>
       <td>{{ game.rating }}</td>

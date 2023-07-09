@@ -1,0 +1,7 @@
+<h1>{{ game.name }}</h1>
+<img src="{{ game.image }}" alt="Italian Trulli" />
+<h4>{{ game.description }}</h4>
+<h6>Release Date: {{ game.releaseDate }}</h6>
+<h6>Required Age: {{ game.requiredAge }}</h6>
+
+<button (click)="goBack()" class="btn btn-primary">Back</button>
