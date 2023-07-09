@@ -29,6 +29,19 @@ namespace GeekHub.VideoGames.Web
             services.RegisterDbContext(_configuration);
             services.RegisterRepositories();
 
+            services.AddCors(
+                options =>
+                    {
+                        options.AddPolicy(
+                            "cors",
+                            builder =>
+                                {
+                                    // Not a permanent solution, but just trying to isolate the problem
+                                    builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyMethod()
+                                        .AllowAnyHeader();
+                                });
+                    });
+
             services.RegisterSteamAdapterMapping();
             services.RegisterGeneratedClientClient(c =>
             {
@@ -53,6 +66,8 @@ namespace GeekHub.VideoGames.Web
             app.UseStaticFiles();
             app.UseSwaggerPage();
             app.UseRouting();
+
+            app.UseCors("cors");
 
             app.UseEndpoints(endpoints =>
             {
