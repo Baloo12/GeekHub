@@ -21,6 +21,12 @@ namespace GeekHub.VideoGames.Web.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Creates a video games from selected provider that are not syncronized yet (don't have geekhubId)
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         [HttpPost("{provider}/{count}")]
         [SwaggerOperation(OperationId = "Synchronization_SynchronizeVideoGames")]
         [SwaggerResponse(200, Type = typeof(IEnumerable<SynchronizedVideoGameDto>))]
