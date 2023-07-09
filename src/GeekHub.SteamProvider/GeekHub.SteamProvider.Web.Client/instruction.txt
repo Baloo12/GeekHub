@@ -1,0 +1,19 @@
+run 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' in PowerShell with Admin or VSCode terminal to allow script ExecutionPolicy
+start web app
+run '.\GenerateClient-FromLocal.ps1' to generate client
+
+if you have 'Could not find MSbuild...' error -> install MSbuild
+go to https://visualstudio.microsoft.com/downloads/
+scroll down and download Build Tools for Visual Studio ...
+use Visual Studio Installer to install Build tools
+
+if you have 'Could not resolve SDK "Microsoft.NET.Sdk"' error -> open VSInstaller and modify MSBuild 
+install .NET SDK in your MSBUILD 
+
+if you updated .net version (ex. 7.0) -> check also 
+<Exec Command="$(NSwagExe_Net70) - in .csproj
+<PackageReference Include="NSwag.MSBuild" Version="13.18.2"> - should be up to date
+
+check GenerateClient.cs -> add using GeekHub.SteamProvider.Web.Client; if needed
+
+you also need to increase manuall (for now) nuget version you want to generate and build solution

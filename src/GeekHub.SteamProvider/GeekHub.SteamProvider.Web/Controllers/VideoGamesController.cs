@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GeekHub.SteamProvider.Domain.Commands;
 using GeekHub.SteamProvider.Domain.Commands.VideoGames;
-using GeekHub.SteamProvider.Domain.Queries;
 using GeekHub.SteamProvider.Domain.Queries.VideoGames;
 using GeekHub.VideoGames.Contracts.Dtos.Steam;
 using GeekHub.VideoGames.Contracts.Dtos.Synchronization;
@@ -32,7 +30,7 @@ namespace GeekHub.SteamProvider.Web.Controllers
         {
             var query = new QueryVideoGameByGeekHubId(geekHubId);
             var game = await _mediator.Send(query);
-            
+
             if (game == null)
             {
                 return NotFound();
@@ -40,7 +38,13 @@ namespace GeekHub.SteamProvider.Web.Controllers
 
             return Ok(game);
         }
-        
+
+        /// <summary>
+        /// External(used by video games microservice) /api/synchronization/Steam/{count}
+        /// Get steam video games from db that don't have geekhubId
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
         [HttpGet("unsynchronized/{count}")]
         [SwaggerOperation(OperationId = "VideoGames_GetUnsynchronized")]
         [SwaggerResponse(200, Type = typeof(IEnumerable<UnsynchronizedVideoGameDto>))]
@@ -52,12 +56,18 @@ namespace GeekHub.SteamProvider.Web.Controllers
 
             return Ok(videoGamesToSynchronize);
         }
-        
+
+        /// <summary>
+        /// External(used by video games microservice) /api/synchronization/Steam/{count}
+        /// Set geekhubId for unsyncronized steam video games got with [HttpGet("unsynchronized/{count}")] endpint
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
         [HttpPut("synchronize")]
         [SwaggerOperation(OperationId = "VideoGames_Synchronize")]
         [SwaggerResponse(200)]
         public async Task<IActionResult> SynchronizeGames(
-            [FromBody]IEnumerable<SynchronizedVideoGameDto> videoGamesToSynchronize)
+            [FromBody] IEnumerable<SynchronizedVideoGameDto> videoGamesToSynchronize)
         {
             var updateCommand = new SynchronizeVideoGamesCommand(videoGamesToSynchronize);
             var updatedGames = await _mediator.Send(updateCommand);

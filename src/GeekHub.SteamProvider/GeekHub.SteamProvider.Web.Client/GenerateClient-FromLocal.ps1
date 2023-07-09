@@ -10,7 +10,7 @@ $commonParams = @{
  
 . "$PSScriptRoot\GenerateClient-Functions.ps1"
  
-$endpoint = "http://localhost:5000/swagger/v1/swagger.json"
+$endpoint = "http://localhost:8080/swagger/v1/swagger.json"
 $applicationPath = "$PSScriptRoot\..\GeekHub.SteamProvider.Web"
 $clientPath = "$PSScriptRoot\..\GeekHub.SteamProvider.Web.Client\GeekHub.SteamProvider.Web.Client.csproj"
  
