@@ -342,3 +342,4 @@ ASALocalRun/
 /src/Client/Source/Configuration/GLOBAL.jconfig
 
 .vswhere.exe
+.vscode

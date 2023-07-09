@@ -18,7 +18,11 @@ namespace GeekHub.SteamProvider.Web.Controllers
         {
             _mediator = mediator;
         }
-        
+
+        /// <summary>
+        /// Create new games(baseinfo: steamid and name) from steam that are not present in db yet 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("all-base-info")]
         [SwaggerOperation(OperationId = "Collector_CollectAllVideoGamesBaseInfo")]
         [SwaggerResponse(200)]
@@ -33,6 +37,11 @@ namespace GeekHub.SteamProvider.Web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Enrich game with full possible info from steam
+        /// </summary>
+        /// <param name="steamId"></param>
+        /// <returns></returns>
         [HttpPost("details/{steamId}")]
         [SwaggerOperation(OperationId = "Collector_CollectVideoGameDetails")]
         [SwaggerResponse(200)]

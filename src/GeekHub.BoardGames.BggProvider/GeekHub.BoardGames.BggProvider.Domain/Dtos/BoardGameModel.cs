@@ -1,4 +1,4 @@
-﻿namespace GeekHub.BoardGames.BggProvider.Web.Models
+﻿namespace GeekHub.BoardGames.BggProvider.Domain.Dtos
 {
     public class BoardGameModel
     {

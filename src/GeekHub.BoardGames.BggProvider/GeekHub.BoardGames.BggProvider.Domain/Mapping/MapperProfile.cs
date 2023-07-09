@@ -1,15 +1,17 @@
-﻿namespace GeekHub.BoardGames.BggProvider.Web.Mapping
+﻿namespace GeekHub.BoardGames.BggProvider.Domain.Mapping
 {
     using AutoMapper;
 
+    using GeekHub.BoardGames.BggProvider.Domain.Dtos;
     using GeekHub.BoardGames.BggProvider.Domain.Entities;
-    using GeekHub.BoardGames.BggProvider.Web.Models;
 
     public class MapperProfile : Profile
     {
         public MapperProfile()
         {
             CreateMap<BoardGame, BoardGameModel>().ReverseMap();
+            CreateMap<PlayRecord, PlayRecordModel>().ReverseMap();
+            CreateMap<BoardGame, PlayRecordGameModel>().ReverseMap();
         }
     }
 }
