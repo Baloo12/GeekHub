@@ -36,7 +36,10 @@ namespace GeekHub.VideoGames.Domain.Tests.Commands
             public async Task ShouldCreateVideoGame()
             {
                 //Arrange
-                var game = new CreateVideoGameRequestDto(VideoGameName);
+                var game = new CreateVideoGameRequestDto 
+                {
+                    Name = VideoGameName
+                };
                 
                 var createdGame = new VideoGame()
                 {
@@ -67,7 +70,10 @@ namespace GeekHub.VideoGames.Domain.Tests.Commands
             public async Task ShouldCallOnce_RepositoryCreateAsync_WithMapperRequestData()
             {
                 //Arrange
-                var game = new CreateVideoGameRequestDto(VideoGameName);
+                var game = new CreateVideoGameRequestDto 
+                {
+                    Name = VideoGameName
+                };
                 
                 _repository.Setup(r => r.CreateAsync(It.Is<VideoGame>(g => g.Name == game.Name)));
                 _repository.Setup(r => r.SaveChangesAsync());
@@ -87,7 +93,10 @@ namespace GeekHub.VideoGames.Domain.Tests.Commands
             public async Task ShouldCallOnce_RepositorySaveChangesAsync()
             {
                 //Arrange
-                var game = new CreateVideoGameRequestDto(VideoGameName);
+                var game = new CreateVideoGameRequestDto 
+                {
+                    Name = VideoGameName
+                };
                 
                 _repository.Setup(r => r.CreateAsync(It.Is<VideoGame>(g => g.Name == game.Name)));
                 _repository.Setup(r => r.SaveChangesAsync());

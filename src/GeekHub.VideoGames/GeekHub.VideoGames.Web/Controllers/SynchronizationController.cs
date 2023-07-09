@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using GeekHub.VideoGames.Contracts.Dtos.Synchronization;
 using GeekHub.VideoGames.Domain.Commands;
 using GeekHub.VideoGames.Domain.Dtos;
@@ -15,10 +16,12 @@ namespace GeekHub.VideoGames.Web.Controllers
     public class SynchronizationController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public SynchronizationController(IMediator mediator)
+        public SynchronizationController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -87,7 +90,7 @@ namespace GeekHub.VideoGames.Web.Controllers
 
         private async Task<VideoGameResponseDto> CreateVideoGame(UnsynchronizedVideoGameDto unsynchronizedVideoGame)
         {
-            var createVideoGameDto = new CreateVideoGameRequestDto(unsynchronizedVideoGame.Name);
+            var createVideoGameDto = _mapper.Map<CreateVideoGameRequestDto>(unsynchronizedVideoGame);
             
             var command = new CreateVideoGameCommand(createVideoGameDto);
             var createdVideoGame = await _mediator.Send(command);

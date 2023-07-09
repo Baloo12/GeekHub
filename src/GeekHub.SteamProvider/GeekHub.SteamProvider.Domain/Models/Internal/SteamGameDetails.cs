@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GeekHub.SteamProvider.Domain.Models.Internal
 {
@@ -20,19 +21,19 @@ namespace GeekHub.SteamProvider.Domain.Models.Internal
         [JsonPropertyName("website")]
         public string Website { get; set; }
 
-        [JsonPropertyName("is_free")]
+        [JsonProperty(PropertyName = "is_free")]
         public bool IsFree { get; set; }
 
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
-        [JsonPropertyName("required_age")]
+        [JsonProperty(PropertyName = "required_age")]
         public int RequiredAge { get; set; }
 
-        [JsonPropertyName("short_description")]
+        [JsonProperty(PropertyName = "short_description")]
         public string ShortDescription { get; set; }
 
-        [JsonPropertyName("header_image")]
+        [JsonProperty(PropertyName = "header_image")]
         public string Image { get; set; }
 
         [JsonPropertyName("publishers")]
@@ -47,7 +48,7 @@ namespace GeekHub.SteamProvider.Domain.Models.Internal
         [JsonPropertyName("genres")]
         public List<Genre> Genres { get; set; }
 
-        [JsonPropertyName("release_date")]
+        [JsonProperty(PropertyName = "release_date")]
         public ReleaseDate ReleaseDate { get; set; }
     }
 
@@ -59,7 +60,7 @@ namespace GeekHub.SteamProvider.Domain.Models.Internal
 
     public class ReleaseDate
     {
-        [JsonPropertyName("coming_soon")]
+        [JsonProperty(PropertyName = "coming_soon")]
         public bool ComingSoon { get; set; }
 
         [JsonPropertyName("date")]
