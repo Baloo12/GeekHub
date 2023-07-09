@@ -8,7 +8,7 @@ namespace GeekHub.VideoGames.EntityFramework
         public VideoGamesDbContext(DbContextOptions contextOptions)
             : base(contextOptions)
         {
-            //Database.EnsureDeleted();
+            // Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

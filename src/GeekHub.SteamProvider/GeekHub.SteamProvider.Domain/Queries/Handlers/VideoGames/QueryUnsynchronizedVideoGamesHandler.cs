@@ -27,7 +27,7 @@ namespace GeekHub.SteamProvider.Domain.Queries.Handlers.VideoGames
             QueryUnsynchronizedVideoGames request,
             CancellationToken cancellationToken = default)
         {
-            var games = await _videoGamesRepository.GetManyAsync(g => g.GeekHubId == Guid.Empty, request.Count);
+            var games = await _videoGamesRepository.GetManyAsync(g => g.SteamId == "1091500", request.Count);
             var response = _mapper.Map<IEnumerable<UnsynchronizedVideoGameDto>>(games);
 
             return response;
