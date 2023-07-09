@@ -1,0 +1,14 @@
+<table class="table table-hover">
+  <thead>
+    <th scope="col">Rank</th>
+    <th scope="col">Name</th>
+    <th scope="col">Rating</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let game of games" routerLink="/game-overview/{{ game.id }}">
+      <td>{{ game.overallRank }}</td>
+      <td>{{ game.name }}</td>
+      <td>{{ game.rating }}</td>
+    </tr>
+  </tbody>
+</table>

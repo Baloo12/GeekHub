@@ -1,0 +1,13 @@
+$header-height: 44px;
+$content-indent: 32px;
+
+.layout__header {
+  height: $header-height;
+  position: relative;
+}
+
+.layout__main {
+  height: calc(100% - #{$header-height});
+  position: relative;
+  margin: $content-indent;
+}
